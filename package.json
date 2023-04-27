@@ -1,0 +1,25 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "The game Battleship  built in JS to practice test driven development (TDD) using Jest.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JFerrettUK/Battleship.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JFerrettUK/Battleship/issues"
+  },
+  "homepage": "https://github.com/JFerrettUK/Battleship#readme",
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "webpack": "^5.81.0",
+    "webpack-cli": "^5.0.2"
+  }
+}
