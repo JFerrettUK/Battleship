@@ -1,8 +1,15 @@
 import gameboard from "./gameboard";
 
-test("testGameboard is correct size", () => {
+test("testGameboard has the correct number of rows (10)", () => {
   let testGameboard = gameboard();
-  expect(testGameboard.size).toBe(100);
+  expect(testGameboard.length).toBe(10);
+});
+
+test("testGameboard row arrays are all the correct length (10)", () => {
+  let testGameboard = gameboard();
+  for (let i = 0; i < 10; i++) {
+    expect(testGameboard[i].length).toBe(10);
+  }
 });
 
 // Gameboards should be able to place ships at specific

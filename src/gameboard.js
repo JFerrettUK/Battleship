@@ -1,19 +1,16 @@
 export default function gameboard(length) {
-  let newShip = function (length) {
-    return {
-      length: length,
-      hits: 0,
-      hit: function () {
-        this.hits += 1;
-      },
-      isSunk: function () {
-        if (this.hits >= this.length) {
-          return true;
-        } else {
-          return false;
-        }
-      },
-    };
+  let newGameboard = function (length) {
+    let board = [];
+
+    for (let i = 0; i < 10; i++) {
+      let row = [];
+      for (let i = 0; i < 10; i++) {
+        row.push(null);
+      }
+      board.push(row);
+    }
+    return board;
   };
-  return newShip(length);
+
+  return newGameboard();
 }

@@ -1,1 +1,0 @@
-(()=>{"use strict";var e;(e={}).name=name,e.age=age,e.greeting=function(){return"Hello I am "+e.name+". I am "+e.age+" years old. "}})();

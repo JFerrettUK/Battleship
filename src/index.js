@@ -1,1 +1,1 @@
-import Ship from "./Ship";
+import ship from "./ship";
