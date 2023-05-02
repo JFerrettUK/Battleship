@@ -28,10 +28,6 @@ test("place ship with vertical length at specific coordinates", () => {
   expect(battleshipBoard.board[5][7]).toBe("ship4");
   expect(battleshipBoard.board[5][8]).toBe("ship4");
   expect(battleshipBoard.board[5][9]).toBe("ship4");
-
-  //I don't need to actually place the ship on each square! Just store an object in the gameboard
-  //Then add a hit counter whenever something "hits" that square.
-  //Keep the gameboard list and ship objects totally seperate!
 });
 
 test("place ship with horizontal length at specific coordinates", () => {
@@ -54,18 +50,46 @@ test("after placeShip, a ship is added to an object list", () => {
   expect(battleshipBoard.ships).toHaveProperty("ship4");
 });
 
-//Gameboards should have a receiveAttack function that takes a pair of coordinates
-
 test("check receiveAttack function changes a null board square", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
   battleshipBoard.receiveAttack(4, 5);
-  expect(battleshipBoard.board[4][5]).toBe("attacked");
+  expect(battleshipBoard.board[4][5]).toBe("missed");
 });
 
 test("check receiveAttack function changes a ship board square", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAttack(5, 6);
+  expect(battleshipBoard.board[5][6]).toBe("hitShip");
+});
+
+test("check receiveAttack function changes a ship object", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAttack(5, 6);
+  battleshipBoard.receiveAttack(6, 6);
+  expect(battleshipBoard.ships.ship4.hits).toBe(2);
+});
+
+test("record coordinates of a missed shot", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(1, 5, 6, "horizontal");
   battleshipBoard.receiveAttack(4, 5);
-  expect(battleshipBoard.board[4][5]).toBe("hitShip");
+  expect(battleshipBoard.listMissed[0]).toStrictEqual([4, 5]);
+});
+
+test("check whether or not all of their ships have been sunk", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(3, 2, 1, "vertical");
+  battleshipBoard.receiveAttack(2, 1);
+  battleshipBoard.receiveAttack(2, 2);
+  battleshipBoard.receiveAttack(2, 3);
+
+  battleshipBoard.placeShip(4, 5, 6, "vertical");
+  battleshipBoard.receiveAttack(5, 6);
+  battleshipBoard.receiveAttack(5, 7);
+  battleshipBoard.receiveAttack(5, 8);
+  battleshipBoard.receiveAttack(5, 9);
+  expect(battleshipBoard.allSunk()).toBe(true);
 });
