@@ -1,5 +1,4 @@
 import gameboard from "./gameboard";
-import ship from "./ship";
 
 test("testGameboard has the correct number of rows (10)", () => {
   let battleshipBoard = gameboard();
@@ -12,9 +11,6 @@ test("testGameboard row arrays are all the correct length (10)", () => {
     expect(battleshipBoard.board[i].length).toBe(10);
   }
 });
-
-// Gameboards should be able to place ships at specific
-// coordinates by calling the ship factory function.
 
 test("place ship with vertical length at specific coordinates", () => {
   let battleshipBoard = gameboard();
@@ -79,7 +75,7 @@ test("record coordinates of a missed shot", () => {
   expect(battleshipBoard.listMissed[0]).toStrictEqual([4, 5]);
 });
 
-test("check whether or not all of their ships have been sunk", () => {
+test("check whether or not all ships have been sunk (true)", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(3, 2, 1, "vertical");
   battleshipBoard.receiveAttack(2, 1);
@@ -92,4 +88,17 @@ test("check whether or not all of their ships have been sunk", () => {
   battleshipBoard.receiveAttack(5, 8);
   battleshipBoard.receiveAttack(5, 9);
   expect(battleshipBoard.allSunk()).toBe(true);
+});
+
+test("check whether or not all ships have been sunk (false)", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(3, 2, 1, "horizontal");
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAttack(5, 9);
+  battleshipBoard.receiveAttack(4, 1);
+  battleshipBoard.receiveAttack(5, 6);
+  battleshipBoard.receiveAttack(6, 6);
+  battleshipBoard.receiveAttack(7, 6);
+  battleshipBoard.receiveAttack(9, 6);
+  expect(battleshipBoard.allSunk()).toBe(false);
 });

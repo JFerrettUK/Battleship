@@ -1,6 +1,6 @@
 import ship from "./ship";
 
-export default function gameboard(length) {
+export default function gameboard() {
   let thisBoard = [];
 
   for (let i = 0; i < 10; i++) {
@@ -55,10 +55,12 @@ export default function gameboard(length) {
   };
 
   let allSunk = function () {
-    for (let i = 0; i < ships.length; i++) {
-      if (ships[i].isSunk() == true) {
+    for (let ship in ships) {
+      if (ships[ship].isSunk() == true) {
+        ("One ship was suunk");
         continue;
       } else {
+        ("One ship wasn't suunk");
         return false;
       }
     }
