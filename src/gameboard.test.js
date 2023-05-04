@@ -102,3 +102,28 @@ test("check whether or not all ships have been sunk (false)", () => {
   battleshipBoard.receiveAttack(9, 6);
   expect(battleshipBoard.allSunk()).toBe(false);
 });
+
+function anyMissed(board) {
+  isMissed = false();
+
+  for (let i = 0; i < 10; i++) {
+    if (board[i] == "missed") {
+      isMissed = true;
+    }
+    for (let n = 0; n < 10; n++) {
+      if (board[i][n] == "missed") {
+        isMissed = true;
+      }
+    }
+  }
+
+  return isMissed;
+}
+
+test("check receiveAIAttack changes a null board square", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAIAttack();
+
+  expect(anyMissed(battleshipBoard.board)).toBe(true);
+});

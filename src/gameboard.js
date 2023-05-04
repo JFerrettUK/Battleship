@@ -54,6 +54,19 @@ export default function gameboard() {
     }
   };
 
+  let receiveAIAttack = function () {
+    let row = Math.floor(Math.random() * 10);
+    let column = Math.floor(Math.random() * 10);
+    if (thisBoard[row][column] == null) {
+      changeBoard(row, column, "missed");
+      saveMissed(row, column);
+    } else {
+      let shipNo = thisBoard[row][column].toString();
+      hitShip(shipNo);
+      changeBoard(row, column, "hitShip");
+    }
+  };
+
   let allSunk = function () {
     for (let ship in ships) {
       if (ships[ship].isSunk() == true) {
@@ -73,6 +86,7 @@ export default function gameboard() {
     listMissed,
     placeShip,
     receiveAttack,
+    receiveAIAttack,
     allSunk,
   };
 }
