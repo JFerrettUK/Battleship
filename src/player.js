@@ -5,7 +5,9 @@ export default function player(name) {
     return {
       name: name,
       playerBoard: gameboard(),
+      isTurn: true,
     };
   };
+
   return newPlayer(name);
 }

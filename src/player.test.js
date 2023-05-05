@@ -16,14 +16,7 @@ test("check that the gameboard of players are working)", () => {
   expect(newPlayer.playerBoard.allSunk()).toBe(false);
 });
 
-// test("Create two players who can attack each other", () => {
-//   //make a player 1 with a ship on 5/6
-//   let player1 = player("player1");
-//   player1.playerBoard.placeShip(1, 5, 6, "vertical");
-
-//   //make a player 2 with a ship on 5/6
-//   let player2 = player("player2");
-//   player2.playerBoard.placeShip(1, 5, 6, "vertical");
-
-//   expect(player2.playerBoard.board[5][6]).toBe("ship1");
-// });
+test("isTurn starts as True", () => {
+  let newPlayer = player("Human");
+  expect(newPlayer.isTurn).toBe(true);
+});

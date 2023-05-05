@@ -104,26 +104,26 @@ test("check whether or not all ships have been sunk (false)", () => {
 });
 
 function anyMissed(board) {
-  isMissed = false();
-
   for (let i = 0; i < 10; i++) {
-    if (board[i] == "missed") {
-      isMissed = true;
-    }
     for (let n = 0; n < 10; n++) {
-      if (board[i][n] == "missed") {
-        isMissed = true;
+      if (board[i][n] === "missed") {
+        return true;
       }
     }
   }
-
-  return isMissed;
+  return false;
 }
 
 test("check receiveAIAttack changes a null board square", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
   battleshipBoard.receiveAIAttack();
-
   expect(anyMissed(battleshipBoard.board)).toBe(true);
+});
+
+test("check receiveAttack can't hit a missed square twice", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAttack(4, 5);
+  expect(battleshipBoard.receiveAttack(4, 5)).toBe("incorrect attack");
 });

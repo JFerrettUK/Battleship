@@ -15,3 +15,8 @@ test("Check that the gameboard of the computer is working)", () => {
   AI.playerBoard.receiveAttack(5, 9);
   expect(AI.playerBoard.allSunk()).toBe(false);
 });
+
+test("isTurn starts as False", () => {
+  let AI = aiPlayer("AI");
+  expect(AI.isTurn).toBe(false);
+});

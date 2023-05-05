@@ -43,6 +43,13 @@ export default function gameboard() {
     listMissed.push([missedRow, missedColumn]);
   };
 
+  let isMissed = function (row, column) {
+    if (listMissed.some([row, column])) {
+      return true;
+    }
+    return false;
+  };
+
   let receiveAttack = function (row, column) {
     if (thisBoard[row][column] == null) {
       changeBoard(row, column, "missed");
