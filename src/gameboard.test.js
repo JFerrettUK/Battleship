@@ -103,27 +103,50 @@ test("check whether or not all ships have been sunk (false)", () => {
   expect(battleshipBoard.allSunk()).toBe(false);
 });
 
-function anyMissed(board) {
-  for (let i = 0; i < 10; i++) {
-    for (let n = 0; n < 10; n++) {
-      if (board[i][n] === "missed") {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
 test("check receiveAIAttack changes a null board square", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
   battleshipBoard.receiveAIAttack();
-  expect(anyMissed(battleshipBoard.board)).toBe(true);
+  expect(battleshipBoard.anyMissed()[0]).toBe(true);
 });
 
 test("check receiveAttack can't hit a missed square twice", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
   battleshipBoard.receiveAttack(4, 5);
-  expect(battleshipBoard.receiveAttack(4, 5)).toBe("incorrect attack");
+  expect(battleshipBoard.isMissed(4, 4)).toBe(false);
+  expect(battleshipBoard.isMissed(4, 5)).toBe(true);
+  expect(battleshipBoard.receiveAttack(4, 5)).toBe("hitBefore");
+});
+
+test("check receiveAttack can't hit a hit ship twice", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAttack(5, 6);
+  expect(battleshipBoard.board[5][6]).toBe("hitShip");
+  expect(battleshipBoard.receiveAttack(5, 6)).toBe("hitBefore");
+});
+
+test("check receiveAIAttack can't hit a missed square twice", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.receiveAIAttack();
+  const theMissed = battleshipBoard.anyMissed();
+  expect(theMissed[0]).toBe(true);
+  const hitSquare = theMissed[1];
+  expect(battleshipBoard.receiveAttack(hitSquare[0], hitSquare[1])).toBe(
+    "hitBefore"
+  );
+});
+
+test("run receiveAIAttack 500 times. It should at some point return 'hit before'", () => {
+  let battleshipBoard = gameboard();
+  let hitBefore = false;
+  for (let i = 0; i < 500; i++) {
+    let result = battleshipBoard.receiveAIAttack();
+    if (result == "hitBefore") {
+      hitBefore = true;
+      break;
+    }
+  }
+  expect(hitBefore).toBe(true);
 });

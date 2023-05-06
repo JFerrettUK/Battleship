@@ -44,7 +44,11 @@ export default function gameboard() {
   };
 
   let isMissed = function (row, column) {
-    if (listMissed.some([row, column])) {
+    if (
+      listMissed.some(function (element) {
+        return element[0] === row && element[1] === column;
+      })
+    ) {
       return true;
     }
     return false;
@@ -54,6 +58,10 @@ export default function gameboard() {
     if (thisBoard[row][column] == null) {
       changeBoard(row, column, "missed");
       saveMissed(row, column);
+    } else if (thisBoard[row][column] == "missed") {
+      return "hitBefore";
+    } else if (thisBoard[row][column] == "hitShip") {
+      return "hitBefore";
     } else {
       let shipNo = thisBoard[row][column].toString();
       hitShip(shipNo);
@@ -61,9 +69,27 @@ export default function gameboard() {
     }
   };
 
+  let anyMissed = function () {
+    for (let i = 0; i < 10; i++) {
+      for (let n = 0; n < 10; n++) {
+        if (thisBoard[i][n] === "missed") {
+          return [true, [i, n]];
+        }
+      }
+    }
+    return false;
+  };
+
   let receiveAIAttack = function () {
     let row = Math.floor(Math.random() * 10);
     let column = Math.floor(Math.random() * 10);
+
+    if (thisBoard[row][column] == "missed") {
+      return "hitBefore";
+    } else if (thisBoard[row][column] == "hitShip") {
+      return "hitBefore";
+    }
+
     if (thisBoard[row][column] == null) {
       changeBoard(row, column, "missed");
       saveMissed(row, column);
@@ -91,9 +117,11 @@ export default function gameboard() {
     board: thisBoard,
     ships,
     listMissed,
+    isMissed,
     placeShip,
     receiveAttack,
     receiveAIAttack,
     allSunk,
+    anyMissed,
   };
 }
