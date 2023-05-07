@@ -4,8 +4,8 @@ export default function player(name) {
   let newPlayer = function () {
     return {
       name: name,
-      playerBoard: gameboard(),
       isTurn: true,
+      playerBoard: gameboard(),
     };
   };
 

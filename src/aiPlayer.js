@@ -6,9 +6,6 @@ export default function player() {
       name: "Hal",
       isTurn: false,
       playerBoard: gameboard(),
-
-      //attack the enemy gameboard
-      attackComp: function (row, column) {},
     };
   };
   return computer();

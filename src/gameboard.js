@@ -80,13 +80,30 @@ export default function gameboard() {
     return false;
   };
 
+  let missedInARow = function (row) {
+    for (let row = 0; row < 10; row++) {
+      for (let n = 0; n < 10; n++) {
+        if (thisBoard[i][n] === "missed") {
+          return [true, [i, n]];
+        }
+      }
+    }
+    return false;
+  };
+
   let receiveAIAttack = function () {
+    if (listMissed.length == 99) {
+      return "board full";
+    }
+
     let row = Math.floor(Math.random() * 10);
     let column = Math.floor(Math.random() * 10);
 
-    if (thisBoard[row][column] == "missed") {
-      return "hitBefore";
-    } else if (thisBoard[row][column] == "hitShip") {
+    if (
+      thisBoard[row][column] == "missed" ||
+      thisBoard[row][column] == "hitShip"
+    ) {
+      receiveAIAttack();
       return "hitBefore";
     }
 
@@ -103,10 +120,8 @@ export default function gameboard() {
   let allSunk = function () {
     for (let ship in ships) {
       if (ships[ship].isSunk() == true) {
-        ("One ship was suunk");
         continue;
       } else {
-        ("One ship wasn't suunk");
         return false;
       }
     }
@@ -123,5 +138,6 @@ export default function gameboard() {
     receiveAIAttack,
     allSunk,
     anyMissed,
+    missedInARow,
   };
 }

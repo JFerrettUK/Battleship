@@ -132,8 +132,7 @@ test("check receiveAIAttack can't hit a missed square twice", () => {
   battleshipBoard.receiveAIAttack();
   const theMissed = battleshipBoard.anyMissed();
   expect(theMissed[0]).toBe(true);
-  const hitSquare = theMissed[1];
-  expect(battleshipBoard.receiveAttack(hitSquare[0], hitSquare[1])).toBe(
+  expect(battleshipBoard.receiveAttack(theMissed[1][0], theMissed[1][1])).toBe(
     "hitBefore"
   );
 });
@@ -149,4 +148,32 @@ test("run receiveAIAttack 500 times. It should at some point return 'hit before'
     }
   }
   expect(hitBefore).toBe(true);
+});
+
+test("if receiveAIAttack hits an already touched square, it runs again", () => {
+  let battleshipBoard = gameboard();
+  for (let row = 0; row < 9; row++) {
+    for (let column = 0; column < 10; column++) {
+      battleshipBoard.receiveAIAttack(row, column);
+    }
+  }
+
+  for (let i = 0; i < 10; i++) {
+    battleshipBoard.receiveAIAttack();
+  }
+
+  expect(battleshipBoard.receiveAttack(9, 9)).toBe("hitBefore");
+});
+
+test("if receiveAIAttack runs on a full gameboard, board full is returned", () => {
+  let battleshipBoard = gameboard();
+  for (let row = 0; row < 10; row++) {
+    for (let column = 0; column < 10; column++) {
+      battleshipBoard.receiveAIAttack(row, column);
+    }
+  }
+
+  battleshipBoard.receiveAIAttack();
+
+  expect(battleshipBoard.receiveAIAttack()).toBe("board full");
 });
