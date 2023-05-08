@@ -15,20 +15,20 @@ test("it starts as player turn first", () => {
 
 test("use the manageTurns function to move one turn on", () => {
   let ai = aiPlayer();
-  let john = player();
+  let user = player();
 
   const turns = manageTurns();
-  turns.switchTurns(john, ai);
+  turns.switchTurns(user, ai);
 
   expect(ai.isTurn).toBe(true);
-  expect(john.isTurn).toBe(false);
+  expect(user.isTurn).toBe(false);
 });
 
 test("use the manageTurns function to move one turn on", () => {
   let ai = aiPlayer();
-  let john = player();
+  let user = player();
 
   const turns = manageTurns();
-  turns.switchTurns(john, ai);
+  turns.switchTurns(user, ai);
   expect(turns.getNo()).toBe(1);
 });
