@@ -25,10 +25,24 @@ export default function gameboard() {
   let placeShip = function (length, row, column, align) {
     addShip(length);
     if (align == "vertical") {
+      //check if these squares are already occupied
+      for (let i = column; i < length + column; i++) {
+        if (thisBoard[row][i] !== null) {
+          return "occupiedSquare";
+        }
+      }
+      //change the board if not
       for (let i = column; i < length + column; i++) {
         changeBoard(row, i, `ship${length}`);
       }
     } else {
+      //check if these squares are already occupied
+      for (let i = row; i < length + row; i++) {
+        if (thisBoard[i][column] !== null) {
+          return "occupiedSquare";
+        }
+      }
+      //change the board if not
       for (let i = row; i < length + row; i++) {
         changeBoard(i, column, `ship${length}`);
       }

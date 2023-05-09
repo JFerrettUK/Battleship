@@ -1,1 +1,3 @@
-import ship from "./ship";
+import makeBoard from "./makeBoard.js";
+
+makeBoard();

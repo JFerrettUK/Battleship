@@ -11,7 +11,7 @@ export default function mainLoop(playerName) {
   const attackAIFunc = ai.playerBoard.receiveAttack.bind(ai.playerBoard);
   const turns = manageTurns();
   const placeAIShip = ai.playerBoard.placeShip.bind(ai.playerBoard);
-  const placePlayerShip = user.playerBoard.placeShip.bind(user.playerBoard);
+  const placeUserShip = user.playerBoard.placeShip.bind(user.playerBoard);
 
   let attackPlayer = function (row, column) {
     attackPlayerFunc();
@@ -25,6 +25,17 @@ export default function mainLoop(playerName) {
     turns.switchTurns(user, ai);
   };
 
+  let placeTempShips = function () {
+    placeAIShip(2, 2, 1, "vertical");
+    placeAIShip(3, 4, 4, "horizontal");
+    placeAIShip(4, 6, 1, "horizontal");
+    placeAIShip(5, 4, 5, "vertical");
+    placeUserShip(2, 2, 1, "vertical");
+    placeUserShip(3, 4, 4, "horizontal");
+    placeUserShip(4, 6, 1, "horizontal");
+    placeUserShip(5, 4, 5, "vertical");
+  };
+
   return {
     ai,
     user,
@@ -32,6 +43,7 @@ export default function mainLoop(playerName) {
     attackPlayer,
     attackAI,
     placeAIShip,
-    placePlayerShip,
+    placeUserShip,
+    placeTempShips,
   };
 }

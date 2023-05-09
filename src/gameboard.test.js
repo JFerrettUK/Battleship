@@ -177,3 +177,19 @@ test("if receiveAIAttack runs on a full gameboard, board full is returned", () =
 
   expect(battleshipBoard.receiveAIAttack()).toBe("board full");
 });
+
+test("can't place ship vertically on an already occupied square", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(1, 2, 2, "vertical");
+  expect(battleshipBoard.board[2][2]).toBe("ship1");
+  expect(battleshipBoard.placeShip(3, 2, 1, "vertical")).toBe("occupiedSquare");
+});
+
+test("can't place ship horizontally on an already occupied square", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(2, 2, 2, "horizontal");
+  expect(battleshipBoard.board[2][2]).toBe("ship2");
+  expect(battleshipBoard.placeShip(3, 2, 2, "horizontal")).toBe(
+    "occupiedSquare"
+  );
+});
