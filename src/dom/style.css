@@ -1,0 +1,45 @@
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+#battleBoard {
+  display: grid;
+  width: 520px;
+  height: 520px;
+  grid-template-rows: repeat(10, 51px);
+  grid-template-columns: repeat(10, 51px);
+  margin: 0 auto;
+  position: absolute;
+  top: 52px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.cyan,
+.blue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+}
+
+.cyan:hover,
+.blue:hover {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+.cyan {
+  background-color: rgb(215, 239, 250);
+  color: rgb(189, 198, 218);
+}
+
+.blue {
+  background-color: rgb(207, 218, 231);
+  color: rgb(215, 239, 250);
+}
+
+#shipSquare {
+  background-color: rgb(83, 83, 83);
+}

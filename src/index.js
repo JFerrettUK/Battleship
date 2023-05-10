@@ -1,3 +1,3 @@
-import makeBoard from "./makeBoard.js";
+import makeBoard from "./dom/makeBoard.js";
 
 makeBoard();
