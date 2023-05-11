@@ -2,7 +2,7 @@ import manageTurns from "./manageTurns";
 import player from "./player";
 import aiPlayer from "./aiPlayer";
 
-export default function mainLoop(playerName) {
+export default function gameLoop(playerName) {
   const ai = aiPlayer();
   const user = player(playerName);
   const attackPlayerFunc = user.playerBoard.receiveAIAttack.bind(

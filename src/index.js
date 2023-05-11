@@ -1,3 +1,3 @@
-import makeBoard from "./dom/makeBoard.js";
+import editBoard from "./dom/editBoard";
 
-makeBoard();
+editBoard();

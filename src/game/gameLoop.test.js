@@ -1,9 +1,9 @@
-import mainLoop from "./mainLoop";
+import gameLoop from "./gameLoop";
 
-let thisGame = mainLoop("James");
+let thisGame = gameLoop("James");
 
-test("mainLoop user and ai players should work with the manageTurn func", () => {
-  let testGame = mainLoop("James");
+test("gameLoop user and ai players should work with the manageTurn func", () => {
+  let testGame = gameLoop("James");
   expect(testGame.user.isTurn).toBe(true);
   expect(testGame.ai.isTurn).toBe(false);
   expect(testGame.turns.whoseTurn(testGame.user, testGame.ai)).toBe(
@@ -62,21 +62,21 @@ test("attackAI: Don't change turns if the AI's square was hitBefore", () => {
 
 describe("Hit ships: attack function works", () => {
   test("check receiveAttack function changes a null board square", () => {
-    thisGame = mainLoop("James");
+    thisGame = gameLoop("James");
     thisGame.user.playerBoard.placeShip(4, 5, 6, "horizontal");
     thisGame.user.playerBoard.receiveAttack(4, 5);
     expect(thisGame.user.playerBoard.board[4][5]).toBe("missed");
   });
 
   test("check receiveAttack function changes a ship board square", () => {
-    thisGame = mainLoop("James");
+    thisGame = gameLoop("James");
     thisGame.user.playerBoard.placeShip(4, 5, 6, "horizontal");
     thisGame.user.playerBoard.receiveAttack(5, 6);
     expect(thisGame.user.playerBoard.board[5][6]).toBe("hitShip");
   });
 
   test("check receiveAttack function changes a ship object", () => {
-    thisGame = mainLoop("James");
+    thisGame = gameLoop("James");
     thisGame.user.playerBoard.placeShip(4, 5, 6, "horizontal");
     thisGame.user.playerBoard.receiveAttack(5, 6);
     thisGame.user.playerBoard.receiveAttack(6, 6);
@@ -85,7 +85,7 @@ describe("Hit ships: attack function works", () => {
 });
 
 test("placeTempShips: Manually add ships to user/ai boards", () => {
-  thisGame = mainLoop("James");
+  thisGame = gameLoop("James");
   thisGame.placeTempShips();
   expect(thisGame.ai.playerBoard.board[2][1]).toBe("ship2");
   expect(thisGame.ai.playerBoard.board[4][4]).toBe("ship3");
