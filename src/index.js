@@ -1,3 +1,5 @@
 import editBoard from "./dom/editBoard";
+import userClick from "./dom/userClick";
 
-editBoard();
+editBoard("userBoard");
+userClick();

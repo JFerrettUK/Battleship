@@ -1,4 +1,4 @@
-export default function editBoard() {
+export default function editBoard(targetParent) {
   function makeRow(row, colour) {
     for (let i = 0; i < 10; i++) {
       const battleSquare = document.createElement("div");
@@ -13,7 +13,7 @@ export default function editBoard() {
       }
 
       battleSquare.id = `${row}-${i}`;
-      document.getElementById("battleBoard").appendChild(battleSquare);
+      document.getElementById(targetParent).appendChild(battleSquare);
     }
   }
 

@@ -1,6 +1,7 @@
+import userClick from "./userClick";
 import editBoard from "./editBoard";
-import squareHitMissed from "./squareHitMissed";
 import path from "path";
+import { fireEvent } from "@testing-library/dom";
 import { JSDOM } from "jsdom";
 
 let dom;
@@ -10,20 +11,11 @@ beforeAll(async () => {
   global.document = dom.window.document;
 });
 
-test("check that a missed square has the class 'missed'", async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000)); // wait for 1 second
+test("clicking a square toggles its 'flash' class", () => {
   editBoard();
-  let zeroZero = document.getElementById("0-0");
-  expect(zeroZero.classList.contains("missed")).toBe(false);
-  zeroZero = squareHitMissed(zeroZero, "missed");
-  expect(zeroZero.classList.contains("missed")).toBe(true);
-});
-
-test("check that a hitShip square has the class 'hitShip'", async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000)); // wait for 1 second
-  editBoard();
-  let zeroZero = document.getElementById("0-0");
-  expect(zeroZero.classList.contains("hitShip")).toBe(false);
-  zeroZero = squareHitMissed(zeroZero, "hitShip");
-  expect(zeroZero.classList.contains("hitShip")).toBe(true);
+  userClick();
+  const square = document.getElementById("0-0");
+  expect(square.classList.contains("flash")).toBe(false);
+  fireEvent.click(square);
+  expect(square.classList.contains("flash")).toBe(true);
 });
