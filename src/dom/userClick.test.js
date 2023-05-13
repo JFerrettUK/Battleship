@@ -12,7 +12,7 @@ beforeAll(async () => {
 });
 
 test("clicking a square toggles its 'flash' class", () => {
-  editBoard();
+  editBoard("userBoard");
   userClick();
   const square = document.getElementById("0-0");
   expect(square.classList.contains("flash")).toBe(false);

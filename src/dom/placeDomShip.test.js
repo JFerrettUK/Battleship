@@ -12,5 +12,5 @@ beforeAll(async () => {
 
 test("check that a new ship has been placed in the dom", async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000)); // wait for 1 second
-  editBoard();
+  editBoard("userBoard");
 });

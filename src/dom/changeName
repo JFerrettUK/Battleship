@@ -1,4 +1,0 @@
-export default function changeName(name) {
-  name.innerText(name);
-  return name;
-}

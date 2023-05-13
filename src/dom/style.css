@@ -2,12 +2,38 @@ body {
   font-family: Helvetica, sans-serif;
 }
 
+#battleshipTitle {
+  display: flex;
+  padding: 30px;
+  justify-content: center;
+  min-width: 800px;
+
+  font-size: 70px;
+  font-weight: 600;
+  background-image: linear-gradient(
+    to left,
+    rgb(164, 212, 235),
+    rgb(183, 198, 216)
+  );
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+#boardContainers {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr;
+  top: 52px;
+  min-width: 800px;
+
+  height: 394px;
+}
+
 .boardCont {
   display: grid;
-  width: 394px;
+  min-width: 394px;
   height: 394px;
-  margin: 0 auto;
-  position: absolute;
   align-items: center;
   justify-content: center;
   top: 52px;
@@ -16,13 +42,23 @@ body {
   right: 0;
 }
 
-#userTitle {
+#userTitle,
+#aiTitle {
+  font-weight: 600;
   display: flex;
   justify-content: center;
 }
 
+#userTitle {
+  color: rgb(183, 198, 216);
+}
+#aiTitle {
+  color: rgb(164, 212, 235);
+}
+
 #battleBoard,
-#userBoard {
+#userBoard,
+#aiBoard {
   display: grid;
   width: 350px;
   height: 350px;

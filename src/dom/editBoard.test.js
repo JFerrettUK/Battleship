@@ -15,13 +15,13 @@ beforeAll(async () => {
 });
 
 test("Check that there are one-hundred squares in the DOM", () => {
-  editBoard();
+  editBoard("userBoard");
   const squareList = document.querySelectorAll(".battleSquare");
   expect(squareList.length).toBe(100);
 });
 
 test("Check that the initial class of the first square is blue, second cyan, last blue", () => {
-  editBoard();
+  editBoard("userBoard");
   const squareList = document.querySelectorAll(".battleSquare");
   expect(squareList[0].classList.contains("blue")).toBe(true);
   expect(squareList[1].classList.contains("cyan")).toBe(true);
