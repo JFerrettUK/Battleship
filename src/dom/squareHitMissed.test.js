@@ -13,7 +13,7 @@ beforeAll(async () => {
 test("check that a missed square has the class 'missed'", async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000)); // wait for 1 second
   editBoard("userBoard");
-  let zeroZero = document.getElementById("0-0");
+  let zeroZero = document.getElementById("0-0-userBoard");
   expect(zeroZero.classList.contains("missed")).toBe(false);
   zeroZero = squareHitMissed(zeroZero, "missed");
   expect(zeroZero.classList.contains("missed")).toBe(true);
@@ -22,7 +22,7 @@ test("check that a missed square has the class 'missed'", async () => {
 test("check that a hitShip square has the class 'hitShip'", async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000)); // wait for 1 second
   editBoard("userBoard");
-  let zeroZero = document.getElementById("0-0");
+  let zeroZero = document.getElementById("0-0-userBoard");
   expect(zeroZero.classList.contains("hitShip")).toBe(false);
   zeroZero = squareHitMissed(zeroZero, "hitShip");
   expect(zeroZero.classList.contains("hitShip")).toBe(true);

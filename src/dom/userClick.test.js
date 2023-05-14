@@ -14,7 +14,7 @@ beforeAll(async () => {
 test("clicking a square toggles its 'flash' class", () => {
   editBoard("userBoard");
   userClick();
-  const square = document.getElementById("0-0");
+  const square = document.getElementById("0-0-userBoard");
   expect(square.classList.contains("flash")).toBe(false);
   fireEvent.click(square);
   expect(square.classList.contains("flash")).toBe(true);

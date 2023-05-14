@@ -12,7 +12,7 @@ export default function editBoard(targetParent) {
         else battleSquare.classList.add("blue");
       }
 
-      battleSquare.id = `${row}-${i}`;
+      battleSquare.id = `${row}-${i}-${targetParent}`;
       document.getElementById(targetParent).appendChild(battleSquare);
     }
   }

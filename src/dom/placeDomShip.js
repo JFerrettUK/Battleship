@@ -1,4 +1,4 @@
-export default function squareHitMissed(missedSquare, type) {
+export default function placeDomShip(missedSquare, type) {
   if (type == "missed") {
     missedSquare.classList.add("missed");
     return missedSquare;
