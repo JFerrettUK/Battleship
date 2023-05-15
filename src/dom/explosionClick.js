@@ -2,9 +2,9 @@ export default function userClick() {
   const squares = document.querySelectorAll(".battleSquare");
   squares.forEach((square) => {
     square.addEventListener("click", () => {
-      square.classList.add("flash");
+      square.classList.add("boom");
       setTimeout(() => {
-        square.classList.remove("flash");
+        square.classList.remove("boom");
       }, 500);
     });
   });

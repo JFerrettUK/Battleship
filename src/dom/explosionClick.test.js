@@ -1,4 +1,4 @@
-import userClick from "./userClick";
+import explosionClick from "./explosionClick";
 import editPlayerBoard from "./editPlayerBoard";
 import path from "path";
 import { fireEvent } from "@testing-library/dom";
@@ -11,11 +11,11 @@ beforeAll(async () => {
   global.document = dom.window.document;
 });
 
-test("clicking a square toggles its 'flash' class", () => {
+test("clicking a square toggles its 'boom' class", () => {
   editPlayerBoard("userBoard");
-  userClick();
+  explosionClick();
   const square = document.getElementById("0-0-userBoard");
-  expect(square.classList.contains("flash")).toBe(false);
+  expect(square.classList.contains("boom")).toBe(false);
   fireEvent.click(square);
-  expect(square.classList.contains("flash")).toBe(true);
+  expect(square.classList.contains("boom")).toBe(true);
 });

@@ -1,4 +1,4 @@
-export default function editBoard(targetParent) {
+export default function editPlayerBoard(targetParent) {
   function makeRow(row, colour) {
     for (let i = 0; i < 10; i++) {
       const battleSquare = document.createElement("div");

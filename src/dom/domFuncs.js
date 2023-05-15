@@ -1,5 +1,5 @@
 import changeName from "./changeName";
-import editBoard from "./editBoard";
+import editPlayerBoard from "./editPlayerBoard";
 import placeDomShip from "./placeDomShip";
 import squareHitMissed from "./squareHitMissed";
 import userClick from "./userClick";
@@ -10,7 +10,7 @@ export default function domFuncs() {
   };
 
   let domBoard = function (targetParent) {
-    editBoard(targetParent);
+    editPlayerBoard(targetParent);
   };
 
   let placeDOMShips = function (missedSquare, type) {

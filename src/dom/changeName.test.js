@@ -1,6 +1,6 @@
 import path from "path";
 import { JSDOM } from "jsdom";
-import editBoard from "./editBoard";
+import editPlayerBoard from "./editPlayerBoard";
 import changeName from "./changeName";
 
 let dom;
@@ -11,7 +11,7 @@ beforeAll(async () => {
 });
 
 test("Assign the user/AI board titles", () => {
-  editBoard("userBoard");
+  editPlayerBoard("userBoard");
   let userTitle = document.getElementById("userTitle");
   userTitle = changeName("John", userTitle);
   let aiTitle = document.getElementById("aiTitle");

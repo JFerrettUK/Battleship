@@ -1,6 +1,6 @@
-import editBoard from "./dom/editBoard";
+import editPlayerBoard from "./dom/editPlayerBoard";
 import userClick from "./dom/userClick";
 
-editBoard("userBoard");
-editBoard("aiBoard");
+editPlayerBoard("userBoard");
+editPlayerBoard("aiBoard");
 userClick();

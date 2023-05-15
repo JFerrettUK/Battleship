@@ -1,4 +1,4 @@
-import editBoard from "./editBoard";
+import editPlayerBoard from "./editPlayerBoard";
 import squareHitMissed from "./squareHitMissed";
 import path from "path";
 import { JSDOM } from "jsdom";
@@ -12,5 +12,5 @@ beforeAll(async () => {
 
 test("check that a new ship has been placed in the dom", async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000)); // wait for 1 second
-  editBoard("userBoard");
+  editPlayerBoard("userBoard");
 });
