@@ -117,8 +117,7 @@ export default function gameboard() {
       thisBoard[row][column] == "missed" ||
       thisBoard[row][column] == "hitShip"
     ) {
-      receiveAIAttack();
-      return "hitBefore";
+      return receiveAIAttack();
     }
 
     if (thisBoard[row][column] == null) {
@@ -129,6 +128,8 @@ export default function gameboard() {
       hitShip(shipNo);
       changeBoard(row, column, "hitShip");
     }
+
+    return "hitBefore";
   };
 
   let allSunk = function () {

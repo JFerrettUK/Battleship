@@ -1,35 +1,47 @@
 import changeName from "./changeName";
+import editAIBoard from "./editAIBoard";
 import editPlayerBoard from "./editPlayerBoard";
-import placeDomShip from "./placeDomShip";
+import placePlayerDomShip from "./placePlayerDomShip";
 import squareHitMissed from "./squareHitMissed";
+import explosionClick from "./explosionClick";
 import userClick from "./userClick";
 
 export default function domFuncs() {
-  let changeDOMName = function (name, userTitle) {
-    changeName(name, userTitle);
+  let changeNameDOM = function (name, userTitle) {
+    return changeName(name, userTitle);
   };
 
-  let domBoard = function (targetParent) {
+  let aiBoardDOM = function (targetParent) {
+    editAIBoard(targetParent);
+  };
+
+  let playerBoardDOM = function (targetParent) {
     editPlayerBoard(targetParent);
   };
 
-  let placeDOMShips = function (missedSquare, type) {
-    placeDomShip(missedSquare, type);
+  let explosionClickDOM = function () {
+    explosionClick();
   };
 
-  let squareDOMHitMissed = function (missedSquare, type) {
+  let placePlayerShipDOM = function (length, row, column, align) {
+    placePlayerDomShip(length, row, column, align);
+  };
+
+  let squareHMDOM = function (missedSquare, type) {
     squareHitMissed(missedSquare, type);
   };
 
-  let userDOMClick = function () {
+  let userClickDOM = function () {
     userClick();
   };
 
   return {
-    changeDOMName,
-    domBoard,
-    placeDOMShips,
-    squareDOMHitMissed,
-    userDOMClick,
+    changeNameDOM,
+    aiBoardDOM,
+    explosionClickDOM,
+    playerBoardDOM,
+    placePlayerShipDOM,
+    squareHMDOM,
+    userClickDOM,
   };
 }

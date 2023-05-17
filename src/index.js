@@ -1,6 +1,7 @@
-import editPlayerBoard from "./dom/editPlayerBoard";
-import userClick from "./dom/userClick";
+import domFuncs from "./dom/domFuncs";
 
-editPlayerBoard("userBoard");
-editPlayerBoard("aiBoard");
-userClick();
+const domFunctions = domFuncs();
+
+domFunctions.playerBoardDOM("userBoard");
+domFunctions.aiBoardDOM("aiBoard");
+domFunctions.userClickDOM();

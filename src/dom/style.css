@@ -60,7 +60,8 @@ body {
 }
 
 .cyan,
-.blue {
+.blue,
+.grey {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,7 +71,8 @@ body {
 }
 
 .cyan:hover,
-.blue:hover {
+.blue:hover,
+.grey:hover {
   background-color: rgba(255, 0, 0, 0.2);
 }
 
@@ -84,7 +86,12 @@ body {
   color: rgb(215, 239, 250);
 }
 
-#shipSquare {
+.grey {
+  background-color: #d8d7e0;
+  border: white 1px stroke;
+}
+
+.shipSquare {
   background-color: rgb(83, 83, 83);
 }
 

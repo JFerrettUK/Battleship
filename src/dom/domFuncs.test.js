@@ -9,10 +9,27 @@ beforeAll(async () => {
   global.document = dom.window.document;
 });
 
+const domFunctions = domFuncs();
+
 test("Check that there are one-hundred squares in the DOM", () => {
-  const domFunctions = domFuncs();
-  domFunctions.domBoard("userBoard");
-  domFunctions.domBoard("aiBoard");
+  domFunctions.playerBoardDOM("userBoard");
+  const squareList = document.querySelectorAll(".battleSquare");
+  expect(squareList.length).toBe(100);
+});
+
+test("Check that there are one-hundred squares in the DOM", () => {
+  domFunctions.aiBoardDOM("aiBoard");
   const squareList = document.querySelectorAll(".battleSquare");
   expect(squareList.length).toBe(200);
+});
+
+test("Assign the user/AI board titles", () => {
+  domFunctions.playerBoardDOM("userBoard");
+  domFunctions.aiBoardDOM("aiBoard");
+  let userTitle = document.getElementById("userTitle");
+  userTitle = domFunctions.changeNameDOM("John", userTitle);
+  let aiTitle = document.getElementById("aiTitle");
+  aiTitle = domFunctions.changeNameDOM("Hal", aiTitle);
+  expect(userTitle.innerText).toBe("John");
+  expect(aiTitle.innerText).toBe("Hal");
 });
