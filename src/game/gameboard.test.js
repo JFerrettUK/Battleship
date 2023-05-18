@@ -193,3 +193,11 @@ test("can't place ship horizontally on an already occupied square", () => {
     "occupiedSquare"
   );
 });
+
+test("can't place ship offBoard", () => {
+  let battleshipBoard = gameboard();
+  expect(battleshipBoard.placeShip(11, 2, 2, "horizontal")).toBe("offBoard");
+  expect(battleshipBoard.placeShip(3, 11, 2, "horizontal")).toBe("offBoard");
+  expect(battleshipBoard.placeShip(11, 2, 2, "vertical")).toBe("offBoard");
+  expect(battleshipBoard.placeShip(3, 11, 2, "vertical")).toBe("offBoard");
+});

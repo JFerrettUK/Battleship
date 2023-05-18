@@ -20,7 +20,7 @@ body {
   top: 52px;
   min-width: 800px;
 
-  height: 394px;
+  min-height: 394px;
 }
 
 .boardCont {
@@ -61,7 +61,8 @@ body {
 
 .cyan,
 .blue,
-.grey {
+.grey,
+.shipSquare {
   display: flex;
   align-items: center;
   justify-content: center;

@@ -12,6 +12,10 @@ export default function editPlayerBoard(targetParent) {
         else battleSquare.classList.add("blue");
       }
 
+      if (battleSquare.classList.contains("shipSquare")) {
+        battleSquare.classList.remove("shipSquare");
+      }
+
       battleSquare.id = `${row}-${i}-${targetParent}`;
       document.getElementById(targetParent).appendChild(battleSquare);
     }
