@@ -1,6 +1,6 @@
 import changeSquareClass from "./changeSquareClass";
 
-export default function placePlayerDomShip(length, row, column, align) {
+export default function placeAIDomShip(length, row, column, align) {
   if (row > 9 || column > 9) {
     return "offBoard";
   }
@@ -12,7 +12,7 @@ export default function placePlayerDomShip(length, row, column, align) {
         return "offBoard";
       }
 
-      let shipSquare = document.getElementById(row + "-" + i + "-userBoard");
+      let shipSquare = document.getElementById(row + "-" + i + "-aiBoard");
       if (shipSquare.classList.contains("shipSquare")) {
         return "occupiedSquare";
       }
@@ -28,7 +28,7 @@ export default function placePlayerDomShip(length, row, column, align) {
         return "offBoard";
       }
 
-      let shipSquare = document.getElementById(i + "-" + column + "-userBoard");
+      let shipSquare = document.getElementById(i + "-" + column + "-aiBoard");
       if (shipSquare.classList.contains("shipSquare")) {
         return "occupiedSquare";
       }
