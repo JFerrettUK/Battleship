@@ -3,6 +3,7 @@ export default function editPlayerBoard(targetParent) {
     for (let i = 0; i < 10; i++) {
       const battleSquare = document.createElement("div");
       battleSquare.classList.add("battleSquare");
+      battleSquare.classList.add("userSquare");
 
       if (colour == "blue") {
         if (i % 2 == 0) battleSquare.classList.add("blue");

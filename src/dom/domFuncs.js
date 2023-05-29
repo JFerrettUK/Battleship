@@ -40,15 +40,15 @@ export default function domFuncs() {
     userClick();
   };
 
-  let placeTempShips = function () {
-    placeAIShip(2, 2, 1, "vertical");
-    placeAIShip(3, 4, 4, "horizontal");
-    placeAIShip(4, 6, 1, "horizontal");
-    placeAIShip(5, 4, 5, "vertical");
-    placePlayerDomShip(2, 2, 1, "vertical");
-    placePlayerDomShip(3, 4, 4, "horizontal");
-    placePlayerDomShip(4, 6, 1, "horizontal");
-    placePlayerDomShip(5, 4, 5, "vertical");
+  let placeTempDOMShips = function () {
+    placeAIShipDOM(2, 2, 1, "vertical");
+    placeAIShipDOM(3, 4, 4, "horizontal");
+    placeAIShipDOM(4, 6, 1, "horizontal");
+    placeAIShipDOM(5, 4, 5, "vertical");
+    placePlayerShipDOM(2, 2, 1, "vertical");
+    placePlayerShipDOM(3, 4, 3, "horizontal");
+    placePlayerShipDOM(4, 6, 1, "horizontal");
+    placePlayerShipDOM(5, 4, 5, "vertical");
   };
 
   return {
@@ -58,6 +58,7 @@ export default function domFuncs() {
     playerBoardDOM,
     placePlayerShipDOM,
     placeAIShipDOM,
+    placeTempDOMShips,
     squareHMDOM,
     userClickDOM,
   };

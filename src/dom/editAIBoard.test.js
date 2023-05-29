@@ -1,6 +1,6 @@
 import path from "path";
 import { JSDOM } from "jsdom";
-import editAIBoard from "./editAIBoard";
+import editPlayerBoard from "./editPlayerBoard";
 
 // Declare a variable to hold the JSDOM instance
 let dom;
@@ -15,13 +15,15 @@ beforeAll(async () => {
 });
 
 test("Check that there are one-hundred squares in the DOM", () => {
-  editAIBoard("aiBoard");
+  editPlayerBoard("userBoard");
   const squareList = document.querySelectorAll(".battleSquare");
   expect(squareList.length).toBe(100);
 });
 
-test("Check that the class of all squares are grey", () => {
-  editAIBoard("userBoard");
+test("Check that the initial class of the first square is blue, second cyan, last blue", () => {
+  editPlayerBoard("userBoard");
   const squareList = document.querySelectorAll(".battleSquare");
-  expect(squareList[0].classList.contains("grey")).toBe(true);
+  expect(squareList[0].classList.contains("blue")).toBe(true);
+  expect(squareList[1].classList.contains("cyan")).toBe(true);
+  expect(squareList[99].classList.contains("blue")).toBe(true);
 });

@@ -19,7 +19,7 @@ export default function placePlayerDomShip(length, row, column, align) {
     }
     //change the board if not
     for (let i = column; i < length + column; i++) {
-      changeSquareClass(row, i);
+      changeSquareClass(row, i, "user");
     }
   } else {
     //check if these squares are already occupied
@@ -35,7 +35,7 @@ export default function placePlayerDomShip(length, row, column, align) {
     }
     //change the board if not
     for (let i = row; i < length + row; i++) {
-      changeSquareClass(i, column);
+      changeSquareClass(i, column, "user");
     }
   }
 }

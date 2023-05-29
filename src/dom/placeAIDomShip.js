@@ -12,14 +12,14 @@ export default function placeAIDomShip(length, row, column, align) {
         return "offBoard";
       }
 
-      let shipSquare = document.getElementById(row + "-" + i + "-aiBoard");
-      if (shipSquare.classList.contains("shipSquare")) {
+      let aiShipSquare = document.getElementById(row + "-" + i + "-aiBoard");
+      if (aiShipSquare.classList.contains("aiShipSquare")) {
         return "occupiedSquare";
       }
     }
     //change the board if not
     for (let i = column; i < length + column; i++) {
-      changeSquareClass(row, i);
+      changeSquareClass(row, i, "ai");
     }
   } else {
     //check if these squares are already occupied
@@ -28,14 +28,14 @@ export default function placeAIDomShip(length, row, column, align) {
         return "offBoard";
       }
 
-      let shipSquare = document.getElementById(i + "-" + column + "-aiBoard");
-      if (shipSquare.classList.contains("shipSquare")) {
+      let aiShipSquare = document.getElementById(i + "-" + column + "-aiBoard");
+      if (aiShipSquare.classList.contains("aiShipSquare")) {
         return "occupiedSquare";
       }
     }
     //change the board if not
     for (let i = row; i < length + row; i++) {
-      changeSquareClass(i, column);
+      changeSquareClass(i, column, "ai");
     }
   }
 }

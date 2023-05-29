@@ -62,7 +62,8 @@ body {
 .cyan,
 .blue,
 .grey,
-.shipSquare {
+.shipSquare,
+.aiShipSquare {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,7 +88,8 @@ body {
   color: rgb(215, 239, 250);
 }
 
-.grey {
+.grey,
+.aiShipSquare {
   background-color: #d8d7e0;
   border: white 1px stroke;
 }
