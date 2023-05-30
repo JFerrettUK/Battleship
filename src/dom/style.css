@@ -98,11 +98,13 @@ body {
   background-color: rgb(83, 83, 83);
 }
 
-.hitShip {
-  background-color: rgb(216, 66, 66);
+.boardCont .hitSquare {
+  background-image: url("/redx.png");
+  background-color: rgb(48, 48, 48);
 }
 
 .missed {
+  background-image: url("/redx.png");
   background-color: rgb(202, 183, 120);
 }
 

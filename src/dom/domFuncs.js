@@ -1,4 +1,5 @@
 import changeName from "./changeName";
+import aiAttack from "./aiAttack";
 import editAIBoard from "./editAIBoard";
 import editPlayerBoard from "./editPlayerBoard";
 import placePlayerDomShip from "./placePlayerDomShip";
@@ -40,6 +41,10 @@ export default function domFuncs() {
     userClick();
   };
 
+  let aiAttackDOM = function (row, column) {
+    aiAttack(row, column);
+  };
+
   let placeTempDOMShips = function () {
     placeAIShipDOM(2, 2, 1, "vertical");
     placeAIShipDOM(3, 4, 4, "horizontal");
@@ -52,6 +57,7 @@ export default function domFuncs() {
   };
 
   return {
+    aiAttackDOM,
     changeNameDOM,
     aiBoardDOM,
     explosionClickDOM,

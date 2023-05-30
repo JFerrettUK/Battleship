@@ -37,11 +37,12 @@ test("Assign the user/AI board titles", () => {
 test("Place temp ships", () => {
   domFunctions.playerBoardDOM("userBoard");
   domFunctions.aiBoardDOM("aiBoard");
+  domFunctions.placeTempDOMShips();
   expect(
     document.getElementById("2-1-userBoard").classList.contains("shipSquare")
   ).toBe(true);
   expect(
-    document.getElementById("4-4-userBoard").classList.contains("shipSquare")
+    document.getElementById("4-3-userBoard").classList.contains("shipSquare")
   ).toBe(true);
   expect(
     document.getElementById("6-1-userBoard").classList.contains("shipSquare")

@@ -1,4 +1,4 @@
-export default function changeSquareClass(row, column, board) {
+export default function changeShipClass(row, column, board) {
   let shipSquare;
 
   if (board == "user") {
