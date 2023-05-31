@@ -98,13 +98,15 @@ body {
   background-color: rgb(83, 83, 83);
 }
 
-.boardCont .hitSquare {
-  background-image: url("/redx.png");
-  background-color: rgb(48, 48, 48);
+.boardCont .hitShip {
+  background-color: rgb(233, 31, 31);
 }
 
 .missed {
-  background-image: url("/redx.png");
+  background-color: rgb(120, 202, 161);
+}
+
+.userMissed {
   background-color: rgb(202, 183, 120);
 }
 

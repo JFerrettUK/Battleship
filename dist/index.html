@@ -19,5 +19,24 @@
         <div id="aiBoard"></div>
       </div>
     </div>
+    <script defer>
+      function testImage(url) {
+        var img = new Image();
+        img.onload = function () {
+          console.log("Image loaded successfully.");
+        };
+        img.onerror = function () {
+          console.log("Error loading image.");
+        };
+        img.src = url;
+      }
+
+      window.addEventListener("DOMContentLoaded", function () {
+        var missedElements = document.getElementsByClassName("missed");
+        for (var i = 0; i < missedElements.length; i++) {
+          missedElements[i].style.backgroundImage = 'url("./src/redx.png")';
+        }
+      });
+    </script>
   </body>
 </html>
