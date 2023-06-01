@@ -9,6 +9,10 @@ import explosionClick from "./explosionClick";
 import userClick from "./userClick";
 
 export default function domFuncs() {
+  let aiAttackDOM = function (row, column) {
+    aiAttack(row, column);
+  };
+
   let changeNameDOM = function (name, userTitle) {
     return changeName(name, userTitle);
   };
@@ -41,10 +45,6 @@ export default function domFuncs() {
     userClick();
   };
 
-  let aiAttackDOM = function (row, column) {
-    aiAttack(row, column);
-  };
-
   let placeTempDOMShips = function () {
     placeAIShipDOM(2, 2, 1, "vertical");
     placeAIShipDOM(3, 4, 4, "horizontal");
@@ -60,11 +60,11 @@ export default function domFuncs() {
     aiAttackDOM,
     changeNameDOM,
     aiBoardDOM,
-    explosionClickDOM,
     playerBoardDOM,
-    placePlayerShipDOM,
-    placeAIShipDOM,
+    explosionClickDOM,
     placeTempDOMShips,
+    placeAIShipDOM,
+    placePlayerShipDOM,
     squareHMDOM,
     userClickDOM,
   };

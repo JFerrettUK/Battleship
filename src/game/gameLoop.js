@@ -13,7 +13,7 @@ export default function gameLoop(playerName) {
   const placeAIShip = ai.playerBoard.placeShip.bind(ai.playerBoard);
   const placeUserShip = user.playerBoard.placeShip.bind(user.playerBoard);
 
-  let attackPlayer = function (row, column) {
+  let attackPlayer = function () {
     attackPlayerFunc();
     turns.switchTurns(user, ai);
   };
