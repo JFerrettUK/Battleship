@@ -1,3 +1,3 @@
-import finalGameDOMLoop from "./finalGameDOMLoop/finalGameDOMLoop";
+import playGame from "./playGame/playGame";
 
-finalGameDOMLoop();
+playGame();

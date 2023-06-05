@@ -101,7 +101,7 @@ export default function gameboard() {
         }
       }
     }
-    return false;
+    return [false, []];
   };
 
   let missedInARow = function (row) {
