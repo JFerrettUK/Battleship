@@ -117,7 +117,7 @@ export default function gameboard() {
 
   let receiveAIAttack = function () {
     if (listMissed.length == 99) {
-      return "board full";
+      return ["board full", [row, column]];
     }
 
     let row = Math.floor(Math.random() * 10);
@@ -139,7 +139,7 @@ export default function gameboard() {
       changeBoard(row, column, "hitShip");
     }
 
-    return "hitBefore";
+    return ["hitBefore", [row, column]];
   };
 
   let allSunk = function () {

@@ -53,7 +53,7 @@ test("playerAttack: The last attack should make it turn no 2", () => {
 });
 
 test("attackAI: Don't change turns if the AI's square was hitBefore", () => {
-  expect(thisGame.attackAI(1, 1)).toBe("hitBefore");
+  expect(thisGame.attackAI(1, 1)[1]).toBe("hitBefore");
   expect(thisGame.ai.playerBoard.board[1][1]).toBe("missed");
   expect(thisGame.ai.isTurn).toBe(false);
   expect(thisGame.user.isTurn).toBe(true);

@@ -147,7 +147,7 @@ test("run receiveAIAttack 500 times. It should at some point return 'hit before'
   let battleshipBoard = gameboard();
   let hitBefore = false;
   for (let i = 0; i < 500; i++) {
-    let result = battleshipBoard.receiveAIAttack();
+    let result = battleshipBoard.receiveAIAttack()[0];
     if (result == "hitBefore") {
       hitBefore = true;
       break;
@@ -181,7 +181,7 @@ test("if receiveAIAttack runs on a full gameboard, board full is returned", () =
 
   battleshipBoard.receiveAIAttack();
 
-  expect(battleshipBoard.receiveAIAttack()).toBe("board full");
+  expect(battleshipBoard.receiveAIAttack()[0]).toBe("board full");
 });
 
 test("can't place ship vertically on an already occupied square", () => {

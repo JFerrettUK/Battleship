@@ -22,14 +22,15 @@ export default function gameLoop(playerName) {
 
   // Function to handle player attack
   let attackPlayer = function () {
-    attackPlayerFunc(); // Execute player attack
+    let attackResult = attackPlayerFunc()[1]; // Execute player attack
     turns.switchTurns(user, ai); // Switch turns between players
+    return attackResult;
   };
 
   // Function to handle AI attack
   let attackAI = function (row, column) {
     if (attackAIFunc(row, column) == "hitBefore") {
-      return "hitBefore"; // If AI attack was invalid (already hit), return "hitBefore" flag
+      return [[row, column], "hitBefore"]; // If AI attack was invalid (already hit), return "hitBefore" flag
     }
     turns.switchTurns(user, ai); // Switch turns between players
   };

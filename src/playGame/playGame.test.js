@@ -48,7 +48,7 @@ describe("playGame", () => {
 });
 
 test("gameLoop user and ai players should work with the manageTurn func", async () => {
-  let thisGame = await playGame();
+  let thisGame = (await playGame()).thisGame;
 
   expect(thisGame.user.isTurn).toBe(true);
   expect(thisGame.ai.isTurn).toBe(false);
@@ -62,3 +62,7 @@ test("gameLoop user and ai players should work with the manageTurn func", async 
   thisGame.turns.switchTurns(thisGame.user, thisGame.ai);
   expect(thisGame.turns.getNo()).toBe(2);
 });
+
+test("handleAttack attacks player in both DOM and game", async () => {});
+
+test("handleAttack attacks ai in both DOM and game", async () => {});
