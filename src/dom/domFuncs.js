@@ -1,5 +1,5 @@
 import changeName from "./changeName";
-import aiAttack from "./aiAttack";
+import receiveAIAttack from "./receiveAIAttack";
 import editAIBoard from "./editAIBoard";
 import editPlayerBoard from "./editPlayerBoard";
 import placePlayerDomShip from "./placePlayerDomShip";
@@ -9,8 +9,8 @@ import explosionClick from "./explosionClick";
 import userClick from "./userClick";
 
 export default function domFuncs() {
-  let aiAttackDOM = function (row, column) {
-    aiAttack(row, column);
+  let receiveAIAttackDOM = function (row, column) {
+    receiveAIAttack(row, column);
   };
 
   let changeNameDOM = function (name, userTitle) {
@@ -57,7 +57,7 @@ export default function domFuncs() {
   };
 
   return {
-    aiAttackDOM,
+    receiveAIAttackDOM,
     changeNameDOM,
     aiBoardDOM,
     playerBoardDOM,

@@ -63,6 +63,22 @@ test("gameLoop user and ai players should work with the manageTurn func", async 
   expect(thisGame.turns.getNo()).toBe(2);
 });
 
-test("handleAttack attacks player in both DOM and game", async () => {});
+test("handleAttack attacks player in both DOM and game", async () => {
+  const { thisGame, handleAttack } = await playGame();
 
-test("handleAttack attacks ai in both DOM and game", async () => {});
+  // Perform player attack
+  const playerAttackRow = 2;
+  const playerAttackColumn = 3;
+  handleAttack(playerAttackRow, playerAttackColumn);
+
+  // Assert that the player attack is reflected in the game and DOM
+  // You can use appropriate assertions and DOM inspection methods to verify the results
+});
+
+test("handleAttack attacks ai in both DOM and game", async () => {
+  let thisGame = (await playGame()).thisGame;
+});
+
+test("handleAttack execution moves the turn order up by 1", async () => {
+  let thisGame = (await playGame()).thisGame;
+});

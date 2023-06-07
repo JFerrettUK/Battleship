@@ -24,14 +24,10 @@ export default async function playGame() {
       playerAttackRow,
       playerAttackColumn
     );
-    domFunctions.aiAttackDOM(attackedAISquare[0], attackedAISquare[1]);
 
     // AI attacks player
     let attackedPlayerSquare = thisGame.attackPlayer();
-    domFunctions.playerAttackDOM(
-      attackedPlayerSquare[0],
-      attackedPlayerSquare[1]
-    );
+    domFunctions.aiAttackDOM(attackedPlayerSquare[0], attackedPlayerSquare[1]);
   };
 
   await new Promise((resolve) => setTimeout(resolve, 1000));

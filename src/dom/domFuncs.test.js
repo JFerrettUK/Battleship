@@ -51,3 +51,13 @@ test("Place temp ships", () => {
     document.getElementById("4-5-userBoard").classList.contains("shipSquare")
   ).toBe(true);
 });
+
+test("attacking a player square triggers the 'flash' animation", () => {
+  domFunctions.playerBoardDOM("userBoard");
+  let row = 0;
+  let column = 0;
+  const square = document.getElementById(`${row}-${column}-userBoard`);
+  expect(square.classList.contains("flash")).toBe(false);
+  domFunctions.receiveAIAttackDOM(row, column);
+  expect(square.classList.contains("flash")).toBe(true);
+});

@@ -1,4 +1,5 @@
 export default function aiAttack(row, column) {
+  // Retrieve the square element using row and column
   let square = document.getElementById(`${row}-${column}-userBoard`);
 
   if (square) {
