@@ -3,7 +3,7 @@ import editPlayerBoard from "./editPlayerBoard";
 import path from "path";
 import { fireEvent } from "@testing-library/dom";
 import { JSDOM } from "jsdom";
-import editAIBoard from "./editAIBoard";
+import editAIBoardDOM from "./editAIBoardDOM";
 
 let dom;
 beforeAll(async () => {
@@ -13,7 +13,7 @@ beforeAll(async () => {
 });
 
 test("clicking a square toggles its 'flash' class", () => {
-  editAIBoard("aiBoard");
+  editAIBoardDOM("aiBoard");
   userClick();
   const square = document.getElementById("0-0-aiBoard");
   expect(square.classList.contains("flash")).toBe(false);

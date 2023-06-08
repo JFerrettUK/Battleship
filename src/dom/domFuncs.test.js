@@ -1,6 +1,8 @@
 import path from "path";
 import { JSDOM } from "jsdom";
 import domFuncs from "./domFuncs";
+import editPlayerBoard from "./editPlayerBoard";
+import editAIBoardDOM from "./editAIBoardDOM";
 
 let dom;
 beforeAll(async () => {
@@ -11,32 +13,9 @@ beforeAll(async () => {
 
 const domFunctions = domFuncs();
 
-test("Check that there are one-hundred squares in the DOM", () => {
-  domFunctions.playerBoardDOM("userBoard");
-  const squareList = document.querySelectorAll(".battleSquare");
-  expect(squareList.length).toBe(100);
-});
-
-test("Check that there are one-hundred squares in the DOM", () => {
-  domFunctions.aiBoardDOM("aiBoard");
-  const squareList = document.querySelectorAll(".battleSquare");
-  expect(squareList.length).toBe(200);
-});
-
-test("Assign the user/AI board titles", () => {
-  domFunctions.playerBoardDOM("userBoard");
-  domFunctions.aiBoardDOM("aiBoard");
-  let userTitle = document.getElementById("userTitle");
-  userTitle = domFunctions.changeNameDOM("John", userTitle);
-  let aiTitle = document.getElementById("aiTitle");
-  aiTitle = domFunctions.changeNameDOM("Hal", aiTitle);
-  expect(userTitle.innerText).toBe("John");
-  expect(aiTitle.innerText).toBe("Hal");
-});
-
 test("Place temp ships", () => {
-  domFunctions.playerBoardDOM("userBoard");
-  domFunctions.aiBoardDOM("aiBoard");
+  editPlayerBoard("userBoard");
+  editAIBoardDOM("aiBoard");
   domFunctions.placeTempDOMShips();
   expect(
     document.getElementById("2-1-userBoard").classList.contains("shipSquare")
@@ -50,14 +29,4 @@ test("Place temp ships", () => {
   expect(
     document.getElementById("4-5-userBoard").classList.contains("shipSquare")
   ).toBe(true);
-});
-
-test("attacking a player square triggers the 'flash' animation", () => {
-  domFunctions.playerBoardDOM("userBoard");
-  let row = 0;
-  let column = 0;
-  const square = document.getElementById(`${row}-${column}-userBoard`);
-  expect(square.classList.contains("flash")).toBe(false);
-  domFunctions.receiveAIAttackDOM(row, column);
-  expect(square.classList.contains("flash")).toBe(true);
 });

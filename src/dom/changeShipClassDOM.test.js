@@ -1,4 +1,4 @@
-import changeShipClass from "./changeShipClass";
+import changeShipClassDOM from "./changeShipClassDOM";
 import editPlayerBoard from "./editPlayerBoard";
 import path from "path";
 import { JSDOM } from "jsdom";
@@ -10,13 +10,13 @@ beforeAll(async () => {
   global.document = dom.window.document;
 });
 
-test("changeShipClass updates ship class correctly", () => {
+test("changeShipClassDOM updates ship class correctly", () => {
   editPlayerBoard("userBoard");
   const square = document.getElementById("5-8-userBoard");
 
   expect(square.classList.contains("cyan")).toBe(true);
 
-  changeShipClass(5, 8, "user");
+  changeShipClassDOM(5, 8, "user");
 
   expect(square.classList.contains("shipSquare")).toBe(true);
   expect(square.classList.contains("cyan")).toBe(false);

@@ -1,4 +1,4 @@
-import receiveAIAttack from "./receiveAIAttack";
+import receiveAIAttackDOM from "./receiveAIAttackDOM";
 import editPlayerBoard from "./editPlayerBoard";
 import path from "path";
 import { JSDOM } from "jsdom";
@@ -18,13 +18,13 @@ beforeEach(() => {
 test("attacking a square triggers the 'flash' animation", () => {
   const square = document.getElementById(`0-0-userBoard`);
   expect(square.classList.contains("flash")).toBe(false);
-  receiveAIAttack(0, 0);
+  receiveAIAttackDOM(0, 0);
   expect(square.classList.contains("flash")).toBe(true);
 });
 
 test("attacking a missed square triggers the 'flash' animation", () => {
   const square = document.getElementById(`0-0-userBoard`);
   expect(square.classList.contains("missed")).toBe(false);
-  receiveAIAttack(0, 0);
+  receiveAIAttackDOM(0, 0);
   expect(square.classList.contains("missed")).toBe(true);
 });

@@ -1,4 +1,4 @@
-import changeShipClass from "./changeShipClass";
+import changeShipClassDOM from "./changeShipClassDOM";
 
 export default function placeAIDomShip(length, row, column, align) {
   if (row > 9 || column > 9) {
@@ -19,7 +19,7 @@ export default function placeAIDomShip(length, row, column, align) {
     }
     //change the board if not
     for (let i = column; i < length + column; i++) {
-      changeShipClass(row, i, "ai");
+      changeShipClassDOM(row, i, "ai");
     }
   } else {
     //check if these squares are already occupied
@@ -35,7 +35,7 @@ export default function placeAIDomShip(length, row, column, align) {
     }
     //change the board if not
     for (let i = row; i < length + row; i++) {
-      changeShipClass(i, column, "ai");
+      changeShipClassDOM(i, column, "ai");
     }
   }
 }

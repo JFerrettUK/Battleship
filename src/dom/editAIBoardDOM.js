@@ -1,4 +1,4 @@
-export default function editAIBoard(targetParent) {
+export default function editAIBoardDOM(targetParent) {
   document.getElementById(targetParent).innerHTML = "";
 
   function makeRow(row, colour) {

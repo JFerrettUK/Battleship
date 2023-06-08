@@ -1,7 +1,7 @@
 import path from "path";
 import { JSDOM } from "jsdom";
 import editPlayerBoard from "./editPlayerBoard";
-import changeName from "./changeName";
+import changeNameDOM from "./changeNameDOM";
 
 let dom;
 beforeAll(async () => {
@@ -13,9 +13,9 @@ beforeAll(async () => {
 test("Assign the user/AI board titles", () => {
   editPlayerBoard("userBoard");
   let userTitle = document.getElementById("userTitle");
-  userTitle = changeName("John", userTitle);
+  userTitle = changeNameDOM("John", userTitle);
   let aiTitle = document.getElementById("aiTitle");
-  aiTitle = changeName("Hal", aiTitle);
+  aiTitle = changeNameDOM("Hal", aiTitle);
   expect(userTitle.innerText).toBe("John");
   expect(aiTitle.innerText).toBe("Hal");
 });
