@@ -1,5 +1,5 @@
-import placePlayerDomShip from "./placePlayerDomShip";
-import editPlayerBoard from "./editPlayerBoard";
+import placePlayerShipDOM from "./placePlayerShipDOM";
+import editPlayerBoardDOM from "./editPlayerBoardDOM";
 import path from "path";
 import { JSDOM } from "jsdom";
 
@@ -11,7 +11,7 @@ beforeAll(async () => {
 });
 
 test("no ships at start of test", () => {
-  editPlayerBoard("userBoard");
+  editPlayerBoardDOM("userBoard");
 
   expect(
     document.getElementById("5-8-userBoard").classList.contains("shipSquare")
@@ -22,9 +22,9 @@ test("no ships at start of test", () => {
 });
 
 test("place ship  in dom with vertical length", () => {
-  editPlayerBoard("userBoard");
+  editPlayerBoardDOM("userBoard");
 
-  placePlayerDomShip(3, 2, 1, "vertical");
+  placePlayerShipDOM(3, 2, 1, "vertical");
   expect(
     document.getElementById("2-1-userBoard").classList.contains("shipSquare")
   ).toBe(true);
@@ -35,7 +35,7 @@ test("place ship  in dom with vertical length", () => {
     document.getElementById("2-3-userBoard").classList.contains("shipSquare")
   ).toBe(true);
 
-  placePlayerDomShip(4, 5, 6, "vertical");
+  placePlayerShipDOM(4, 5, 6, "vertical");
 
   expect(
     document.getElementById("5-6-userBoard").classList.contains("shipSquare")
@@ -52,9 +52,9 @@ test("place ship  in dom with vertical length", () => {
 });
 
 test("place ship in dom with horizontal length", () => {
-  editPlayerBoard("userBoard");
+  editPlayerBoardDOM("userBoard");
 
-  placePlayerDomShip(3, 3, 1, "horizontal");
+  placePlayerShipDOM(3, 3, 1, "horizontal");
 
   expect(
     document.getElementById("3-1-userBoard").classList.contains("shipSquare")
@@ -66,7 +66,7 @@ test("place ship in dom with horizontal length", () => {
     document.getElementById("5-1-userBoard").classList.contains("shipSquare")
   ).toBe(true);
 
-  placePlayerDomShip(4, 6, 6, "horizontal");
+  placePlayerShipDOM(4, 6, 6, "horizontal");
 
   expect(
     document.getElementById("6-6-userBoard").classList.contains("shipSquare")
@@ -83,7 +83,7 @@ test("place ship in dom with horizontal length", () => {
 });
 
 test("If a ship is placed in a spot that extend off the board, return offBoard", () => {
-  editPlayerBoard("userBoard");
+  editPlayerBoardDOM("userBoard");
 
-  expect(placePlayerDomShip(7, 11, 1, "horizontal")).toBe("offBoard");
+  expect(placePlayerShipDOM(7, 11, 1, "horizontal")).toBe("offBoard");
 });

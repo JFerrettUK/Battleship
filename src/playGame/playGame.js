@@ -1,14 +1,16 @@
 import gameLoop from "../game/gameLoop";
-import domFuncs from "../dom/domFuncs";
+import placeTempShipsDOM from "../dom/placeTempShipsDOM";
 import changeNameDOM from "../dom/changeNameDOM";
 import receiveAIAttackDOM from "../dom/receiveAIAttackDOM";
 import editAIBoardDOM from "../dom/editAIBoardDOM";
-import editPlayerBoard from "../dom/editPlayerBoard";
-import placePlayerDomShip from "../dom/placePlayerDomShip";
-import placeAIDomShip from "../dom/placeAIDomShip";
-import squareHitMissed from "../dom/squareHitMissed";
-import explosionClick from "../dom/explosionClick";
-import userClick from "../dom/userClick";
+import editPlayerBoardDOM from "../dom/editPlayerBoardDOM";
+import placePlayerShipDOM from "../dom/placePlayerShipDOM";
+import placeAIShipDOM from "../dom/placeAIShipDOM";
+import squareHitMissedDOM from "../dom/squareHitMissedDOM";
+import explosionClickDOM from "../dom/explosionClickDOM";
+import userClickDOM from "../dom/userClickDOM";
+
+//Get the DOM working, then add the game to relevant parts
 
 export default async function playGame() {
   let thisGame = gameLoop("James");
@@ -20,27 +22,19 @@ export default async function playGame() {
     thisGame
   ) {
     // Player attacks AI
-    let attackedAISquare = thisGame.attackAI(
-      playerAttackRow,
-      playerAttackColumn
-    );
+    let attackedAIS = thisGame.attackAI(playerAttackRow, playerAttackColumn);
 
     // AI attacks player
-    let attackedPlayerSquare = thisGame.attackPlayer();
-    thisGame = receiveAIAttackDOM(
-      attackedPlayerSquare[0],
-      attackedPlayerSquare[1],
-      thisGame
-    );
+    let attackedPS = thisGame.attackPlayer();
+    thisGame = receiveAIAttackDOM(attackedPS[0], attackedPS[1], thisGame);
 
     return thisGame;
   };
 
-  const domFunctions = domFuncs();
-  editPlayerBoard("userBoard");
+  editPlayerBoardDOM("userBoard");
   editAIBoardDOM("aiBoard");
-  thisGame = userClick();
-  domFunctions.placeTempDOMShips();
+  thisGame = userClickDOM();
+  placeTempShipsDOM();
 
   await new Promise((resolve) => setTimeout(resolve, 1000));
 

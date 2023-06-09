@@ -1,4 +1,4 @@
-import placeAIDomShip from "./placeAIDomShip";
+import placeAIShipDOM from "./placeAIShipDOM";
 import editAIBoardDOM from "./editAIBoardDOM";
 import path from "path";
 import { JSDOM } from "jsdom";
@@ -24,7 +24,7 @@ test("no ships at start of test", () => {
 test("place ship  in dom with vertical length", () => {
   editAIBoardDOM("aiBoard");
 
-  placeAIDomShip(3, 2, 1, "vertical");
+  placeAIShipDOM(3, 2, 1, "vertical");
   expect(
     document.getElementById("2-1-aiBoard").classList.contains("aiShipSquare")
   ).toBe(true);
@@ -35,7 +35,7 @@ test("place ship  in dom with vertical length", () => {
     document.getElementById("2-3-aiBoard").classList.contains("aiShipSquare")
   ).toBe(true);
 
-  placeAIDomShip(4, 5, 6, "vertical");
+  placeAIShipDOM(4, 5, 6, "vertical");
 
   expect(
     document.getElementById("5-6-aiBoard").classList.contains("aiShipSquare")
@@ -54,7 +54,7 @@ test("place ship  in dom with vertical length", () => {
 test("place ship in dom with horizontal length", () => {
   editAIBoardDOM("aiBoard");
 
-  placeAIDomShip(3, 3, 1, "horizontal");
+  placeAIShipDOM(3, 3, 1, "horizontal");
 
   expect(
     document.getElementById("3-1-aiBoard").classList.contains("aiShipSquare")
@@ -66,7 +66,7 @@ test("place ship in dom with horizontal length", () => {
     document.getElementById("5-1-aiBoard").classList.contains("aiShipSquare")
   ).toBe(true);
 
-  placeAIDomShip(4, 6, 6, "horizontal");
+  placeAIShipDOM(4, 6, 6, "horizontal");
 
   expect(
     document.getElementById("6-6-aiBoard").classList.contains("aiShipSquare")
@@ -85,5 +85,5 @@ test("place ship in dom with horizontal length", () => {
 test("If a ship is placed in a spot that extend off the board, return offBoard", () => {
   editAIBoardDOM("aiBoard");
 
-  expect(placeAIDomShip(7, 11, 1, "horizontal")).toBe("offBoard");
+  expect(placeAIShipDOM(7, 11, 1, "horizontal")).toBe("offBoard");
 });

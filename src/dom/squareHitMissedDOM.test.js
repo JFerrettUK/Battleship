@@ -1,5 +1,5 @@
-import editPlayerBoard from "./editPlayerBoard";
-import squareHitMissed from "./squareHitMissed";
+import editPlayerBoardDOM from "./editPlayerBoardDOM";
+import squareHitMissedDOM from "./squareHitMissedDOM";
 import path from "path";
 import { JSDOM } from "jsdom";
 
@@ -12,18 +12,18 @@ beforeAll(async () => {
 
 test("check that a missed square has the class 'missed'", async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000)); // wait for 1 second
-  editPlayerBoard("userBoard");
+  editPlayerBoardDOM("userBoard");
   let zeroZero = document.getElementById("0-0-userBoard");
   expect(zeroZero.classList.contains("missed")).toBe(false);
-  zeroZero = squareHitMissed(zeroZero, "missed");
+  zeroZero = squareHitMissedDOM(zeroZero, "missed");
   expect(zeroZero.classList.contains("missed")).toBe(true);
 });
 
 test("check that a hitShip square has the class 'hitShip'", async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000)); // wait for 1 second
-  editPlayerBoard("userBoard");
+  editPlayerBoardDOM("userBoard");
   let zeroZero = document.getElementById("0-0-userBoard");
   expect(zeroZero.classList.contains("hitShip")).toBe(false);
-  zeroZero = squareHitMissed(zeroZero, "hitShip");
+  zeroZero = squareHitMissedDOM(zeroZero, "hitShip");
   expect(zeroZero.classList.contains("hitShip")).toBe(true);
 });

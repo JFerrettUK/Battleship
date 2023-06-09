@@ -1,6 +1,6 @@
 import changeShipClassDOM from "./changeShipClassDOM";
 
-export default function placeAIDomShip(length, row, column, align) {
+export default function placeAIShipDOM(length, row, column, align) {
   if (row > 9 || column > 9) {
     return "offBoard";
   }

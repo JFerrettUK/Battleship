@@ -1,7 +1,7 @@
 import path from "path";
 import { JSDOM } from "jsdom";
-import domFuncs from "./domFuncs";
-import editPlayerBoard from "./editPlayerBoard";
+import placeTempShipsDOM from "./placeTempShipsDOM";
+import editPlayerBoardDOM from "./editPlayerBoardDOM";
 import editAIBoardDOM from "./editAIBoardDOM";
 
 let dom;
@@ -11,12 +11,10 @@ beforeAll(async () => {
   global.document = dom.window.document;
 });
 
-const domFunctions = domFuncs();
-
 test("Place temp ships", () => {
-  editPlayerBoard("userBoard");
+  editPlayerBoardDOM("userBoard");
   editAIBoardDOM("aiBoard");
-  domFunctions.placeTempDOMShips();
+  placeTempShipsDOM();
   expect(
     document.getElementById("2-1-userBoard").classList.contains("shipSquare")
   ).toBe(true);

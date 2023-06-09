@@ -1,5 +1,5 @@
 import receiveAIAttackDOM from "./receiveAIAttackDOM";
-import editPlayerBoard from "./editPlayerBoard";
+import editPlayerBoardDOM from "./editPlayerBoardDOM";
 import path from "path";
 import { JSDOM } from "jsdom";
 
@@ -12,7 +12,7 @@ beforeAll(async () => {
 
 beforeEach(() => {
   // Reset the state before each test case
-  editPlayerBoard("userBoard");
+  editPlayerBoardDOM("userBoard");
 });
 
 test("attacking a square triggers the 'flash' animation", () => {

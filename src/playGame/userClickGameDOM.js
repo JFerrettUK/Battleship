@@ -1,4 +1,4 @@
-export default function userClick() {
+export default function userClickGameDOM() {
   const squares = document.querySelectorAll(`.aiSquare`);
   squares.forEach((square) => {
     square.addEventListener("click", () => {

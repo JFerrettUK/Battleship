@@ -1,4 +1,4 @@
-export default function editPlayerBoard(targetParent) {
+export default function editPlayerBoardDOM(targetParent) {
   // Clear the target parent element
   document.getElementById(targetParent).innerHTML = "";
 

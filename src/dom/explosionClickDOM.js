@@ -1,4 +1,4 @@
-export default function userClick() {
+export default function userClickDOM() {
   const squares = document.querySelectorAll(".battleSquare");
   squares.forEach((square) => {
     square.addEventListener("click", () => {

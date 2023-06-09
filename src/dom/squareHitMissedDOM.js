@@ -1,4 +1,4 @@
-export default function squareHitMissed(missedSquare, type) {
+export default function squareHitMissedDOM(missedSquare, type) {
   if (type == "missed") {
     missedSquare.classList.add("missed");
     return missedSquare;
