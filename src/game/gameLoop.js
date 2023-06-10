@@ -33,6 +33,7 @@ export default function gameLoop(playerName) {
       return [[row, column], "hitBefore"]; // If AI attack was invalid (already hit), return "hitBefore" flag
     }
     turns.switchTurns(user, ai); // Switch turns between players
+    return row, column;
   };
 
   // Function to place temporary ships for testing purposes

@@ -1,6 +1,6 @@
-export default function userClickGameDOM() {
-  const squares = document.querySelectorAll(`.aiSquare`);
-  squares.forEach((square) => {
+export default function userClickGameDOM(userSquareCallback) {
+  const aiSquares = document.querySelectorAll(".aiSquare");
+  aiSquares.forEach((square) => {
     square.addEventListener("click", () => {
       const row = parseInt(square.dataset.row);
       const column = parseInt(square.dataset.column);
@@ -19,9 +19,35 @@ export default function userClickGameDOM() {
           square.classList.add("cyan");
         }
       }
+
       square.classList.add("flash");
       setTimeout(() => {
         square.classList.remove("flash");
+      }, 500);
+
+      const userSquares = document.querySelectorAll(".userSquare");
+      const totalUserSquares = userSquares.length;
+
+      const randomIndex = Math.floor(Math.random() * totalUserSquares);
+      const selectedUserSquare = userSquares[randomIndex];
+
+      if (selectedUserSquare.classList.contains("shipSquare")) {
+        selectedUserSquare.classList.add("hitShip");
+      } else {
+        selectedUserSquare.classList.add("missed");
+        if (
+          (row % 2 === 0 && column % 2 === 0) ||
+          (row % 2 !== 0 && column % 2 !== 0)
+        ) {
+          selectedUserSquare.classList.add("blue");
+        } else {
+          selectedUserSquare.classList.add("cyan");
+        }
+      }
+
+      selectedUserSquare.classList.add("flash");
+      setTimeout(() => {
+        selectedUserSquare.classList.remove("flash");
       }, 500);
     });
   });
