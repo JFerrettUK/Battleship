@@ -20,14 +20,14 @@ export default function gameLoop(playerName) {
   const placeAIShip = ai.playerBoard.placeShip.bind(ai.playerBoard);
   const placeUserShip = user.playerBoard.placeShip.bind(user.playerBoard);
 
-  // Function to handle player attack
-  let attackPlayer = function () {
+  // Function to handle an attack on the user i.e. AI attacking the user
+  let attackPlayer = function (row, column) {
     let attackResult = attackPlayerFunc()[1]; // Execute player attack
     turns.switchTurns(user, ai); // Switch turns between players
     return attackResult;
   };
 
-  // Function to handle AI attack
+  // Function to handle an attack on the AI i.e. user attacking the AI
   let attackAI = function (row, column) {
     if (attackAIFunc(row, column) == "hitBefore") {
       return [[row, column], "hitBefore"]; // If AI attack was invalid (already hit), return "hitBefore" flag

@@ -10,7 +10,18 @@ export default function playGame() {
   editPlayerBoardDOM("userBoard");
   editAIBoardDOM("aiBoard");
   placeTempShipsDOM();
-  userClickGameDOM();
+
+  // Define a callback function that updates `thisGame` based on the user's attack
+  const userSquareCallback = (playerRow, playerCol) => {
+    // Perform any necessary game logic based on the user's attack
+    // Update `thisGame` accordingly
+    // Example:
+    const attackResult = thisGame.attackPlayer(playerRow, playerCol);
+    console.log("Attack result:", attackResult);
+  };
+
+  // Pass the callback function to `userClickGameDOM`
+  userClickGameDOM(userSquareCallback);
 
   return thisGame;
 }
