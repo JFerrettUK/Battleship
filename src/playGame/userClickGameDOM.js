@@ -2,8 +2,8 @@ export default function userClickGameDOM(userSquareCallback) {
   const aiSquares = document.querySelectorAll(".aiSquare");
   aiSquares.forEach((square) => {
     square.addEventListener("click", () => {
-      const playerRow = parseInt(square.dataset.row);
-      const playerCol = parseInt(square.dataset.column);
+      const aiSquareRow = parseInt(square.dataset.row);
+      const aiSquareCol = parseInt(square.dataset.column);
 
       // Rest of the code for updating the square's class
       if (square.classList.contains("aiShipSquare")) {
@@ -11,16 +11,16 @@ export default function userClickGameDOM(userSquareCallback) {
       } else {
         square.classList.add("missed");
         if (
-          (playerRow % 2 === 0 && playerCol % 2 === 0) ||
-          (playerRow % 2 !== 0 && playerCol % 2 !== 0)
+          (aiSquareRow % 2 === 0 && aiSquareCol % 2 === 0) ||
+          (aiSquareRow % 2 !== 0 && aiSquareCol % 2 !== 0)
         ) {
           square.classList.add("blue");
         } else {
           square.classList.add("cyan");
         }
       }
-      console.log(playerRow, playerCol);
-      console.log("^should be playerRow/playerCol");
+      console.log(aiSquareRow, aiSquareCol);
+      console.log("^should be aiSquareRow/aiSquareCol");
 
       square.classList.add("flash");
       setTimeout(() => {
@@ -38,8 +38,8 @@ export default function userClickGameDOM(userSquareCallback) {
       } else {
         selectedUserSquare.classList.add("missed");
         if (
-          (playerRow % 2 === 0 && playerCol % 2 === 0) ||
-          (playerRow % 2 !== 0 && playerCol % 2 !== 0)
+          (aiSquareRow % 2 === 0 && aiSquareCol % 2 === 0) ||
+          (aiSquareRow % 2 !== 0 && aiSquareCol % 2 !== 0)
         ) {
           selectedUserSquare.classList.add("blue");
         } else {
@@ -54,22 +54,27 @@ export default function userClickGameDOM(userSquareCallback) {
 
       // Map the DOM coordinates to game board coordinates (adjust as needed)
 
-      let aiRow;
-      let aiCol;
+      let playerSquareRow;
+      let playerSquareCol;
 
       if (randomIndex < 10) {
-        aiRow = 0;
-        aiCol = randomIndex;
+        playerSquareRow = 0;
+        playerSquareCol = randomIndex;
       } else {
-        aiRow = parseInt(randomIndex.toString()[0]);
-        aiCol = parseInt(randomIndex.toString()[1]);
+        playerSquareRow = parseInt(randomIndex.toString()[0]);
+        playerSquareCol = parseInt(randomIndex.toString()[1]);
       }
 
-      console.log(aiRow, aiCol);
-      console.log("^should be aiRow/aiCol");
+      console.log(playerSquareRow, playerSquareCol);
+      console.log("^should be playerSquareRow/playerSquareCol");
 
       // Pass the game board coordinates to the callback function
-      userSquareCallback(aiRow, aiCol);
+      userSquareCallback(
+        aiSquareRow,
+        aiSquareCol,
+        playerSquareRow,
+        playerSquareCol
+      );
     });
   });
 }
