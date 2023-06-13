@@ -103,6 +103,19 @@ test("check whether or not all ships have been sunk (false)", () => {
   expect(battleshipBoard.allSunk()).toBe(false);
 });
 
+test("check whether or not all ships have been sunk (false) from receiveAIAttack", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(3, 2, 1, "horizontal");
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAIAttack(5, 9);
+  battleshipBoard.receiveAIAttack(4, 1);
+  battleshipBoard.receiveAIAttack(5, 6);
+  battleshipBoard.receiveAIAttack(6, 6);
+  battleshipBoard.receiveAIAttack(7, 6);
+  battleshipBoard.receiveAIAttack(9, 6);
+  expect(battleshipBoard.allSunk()).toBe(false);
+});
+
 test("check anyMissed doesn't always work", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
@@ -125,12 +138,29 @@ test("check receiveAttack can't hit a missed square twice", () => {
   expect(battleshipBoard.receiveAttack(4, 5)).toBe("hitBefore");
 });
 
+test("check receiveAIAttack can't hit a missed square twice", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAIAttack(4, 5);
+  expect(battleshipBoard.isMissed(4, 4)).toBe(false);
+  expect(battleshipBoard.isMissed(4, 5)).toBe(true);
+  expect(battleshipBoard.receiveAIAttack(4, 5)).toBe("hitBefore");
+});
+
 test("check receiveAttack can't hit a hit ship twice", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
   battleshipBoard.receiveAttack(5, 6);
   expect(battleshipBoard.board[5][6]).toBe("hitShip");
   expect(battleshipBoard.receiveAttack(5, 6)).toBe("hitBefore");
+});
+
+test("check receiveAIAttack can't hit a hit ship twice", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAIAttack(5, 6);
+  expect(battleshipBoard.board[5][6]).toBe("hitShip");
+  expect(battleshipBoard.receiveAIAttack(5, 6)).toBe("hitBefore");
 });
 
 test("check receiveAIAttack can't hit a missed square twice", () => {

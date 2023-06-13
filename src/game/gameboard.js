@@ -133,13 +133,17 @@ export default function gameboard() {
     if (thisBoard[row][column] == null) {
       changeBoard(row, column, "missed");
       saveMissed(row, column);
+      return ["missed", [row, column]];
     } else {
       let shipNo = thisBoard[row][column].toString();
-      hitShip(shipNo);
-      changeBoard(row, column, "hitShip");
+      if (ships[shipNo].isSunk()) {
+        return ["hitBefore", [row, column]];
+      } else {
+        hitShip(shipNo);
+        changeBoard(row, column, "hitShip");
+        return ["hitShip", [row, column]];
+      }
     }
-
-    return ["hitBefore", [row, column]];
   };
 
   let allSunk = function () {

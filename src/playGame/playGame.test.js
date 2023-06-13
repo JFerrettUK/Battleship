@@ -42,6 +42,16 @@ test("clicking a ship square toggles its 'hitShip' class when needed", async () 
   expect(square.classList.contains("hitShip")).toBe(true);
 });
 
+test("clicking a ship square registers that square as 'hit'", async () => {
+  const game = await playGame(); // Store the returned game object
+  const square = document.getElementById("2-2-aiBoard");
+  expect(square.classList.contains("hitShip")).toBe(false);
+  fireEvent.click(square);
+  expect(square.classList.contains("hitShip")).toBe(true);
+  // Access and test the contents of `thisGame`
+  expect(game.ai.playerBoard.board[2][2]).toBe("hitShip");
+});
+
 test("clicking a ship square toggles its 'missed' class when needed", async () => {
   await playGame();
   const square = document.getElementById("3-3-aiBoard");

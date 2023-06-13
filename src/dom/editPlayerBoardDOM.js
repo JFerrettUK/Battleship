@@ -8,6 +8,10 @@ export default function editPlayerBoardDOM(targetParent) {
       battleSquare.classList.add("battleSquare");
       battleSquare.classList.add("userSquare");
 
+      // Set the data-row and data-column attributes
+      battleSquare.dataset.row = row.toString();
+      battleSquare.dataset.column = i.toString();
+
       if (colour == "blue") {
         if (i % 2 == 0) battleSquare.classList.add("blue");
         else battleSquare.classList.add("cyan");

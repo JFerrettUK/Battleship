@@ -8,6 +8,10 @@ export default function editAIBoardDOM(targetParent) {
       battleSquare.classList.add("aiSquare");
       battleSquare.classList.add("grey");
 
+      // Set the data-row and data-column attributes
+      battleSquare.dataset.row = row.toString();
+      battleSquare.dataset.column = i.toString();
+
       if (battleSquare.classList.contains("aiShipSquare")) {
         battleSquare.classList.remove("aiShipSquare");
       }

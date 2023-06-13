@@ -19,8 +19,6 @@ export default function userClickGameDOM(userSquareCallback) {
           square.classList.add("cyan");
         }
       }
-      console.log(aiSquareRow, aiSquareCol);
-      console.log("^should be aiSquareRow/aiSquareCol");
 
       square.classList.add("flash");
       setTimeout(() => {
@@ -64,9 +62,6 @@ export default function userClickGameDOM(userSquareCallback) {
         playerSquareRow = parseInt(randomIndex.toString()[0]);
         playerSquareCol = parseInt(randomIndex.toString()[1]);
       }
-
-      console.log(playerSquareRow, playerSquareCol);
-      console.log("^should be playerSquareRow/playerSquareCol");
 
       // Pass the game board coordinates to the callback function
       userSquareCallback(
