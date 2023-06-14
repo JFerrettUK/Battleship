@@ -18,14 +18,11 @@ export default function playGame() {
     playerSquareRow,
     playerSquareCol
   ) => {
-    // Perform any necessary game logic based on the user's attack
-    // Update `thisGame` accordingly
-    // Example:
+    //ai attacked on user click in both DOM and Gameloop
     const attackResult = thisGame.attackAI(aiSquareRow, aiSquareCol);
   };
 
   // Pass the callback function to `userClickGameDOM`
   userClickGameDOM(userSquareCallback);
-
   return thisGame;
 }

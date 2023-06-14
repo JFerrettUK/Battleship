@@ -59,3 +59,22 @@ test("clicking a ship square toggles its 'missed' class when needed", async () =
   fireEvent.click(square);
   expect(square.classList.contains("missed")).toBe(true);
 });
+
+test("clicking a ship square toggles its 'missed' class when needed", async () => {
+  const game = await playGame(); // Store the returned game object
+  const square = document.getElementById("3-3-aiBoard");
+  const aiSquareRow = 3;
+  const aiSquareCol = 3;
+
+  // Verify that the clicked square initially doesn't have the 'missed' class
+  expect(square.classList.contains("missed")).toBe(false);
+
+  // Simulate a user click on the square
+  fireEvent.click(square);
+
+  // Verify that the clicked square now has the 'missed' class
+  expect(square.classList.contains("missed")).toBe(true);
+
+  // Verify that the game state reflects the missed attack
+  expect(game.ai.playerBoard.board[aiSquareRow][aiSquareCol]).toBe("missed");
+});

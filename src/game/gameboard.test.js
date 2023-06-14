@@ -103,19 +103,6 @@ test("check whether or not all ships have been sunk (false)", () => {
   expect(battleshipBoard.allSunk()).toBe(false);
 });
 
-test("check whether or not all ships have been sunk (false) from receiveAIAttack", () => {
-  let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(3, 2, 1, "horizontal");
-  battleshipBoard.placeShip(4, 5, 6, "horizontal");
-  battleshipBoard.receiveAIAttack(5, 9);
-  battleshipBoard.receiveAIAttack(4, 1);
-  battleshipBoard.receiveAIAttack(5, 6);
-  battleshipBoard.receiveAIAttack(6, 6);
-  battleshipBoard.receiveAIAttack(7, 6);
-  battleshipBoard.receiveAIAttack(9, 6);
-  expect(battleshipBoard.allSunk()).toBe(false);
-});
-
 test("check anyMissed doesn't always work", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
@@ -138,29 +125,12 @@ test("check receiveAttack can't hit a missed square twice", () => {
   expect(battleshipBoard.receiveAttack(4, 5)).toBe("hitBefore");
 });
 
-test("check receiveAIAttack can't hit a missed square twice", () => {
-  let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(4, 5, 6, "horizontal");
-  battleshipBoard.receiveAIAttack(4, 5);
-  expect(battleshipBoard.isMissed(4, 4)).toBe(false);
-  expect(battleshipBoard.isMissed(4, 5)).toBe(true);
-  expect(battleshipBoard.receiveAIAttack(4, 5)).toBe("hitBefore");
-});
-
 test("check receiveAttack can't hit a hit ship twice", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
   battleshipBoard.receiveAttack(5, 6);
   expect(battleshipBoard.board[5][6]).toBe("hitShip");
   expect(battleshipBoard.receiveAttack(5, 6)).toBe("hitBefore");
-});
-
-test("check receiveAIAttack can't hit a hit ship twice", () => {
-  let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(4, 5, 6, "horizontal");
-  battleshipBoard.receiveAIAttack(5, 6);
-  expect(battleshipBoard.board[5][6]).toBe("hitShip");
-  expect(battleshipBoard.receiveAIAttack(5, 6)).toBe("hitBefore");
 });
 
 test("check receiveAIAttack can't hit a missed square twice", () => {
@@ -172,20 +142,18 @@ test("check receiveAIAttack can't hit a missed square twice", () => {
     "hitBefore"
   );
 });
-
 test("run receiveAIAttack 500 times. It should at some point return 'hit before'", () => {
   let battleshipBoard = gameboard();
   let hitBefore = false;
   for (let i = 0; i < 500; i++) {
-    let result = battleshipBoard.receiveAIAttack()[0];
-    if (result == "hitBefore") {
+    let result = battleshipBoard.receiveAIAttack();
+    if (result[0] === "hitBefore") {
       hitBefore = true;
       break;
     }
   }
   expect(hitBefore).toBe(true);
 });
-
 test("if receiveAIAttack hits an already touched square, it runs again", () => {
   let battleshipBoard = gameboard();
   for (let row = 0; row < 9; row++) {

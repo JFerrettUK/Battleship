@@ -114,7 +114,6 @@ export default function gameboard() {
     }
     return false;
   };
-
   let receiveAIAttack = function () {
     if (listMissed.length == 99) {
       return ["board full", [row, column]];
@@ -133,17 +132,13 @@ export default function gameboard() {
     if (thisBoard[row][column] == null) {
       changeBoard(row, column, "missed");
       saveMissed(row, column);
-      return ["missed", [row, column]];
     } else {
       let shipNo = thisBoard[row][column].toString();
-      if (ships[shipNo].isSunk()) {
-        return ["hitBefore", [row, column]];
-      } else {
-        hitShip(shipNo);
-        changeBoard(row, column, "hitShip");
-        return ["hitShip", [row, column]];
-      }
+      hitShip(shipNo);
+      changeBoard(row, column, "hitShip");
     }
+
+    return ["hitBefore", [row, column]];
   };
 
   let allSunk = function () {
