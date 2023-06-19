@@ -41,12 +41,12 @@ test("attackAI: The last attack should make it turn no 1", () => {
   expect(thisGame.turns.getNo()).toBe(1);
 });
 
-test("playerAttack: Attacking the user should damage part of the user's board", () => {
-  thisGame.attackPlayer();
+test("attackPlayerRandom: Attacking the user should damage part of the user's board", () => {
+  thisGame.attackPlayerRandom();
   expect(thisGame.user.playerBoard.anyMissed()[0]).toBe(true);
 });
 
-test("playerAttack: The last attack should make it turn no 2", () => {
+test("attackPlayerRandom: The last attack should make it turn no 2", () => {
   expect(thisGame.ai.isTurn).toBe(false);
   expect(thisGame.user.isTurn).toBe(true);
   expect(thisGame.turns.getNo()).toBe(2);

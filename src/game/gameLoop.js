@@ -8,10 +8,11 @@ export default function gameLoop(playerName) {
   const user = player(playerName);
 
   // Bind the attack functions to the respective player boards
-  const attackPlayerFunc = user.playerBoard.receiveAIAttack.bind(
+  const attackPlayerRandomFunc = user.playerBoard.receiveRandomAIAttack.bind(
     user.playerBoard
   );
   const attackAIFunc = ai.playerBoard.receiveAttack.bind(ai.playerBoard);
+  const attackPlayerFunc = ai.playerBoard.receiveAIAttack.bind(ai.playerBoard);
 
   // Create an instance of the turn manager
   const turns = manageTurns();
@@ -21,8 +22,8 @@ export default function gameLoop(playerName) {
   const placeUserShip = user.playerBoard.placeShip.bind(user.playerBoard);
 
   // Function to handle an attack on the user i.e. AI attacking the user
-  let attackPlayer = function (row, column) {
-    let attackResult = attackPlayerFunc()[1]; // Execute player attack
+  let attackPlayerRandom = function () {
+    let attackResult = attackPlayerRandomFunc()[1]; // Execute player attack
     turns.switchTurns(user, ai); // Switch turns between players
     return attackResult;
   };
@@ -31,6 +32,15 @@ export default function gameLoop(playerName) {
   let attackAI = function (row, column) {
     if (attackAIFunc(row, column) == "hitBefore") {
       return [[row, column], "hitBefore"]; // If AI attack was invalid (already hit), return "hitBefore" flag
+    }
+    turns.switchTurns(user, ai); // Switch turns between players
+    return [row, column];
+  };
+
+  // Function to handle an attack on the player i.e. ai attacking the player
+  let attackPlayer = function (row, column) {
+    if (attackPlayerFunc(row, column) == "hitBefore") {
+      return [[row, column], "hitBefore"]; // If player attack was invalid (already hit), return "hitBefore" flag
     }
     turns.switchTurns(user, ai); // Switch turns between players
     return [row, column];
@@ -54,7 +64,8 @@ export default function gameLoop(playerName) {
     ai, // AI player object
     user, // User player object
     turns, // Turn manager object
-    attackPlayer, // Function to handle player attack
+    attackPlayer,
+    attackPlayerRandom, // Function to handle player attack
     attackAI, // Function to handle AI attack
     placeAIShip, // Function to place AI ship
     placeUserShip, // Function to place user ship

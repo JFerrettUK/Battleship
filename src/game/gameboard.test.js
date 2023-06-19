@@ -109,10 +109,10 @@ test("check anyMissed doesn't always work", () => {
   expect(battleshipBoard.anyMissed()[0]).toBe(false);
 });
 
-test("check receiveAIAttack changes a null board square", () => {
+test("check receiveRandomAIAttack changes a null board square", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
-  battleshipBoard.receiveAIAttack();
+  battleshipBoard.receiveRandomAIAttack();
   expect(battleshipBoard.anyMissed()[0]).toBe(true);
 });
 
@@ -133,20 +133,20 @@ test("check receiveAttack can't hit a hit ship twice", () => {
   expect(battleshipBoard.receiveAttack(5, 6)).toBe("hitBefore");
 });
 
-test("check receiveAIAttack can't hit a missed square twice", () => {
+test("check receiveRandomAIAttack can't hit a missed square twice", () => {
   let battleshipBoard = gameboard();
-  battleshipBoard.receiveAIAttack();
+  battleshipBoard.receiveRandomAIAttack();
   const theMissed = battleshipBoard.anyMissed();
   expect(theMissed[0]).toBe(true);
   expect(battleshipBoard.receiveAttack(theMissed[1][0], theMissed[1][1])).toBe(
     "hitBefore"
   );
 });
-test("run receiveAIAttack 500 times. It should at some point return 'hit before'", () => {
+test("run receiveRandomAIAttack 500 times. It should at some point return 'hit before'", () => {
   let battleshipBoard = gameboard();
   let hitBefore = false;
   for (let i = 0; i < 500; i++) {
-    let result = battleshipBoard.receiveAIAttack();
+    let result = battleshipBoard.receiveRandomAIAttack();
     if (result[0] === "hitBefore") {
       hitBefore = true;
       break;
@@ -154,32 +154,32 @@ test("run receiveAIAttack 500 times. It should at some point return 'hit before'
   }
   expect(hitBefore).toBe(true);
 });
-test("if receiveAIAttack hits an already touched square, it runs again", () => {
+test("if receiveRandomAIAttack hits an already touched square, it runs again", () => {
   let battleshipBoard = gameboard();
   for (let row = 0; row < 9; row++) {
     for (let column = 0; column < 10; column++) {
-      battleshipBoard.receiveAIAttack(row, column);
+      battleshipBoard.receiveRandomAIAttack(row, column);
     }
   }
 
   for (let i = 0; i < 10; i++) {
-    battleshipBoard.receiveAIAttack();
+    battleshipBoard.receiveRandomAIAttack();
   }
 
   expect(battleshipBoard.receiveAttack(9, 9)).toBe("hitBefore");
 });
 
-test("if receiveAIAttack runs on a full gameboard, board full is returned", () => {
+test("if receiveRandomAIAttack runs on a full gameboard, board full is returned", () => {
   let battleshipBoard = gameboard();
   for (let row = 0; row < 10; row++) {
     for (let column = 0; column < 10; column++) {
-      battleshipBoard.receiveAIAttack(row, column);
+      battleshipBoard.receiveRandomAIAttack(row, column);
     }
   }
 
-  battleshipBoard.receiveAIAttack();
+  battleshipBoard.receiveRandomAIAttack();
 
-  expect(battleshipBoard.receiveAIAttack()[0]).toBe("board full");
+  expect(battleshipBoard.receiveRandomAIAttack()[0]).toBe("board full");
 });
 
 test("can't place ship vertically on an already occupied square", () => {
@@ -204,4 +204,61 @@ test("can't place ship offBoard", () => {
   expect(battleshipBoard.placeShip(3, 11, 2, "horizontal")).toBe("offBoard");
   expect(battleshipBoard.placeShip(11, 2, 2, "vertical")).toBe("offBoard");
   expect(battleshipBoard.placeShip(3, 11, 2, "vertical")).toBe("offBoard");
+});
+
+test("check receiveAIAttack function changes a null board square", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAIAttack(4, 5);
+  expect(battleshipBoard.board[4][5]).toBe("missed");
+});
+
+test("check receiveAIAttack function changes a ship board square", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAIAttack(5, 6);
+  expect(battleshipBoard.board[5][6]).toBe("hitShip");
+});
+
+test("check receiveAIAttack function changes a ship object", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAIAttack(5, 6);
+  battleshipBoard.receiveAIAttack(6, 6);
+  expect(battleshipBoard.ships.ship4.hits).toBe(2);
+});
+
+test("check receiveAIAttack records coordinates of a missed shot", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(1, 5, 6, "horizontal");
+  battleshipBoard.receiveAIAttack(4, 5);
+  expect(battleshipBoard.listMissed[0]).toStrictEqual([4, 5]);
+});
+
+test("check whether after receiveAIAttack all ships have been sunk (true)", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(3, 2, 1, "vertical");
+  battleshipBoard.receiveAIAttack(2, 1);
+  battleshipBoard.receiveAIAttack(2, 2);
+  battleshipBoard.receiveAIAttack(2, 3);
+
+  battleshipBoard.placeShip(4, 5, 6, "vertical");
+  battleshipBoard.receiveAIAttack(5, 6);
+  battleshipBoard.receiveAIAttack(5, 7);
+  battleshipBoard.receiveAIAttack(5, 8);
+  battleshipBoard.receiveAIAttack(5, 9);
+  expect(battleshipBoard.allSunk()).toBe(true);
+});
+
+test("check whether after receiveAIAttack all ships have been sunk (false)", () => {
+  let battleshipBoard = gameboard();
+  battleshipBoard.placeShip(3, 2, 1, "horizontal");
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAIAttack(5, 9);
+  battleshipBoard.receiveAIAttack(4, 1);
+  battleshipBoard.receiveAIAttack(5, 6);
+  battleshipBoard.receiveAIAttack(6, 6);
+  battleshipBoard.receiveAIAttack(7, 6);
+  battleshipBoard.receiveAIAttack(9, 6);
+  expect(battleshipBoard.allSunk()).toBe(false);
 });

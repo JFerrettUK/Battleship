@@ -114,7 +114,27 @@ export default function gameboard() {
     }
     return false;
   };
-  let receiveAIAttack = function () {
+
+  let receiveAIAttack = function (row, column) {
+    if (listMissed.length == 99) {
+      return ["board full", [row, column]];
+    }
+
+    if (thisBoard[row][column] == null) {
+      changeBoard(row, column, "missed");
+      saveMissed(row, column);
+    } else if (thisBoard[row][column] == "missed") {
+      return "missed";
+    } else if (thisBoard[row][column] == "hitShip") {
+      return "hitBefore";
+    } else {
+      let shipNo = thisBoard[row][column].toString();
+      hitShip(shipNo);
+      changeBoard(row, column, "hitShip");
+    }
+  };
+
+  let receiveRandomAIAttack = function () {
     if (listMissed.length == 99) {
       return ["board full", [row, column]];
     }
@@ -126,7 +146,7 @@ export default function gameboard() {
       thisBoard[row][column] == "missed" ||
       thisBoard[row][column] == "hitShip"
     ) {
-      return receiveAIAttack();
+      return receiveRandomAIAttack();
     }
 
     if (thisBoard[row][column] == null) {
@@ -160,6 +180,7 @@ export default function gameboard() {
     placeShip,
     receiveAttack,
     receiveAIAttack,
+    receiveRandomAIAttack,
     allSunk,
     anyMissed,
     missedInARow,

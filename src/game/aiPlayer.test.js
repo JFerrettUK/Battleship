@@ -21,11 +21,11 @@ test("isTurn starts as False", () => {
   expect(AI.isTurn).toBe(false);
 });
 
-test("run receiveAIAttack 500 times. It should at some point return 'hit before'", () => {
+test("run receiveRandomAIAttack 500 times. It should at some point return 'hit before'", () => {
   let AI = aiPlayer();
   let hitBefore = false;
   for (let i = 0; i < 500; i++) {
-    let result = AI.playerBoard.receiveAIAttack()[0];
+    let result = AI.playerBoard.receiveRandomAIAttack()[0];
     if (result == "hitBefore") {
       hitBefore = true;
       break;

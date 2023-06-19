@@ -33,7 +33,7 @@ test("Check if user ships have all been hit. If they have, return userWins", () 
   expect(gameOver(thisGame)).toBe(false);
 
   for (let index = 0; index < 100; index++) {
-    thisGame.attackPlayer();
+    thisGame.attackPlayerRandom();
   }
   expect(gameOver(thisGame)).toBe(true);
 });

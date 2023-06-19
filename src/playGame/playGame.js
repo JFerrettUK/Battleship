@@ -19,7 +19,11 @@ export default function playGame() {
     playerSquareCol
   ) => {
     //ai attacked on user click in both DOM and Gameloop
-    const attackResult = thisGame.attackAI(aiSquareRow, aiSquareCol);
+    const attackAIResult = thisGame.attackAI(aiSquareRow, aiSquareCol);
+    const attackPlayerResult = thisGame.attackPlayer(
+      playerSquareRow,
+      playerSquareCol
+    );
   };
 
   // Pass the callback function to `userClickGameDOM`
