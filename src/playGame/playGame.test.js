@@ -2,6 +2,7 @@ import path from "path";
 import { JSDOM } from "jsdom";
 import playGame from "./playGame";
 import { fireEvent } from "@testing-library/dom";
+import gameOver from "../game/gameOver";
 
 let dom;
 beforeAll(async () => {
@@ -89,6 +90,13 @@ test("clicking an AI ship square registers a hit on the player", async () => {
 
   expect(game.ai.playerBoard.board[2][0]).toBe("missed");
 
-  // Verify that the clicked square now has the 'missed' class
-  expect(game.user.playerBoard.anyMissed()[0]).toBe(true);
+  // Verify that a player was hit
+  expect(game.user.playerBoard.anyAttacks()[0]).toBe(true);
+});
+
+test("clicking an AI ship square registers a hit on the player", async () => {
+  const game = await playGame(); // Store the returned game object
+
+  // Verify that a player was hit
+  expect(gameOver(game)[0]).toBe(false);
 });

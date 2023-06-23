@@ -104,6 +104,17 @@ export default function gameboard() {
     return [false, []];
   };
 
+  let anyAttacks = function () {
+    for (let i = 0; i < 10; i++) {
+      for (let n = 0; n < 10; n++) {
+        if (thisBoard[i][n] === "missed" || thisBoard[i][n] === "hitShip") {
+          return [true, [i, n]];
+        }
+      }
+    }
+    return [false, []];
+  };
+
   let missedInARow = function (row) {
     for (let row = 0; row < 10; row++) {
       for (let n = 0; n < 10; n++) {
@@ -116,7 +127,7 @@ export default function gameboard() {
   };
 
   let receiveAIAttack = function (row, column) {
-    if (listMissed.length == 99) {
+    if (listMissed.length >= 99) {
       return ["board full", [row, column]];
     }
 
@@ -135,7 +146,7 @@ export default function gameboard() {
   };
 
   let receiveRandomAIAttack = function () {
-    if (listMissed.length == 99) {
+    if (listMissed.length >= 99) {
       return ["board full", [row, column]];
     }
 
@@ -183,6 +194,7 @@ export default function gameboard() {
     receiveRandomAIAttack,
     allSunk,
     anyMissed,
+    anyAttacks,
     missedInARow,
   };
 }

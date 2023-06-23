@@ -1,3 +1,5 @@
+import gameOver from "../game/gameOver";
+
 export default function userClickGameDOM(userSquareCallback) {
   // Get all the squares with the class "aiSquare"
   const aiSquares = document.querySelectorAll(".aiSquare");
@@ -94,4 +96,8 @@ export default function userClickGameDOM(userSquareCallback) {
       );
     });
   });
+
+  if (gameOver(thisGame)[0] == true) {
+    console.log("gameOver");
+  }
 }

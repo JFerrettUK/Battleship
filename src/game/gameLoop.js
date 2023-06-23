@@ -11,8 +11,10 @@ export default function gameLoop(playerName) {
   const attackPlayerRandomFunc = user.playerBoard.receiveRandomAIAttack.bind(
     user.playerBoard
   );
+  const attackPlayerFunc = user.playerBoard.receiveAIAttack.bind(
+    user.playerBoard
+  );
   const attackAIFunc = ai.playerBoard.receiveAttack.bind(ai.playerBoard);
-  const attackPlayerFunc = ai.playerBoard.receiveAIAttack.bind(ai.playerBoard);
 
   // Create an instance of the turn manager
   const turns = manageTurns();

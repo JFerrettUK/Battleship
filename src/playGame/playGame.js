@@ -3,6 +3,7 @@ import placeTempShipsDOM from "../dom/placeTempShipsDOM";
 import editAIBoardDOM from "../dom/editAIBoardDOM";
 import editPlayerBoardDOM from "../dom/editPlayerBoardDOM";
 import userClickGameDOM from "./userClickGameDOM";
+import gameOver from "../game/gameOver";
 
 export default function playGame() {
   let thisGame = gameLoop("James");
@@ -24,9 +25,14 @@ export default function playGame() {
       playerSquareRow,
       playerSquareCol
     );
+
+    // if (gameOver(thisGame)[0] == true) {
+    //   console.log("gameOver");
+    // }
   };
 
   // Pass the callback function to `userClickGameDOM`
   userClickGameDOM(userSquareCallback);
+
   return thisGame;
 }
