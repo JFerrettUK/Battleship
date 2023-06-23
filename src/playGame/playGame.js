@@ -26,9 +26,9 @@ export default function playGame() {
       playerSquareCol
     );
 
-    // if (gameOver(thisGame)[0] == true) {
-    //   console.log("gameOver");
-    // }
+    if (gameOver(thisGame)[0] == true) {
+      console.log("gameOver");
+    }
   };
 
   // Pass the callback function to `userClickGameDOM`

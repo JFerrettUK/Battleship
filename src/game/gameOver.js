@@ -3,12 +3,12 @@ export default function gameOver(game) {
   const aiBoard = game.ai.playerBoard;
 
   if (!userBoard.allSunk() || !aiBoard.allSunk()) {
-    return [false, []];
+    return [false];
   }
 
-  if (userBoard.allSunk() == true) {
+  if (userBoard.allSunk()) {
     return [true, "aiWins"];
-  } else if (aiBoard.allSunk() == true) {
+  } else if (aiBoard.allSunk()) {
     return [true, "userWins"];
   }
 }

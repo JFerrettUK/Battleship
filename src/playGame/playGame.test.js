@@ -3,6 +3,7 @@ import { JSDOM } from "jsdom";
 import playGame from "./playGame";
 import { fireEvent } from "@testing-library/dom";
 import gameOver from "../game/gameOver";
+import gameLoop from "../game/gameLoop";
 
 let dom;
 beforeAll(async () => {
@@ -94,9 +95,26 @@ test("clicking an AI ship square registers a hit on the player", async () => {
   expect(game.user.playerBoard.anyAttacks()[0]).toBe(true);
 });
 
-test("clicking an AI ship square registers a hit on the player", async () => {
+test("Check if user ships have all been hit. If they have, gameOver works", () => {
+  let thisGame = gameLoop("James");
+  thisGame.placeUserShip(3, 2, 1, "vertical");
+  expect(gameOver(thisGame)[0]).toBe(false);
+
+  for (let index = 0; index < 100; index++) {
+    thisGame.attackPlayerRandom();
+  }
+  expect(gameOver(thisGame)[0]).toBe(true);
+});
+
+test("gameOver function works with playGame", async () => {
   const game = await playGame(); // Store the returned game object
 
   // Verify that a player was hit
   expect(gameOver(game)[0]).toBe(false);
+
+  for (let index = 0; index < 100; index++) {
+    game.attackPlayerRandom();
+  }
+  expect(game.user.playerBoard.allSunk()).toBe(true);
+  expect(gameOver(game)[0]).toBe(true);
 });
