@@ -119,3 +119,10 @@ body {
   background-size: cover;
   background-color: rgb(255, 255, 177);
 }
+
+.announceCont {
+  display: none;
+  padding: 30px;
+  justify-content: center;
+  min-width: 800px;
+}

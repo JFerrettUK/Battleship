@@ -26,8 +26,10 @@ export default function playGame() {
       playerSquareCol
     );
 
-    if (gameOver(thisGame)[0] == true) {
-      console.log("gameOver");
+    if (thisGame.user.playerBoard.allSunk()) {
+      console.log("aiWins");
+    } else if (thisGame.ai.playerBoard.allSunk()) {
+      console.log("userWins");
     }
   };
 

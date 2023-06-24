@@ -115,6 +115,7 @@ test("gameOver function works with playGame", async () => {
   for (let index = 0; index < 100; index++) {
     game.attackPlayerRandom();
   }
+
   expect(game.user.playerBoard.allSunk()).toBe(true);
   expect(gameOver(game)[0]).toBe(true);
 });
