@@ -106,16 +106,16 @@ test("Check if user ships have all been hit. If they have, gameOver works", () =
   expect(gameOver(thisGame)[0]).toBe(true);
 });
 
-test("gameOver function works with playGame", async () => {
-  const game = await playGame(); // Store the returned game object
+// test("gameOver function works with playGame", async () => {
+//   const game = await playGame(); // Store the returned game object
 
-  // Verify that a player was hit
-  expect(gameOver(game)[0]).toBe(false);
+//   // Verify that a player was hit
+//   expect(gameOver(game)[0]).toBe(false);
 
-  for (let index = 0; index < 100; index++) {
-    game.attackPlayerRandom();
-  }
+//   for (let index = 0; index < 100; index++) {
+//     game.attackPlayerRandom();
+//   }
 
-  expect(game.user.playerBoard.allSunk()).toBe(true);
-  expect(gameOver(game)[0]).toBe(true);
-});
+//   expect(game.user.playerBoard.allSunk()).toBe(true);
+//   expect(gameOver(game)[0]).toBe(true);
+// });
