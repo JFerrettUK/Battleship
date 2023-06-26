@@ -4,6 +4,7 @@ import editAIBoardDOM from "../dom/editAIBoardDOM";
 import editPlayerBoardDOM from "../dom/editPlayerBoardDOM";
 import userClickGameDOM from "./userClickGameDOM";
 import gameOver from "../game/gameOver";
+import announceWinnerDOM from "../dom/announceWinnerDOM";
 
 export default function playGame() {
   let thisGame = gameLoop("James");
@@ -27,9 +28,9 @@ export default function playGame() {
     );
 
     if (thisGame.user.playerBoard.allSunk()) {
-      console.log("aiWins");
+      announceWinnerDOM("ai");
     } else if (thisGame.ai.playerBoard.allSunk()) {
-      console.log("userWins");
+      announceWinnerDOM("user");
     }
   };
 

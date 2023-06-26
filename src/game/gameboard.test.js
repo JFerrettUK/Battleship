@@ -113,7 +113,7 @@ test("check receiveRandomAIAttack changes a null board square", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
   battleshipBoard.receiveRandomAIAttack();
-  expect(battleshipBoard.anyMissed()[0]).toBe(true);
+  expect(battleshipBoard.anyAttacks()[0]).toBe(true);
 });
 
 test("check receiveAttack can't hit a missed square twice", () => {
