@@ -1,4 +1,4 @@
-export default function userClickGameDOM(userSquareCallback) {
+export default function userClickGameDOM(userSquareCallback, thisGame) {
   // Get all the squares with the class "aiSquare"
   const aiSquares = document.querySelectorAll(".aiSquare");
 
@@ -9,8 +9,6 @@ export default function userClickGameDOM(userSquareCallback) {
       // Get the row and column values from the data attributes of the clicked square
       const aiSquareRow = parseInt(square.dataset.row);
       const aiSquareCol = parseInt(square.dataset.column);
-
-      // Rest of the code for updating the square's class
 
       // If the AI square contains the class "aiShipSquare", add the class "hitShip"
       if (square.classList.contains("aiShipSquare")) {
@@ -73,16 +71,43 @@ export default function userClickGameDOM(userSquareCallback) {
 
       // Map the DOM coordinates to game board coordinates (adjust as needed)
 
+      console.log(thisGame.user.playerBoard.listAttacked);
+
       let playerSquareRow;
       let playerSquareCol;
 
-      // Determine the player square's row and column values based on the random index
-      if (randomIndex < 10) {
-        playerSquareRow = 0;
-        playerSquareCol = randomIndex;
-      } else {
-        playerSquareRow = parseInt(randomIndex.toString()[0]);
-        playerSquareCol = parseInt(randomIndex.toString()[1]);
+      const validAttacks = [];
+
+      for (let row = 0; row < 10; row++) {
+        for (let column = 0; column < 10; column++) {
+          const isAlreadyMissed = thisGame.user.playerBoard.listAttacked.some(
+            ([missedRow, missedColumn]) =>
+              missedRow === row && missedColumn === column
+          );
+
+          if (!isAlreadyMissed) {
+            validAttacks.push([row, column]);
+          }
+        }
+      }
+
+      console.log(validAttacks);
+      let foundMatch = false;
+
+      validAttacks.forEach((validAttack) => {
+        const validAttackRow = validAttack[0];
+        const validAttackCol = validAttack[1];
+
+        if (
+          playerSquareRow === validAttackRow &&
+          playerSquareCol === validAttackCol
+        ) {
+          foundMatch = true;
+        }
+      });
+
+      if (!foundMatch) {
+        setValidTargets();
       }
 
       // Pass the game board coordinates to the callback function

@@ -13,6 +13,7 @@ export default function gameboard() {
 
   let ships = {};
   let listMissed = [];
+  let listAttacked = [];
 
   let addShip = function (length) {
     ships[`ship${length}`] = ship(length);
@@ -67,9 +68,24 @@ export default function gameboard() {
     listMissed.push([missedRow, missedColumn]);
   };
 
+  let saveAttacked = function (missedRow, missedColumn) {
+    listAttacked.push([missedRow, missedColumn]);
+  };
+
   let isMissed = function (row, column) {
     if (
       listMissed.some(function (element) {
+        return element[0] === row && element[1] === column;
+      })
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  let isAttacked = function (row, column) {
+    if (
+      listAttacked.some(function (element) {
         return element[0] === row && element[1] === column;
       })
     ) {
@@ -82,6 +98,7 @@ export default function gameboard() {
     if (thisBoard[row][column] == null) {
       changeBoard(row, column, "missed");
       saveMissed(row, column);
+      saveAttacked(row, column);
     } else if (thisBoard[row][column] == "missed") {
       return "hitBefore";
     } else if (thisBoard[row][column] == "hitShip") {
@@ -90,6 +107,7 @@ export default function gameboard() {
       let shipNo = thisBoard[row][column].toString();
       hitShip(shipNo);
       changeBoard(row, column, "hitShip");
+      saveAttacked(row, column);
     }
   };
 
@@ -134,6 +152,7 @@ export default function gameboard() {
     if (thisBoard[row][column] == null) {
       changeBoard(row, column, "missed");
       saveMissed(row, column);
+      saveAttacked(row, column);
     } else if (thisBoard[row][column] == "missed") {
       return "missed";
     } else if (thisBoard[row][column] == "hitShip") {
@@ -142,6 +161,7 @@ export default function gameboard() {
       let shipNo = thisBoard[row][column].toString();
       hitShip(shipNo);
       changeBoard(row, column, "hitShip");
+      saveAttacked(row, column);
     }
   };
 
@@ -163,10 +183,12 @@ export default function gameboard() {
     if (thisBoard[row][column] == null) {
       changeBoard(row, column, "missed");
       saveMissed(row, column);
+      saveAttacked(row, column);
     } else {
       let shipNo = thisBoard[row][column].toString();
       hitShip(shipNo);
       changeBoard(row, column, "hitShip");
+      saveAttacked(row, column);
     }
 
     return ["hitBefore", [row, column]];
@@ -196,5 +218,8 @@ export default function gameboard() {
     anyMissed,
     anyAttacks,
     missedInARow,
+    saveAttacked,
+    isAttacked,
+    listAttacked,
   };
 }

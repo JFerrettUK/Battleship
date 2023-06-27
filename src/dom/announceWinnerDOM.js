@@ -3,12 +3,15 @@ export default function announceWinnerDOM(whowon) {
   const announceText = announceCont.querySelector("#announceText");
   const buttonContainer = announceCont.querySelector(".buttonContainer");
   const button = buttonContainer.querySelector("button");
+  const boardContainer = document.querySelector("#boardContainers");
 
   announceText.innerHTML = ""; // Clear the existing text
+  boardContainer.innerHTML = ""; // Clear the existing text
 
   if (whowon === "user") {
     announceText.textContent =
       "You win! Congratulations. Click below to play again.";
+    boardContainer.innerHTML = ""; // Clear the existing text
   } else if (whowon === "ai") {
     announceText.textContent = "You lose! Better luck next time...";
   }

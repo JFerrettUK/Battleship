@@ -65,4 +65,18 @@ describe("announceWinnerDOM", () => {
     expect(buttonMock.classList.add).toHaveBeenCalledWith("playButton");
     expect(buttonMock.addEventListener).toHaveBeenCalled();
   });
+
+  test("No", () => {
+    announceWinnerDOM("ai");
+
+    expect(announceTextMock.textContent).toBe(
+      "You lose! Better luck next time..."
+    );
+    expect(announceContMock.style.display).toBe("grid");
+    expect(buttonContainerMock.style.display).toBe("flex");
+    expect(buttonMock.style.display).toBe("inline-block");
+    expect(buttonMock.classList.add).toHaveBeenCalledWith("playButton");
+    expect(buttonMock.addEventListener).toHaveBeenCalled();
+    expect(document.querySelector("#boardContainers").innerHTML).toBe("");
+  });
 });

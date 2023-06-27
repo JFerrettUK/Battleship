@@ -35,7 +35,7 @@ export default function playGame() {
   };
 
   // Pass the callback function to `userClickGameDOM`
-  userClickGameDOM(userSquareCallback);
+  userClickGameDOM(userSquareCallback, thisGame);
 
   return thisGame;
 }
