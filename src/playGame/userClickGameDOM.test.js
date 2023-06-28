@@ -1,6 +1,8 @@
 import path from "path";
 import { JSDOM } from "jsdom";
 import playGame from "./playGame";
+import userClickGameDOM from "./userClickGameDOM";
+
 import { fireEvent } from "@testing-library/dom";
 
 let dom;

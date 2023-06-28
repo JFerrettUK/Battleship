@@ -36,13 +36,22 @@ export default function userClickGameDOM(userSquareCallback, thisGame) {
         square.classList.remove("flash");
       }, 500);
 
+      // Map the DOM coordinates to game board coordinates (adjust as needed)
+
+      let playerSquareRow;
+      let playerSquareCol;
+
+      const validAttacks = thisGame.user.playerBoard.generatePotentialTargets();
+      const randomNo = Math.floor(Math.random() * validAttacks.length);
+      const randomTarget = validAttacks[randomNo];
+      const randomTargetIndex = randomTarget[0] * 10 + randomTarget[1];
+
+      // Determine the player square's row and column values based on the random target
+      playerSquareRow = randomTarget[0];
+      playerSquareCol = randomTarget[1];
       // Get all the user squares
       const userSquares = document.querySelectorAll(".userSquare");
-      const totalUserSquares = userSquares.length;
-
-      // Generate a random index to select a random user square
-      const randomIndex = Math.floor(Math.random() * totalUserSquares);
-      const selectedUserSquare = userSquares[randomIndex];
+      const selectedUserSquare = userSquares[randomTargetIndex];
 
       // Check if the selected user square contains the class "shipSquare" and update its class accordingly
       if (selectedUserSquare.classList.contains("shipSquare")) {
@@ -68,47 +77,6 @@ export default function userClickGameDOM(userSquareCallback, thisGame) {
       setTimeout(() => {
         selectedUserSquare.classList.remove("flash");
       }, 500);
-
-      // Map the DOM coordinates to game board coordinates (adjust as needed)
-
-      console.log(thisGame.user.playerBoard.listAttacked);
-
-      let playerSquareRow;
-      let playerSquareCol;
-
-      const validAttacks = [];
-
-      for (let row = 0; row < 10; row++) {
-        for (let column = 0; column < 10; column++) {
-          const isAlreadyMissed = thisGame.user.playerBoard.listAttacked.some(
-            ([missedRow, missedColumn]) =>
-              missedRow === row && missedColumn === column
-          );
-
-          if (!isAlreadyMissed) {
-            validAttacks.push([row, column]);
-          }
-        }
-      }
-
-      console.log(validAttacks);
-      let foundMatch = false;
-
-      validAttacks.forEach((validAttack) => {
-        const validAttackRow = validAttack[0];
-        const validAttackCol = validAttack[1];
-
-        if (
-          playerSquareRow === validAttackRow &&
-          playerSquareCol === validAttackCol
-        ) {
-          foundMatch = true;
-        }
-      });
-
-      if (!foundMatch) {
-        setValidTargets();
-      }
 
       // Pass the game board coordinates to the callback function
       userSquareCallback(

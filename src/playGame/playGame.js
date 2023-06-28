@@ -27,6 +27,8 @@ export default function playGame() {
       playerSquareCol
     );
 
+    console.log(playerSquareRow, playerSquareCol);
+
     if (thisGame.user.playerBoard.allSunk()) {
       announceWinnerDOM("ai");
     } else if (thisGame.ai.playerBoard.allSunk()) {

@@ -205,6 +205,20 @@ export default function gameboard() {
     return true;
   };
 
+  let generatePotentialTargets = function () {
+    const potentialTargets = [];
+
+    for (let row = 0; row < 10; row++) {
+      for (let col = 0; col < 10; col++) {
+        if (!this.isAttacked(row, col)) {
+          potentialTargets.push([row, col]);
+        }
+      }
+    }
+
+    return potentialTargets;
+  };
+
   return {
     board: thisBoard,
     ships,
@@ -221,5 +235,6 @@ export default function gameboard() {
     saveAttacked,
     isAttacked,
     listAttacked,
+    generatePotentialTargets,
   };
 }

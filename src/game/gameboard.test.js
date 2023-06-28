@@ -262,3 +262,15 @@ test("check whether after receiveAIAttack all ships have been sunk (false)", () 
   battleshipBoard.receiveAIAttack(9, 6);
   expect(battleshipBoard.allSunk()).toBe(false);
 });
+
+describe("gameboard", () => {
+  test("generatePotentialTargets should return targets within the 9x9 square grid", () => {
+    const board = gameboard();
+    const potentialTargets = board.generatePotentialTargets();
+
+    potentialTargets.forEach(([row, col]) => {
+      expect(row).toBeLessThan(10);
+      expect(col).toBeLessThan(10);
+    });
+  });
+});
