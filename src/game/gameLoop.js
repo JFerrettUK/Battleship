@@ -56,7 +56,7 @@ export default function gameLoop(playerName) {
     placeAIShip(4, 6, 1, "horizontal");
     placeAIShip(5, 4, 5, "vertical");
     placeUserShip(2, 2, 1, "vertical");
-    placeUserShip(3, 4, 4, "horizontal");
+    placeUserShip(3, 4, 3, "horizontal");
     placeUserShip(4, 6, 1, "horizontal");
     placeUserShip(5, 4, 5, "vertical");
   };

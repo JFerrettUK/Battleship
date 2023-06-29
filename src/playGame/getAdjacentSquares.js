@@ -7,7 +7,7 @@ export default function getAdjacentSquares(row, column) {
   }
 
   // Check right square
-  if (column < 8) {
+  if (column < 9) {
     adjacentSquares.push([row, column + 1]);
   }
 
@@ -17,7 +17,7 @@ export default function getAdjacentSquares(row, column) {
   }
 
   // Check bottom square
-  if (row < 8) {
+  if (row < 9) {
     adjacentSquares.push([row + 1, column]);
   }
 

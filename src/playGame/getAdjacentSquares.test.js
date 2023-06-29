@@ -5,8 +5,6 @@ test("list adjacent squares for relevant square", () => {
   const [selectedRow, selectedColumn] = selectedSquare;
   const adjacentSquares = getAdjacentSquares(selectedRow, selectedColumn);
 
-  console.log(adjacentSquares);
-
   // Assert the expected adjacent squares
   expect(adjacentSquares).toEqual(
     expect.arrayContaining([
@@ -22,8 +20,6 @@ test("list adjacent squares for a square on the side of the board", () => {
   const selectedSquare = [0, 0];
   const [selectedRow, selectedColumn] = selectedSquare;
   const adjacentSquares = getAdjacentSquares(selectedRow, selectedColumn);
-
-  console.log(adjacentSquares);
 
   // Assert the expected adjacent squares
   expect(adjacentSquares).toEqual(

@@ -14,6 +14,7 @@ export default function gameboard() {
   let ships = {};
   let listMissed = [];
   let listAttacked = [];
+  let listHit = [];
 
   let addShip = function (length) {
     ships[`ship${length}`] = ship(length);
@@ -72,6 +73,10 @@ export default function gameboard() {
     listAttacked.push([missedRow, missedColumn]);
   };
 
+  let saveHit = function (missedRow, missedColumn) {
+    listHit.push([missedRow, missedColumn]);
+  };
+
   let isMissed = function (row, column) {
     if (
       listMissed.some(function (element) {
@@ -94,6 +99,17 @@ export default function gameboard() {
     return false;
   };
 
+  let isHit = function (row, column) {
+    if (
+      listHit.some(function (element) {
+        return element[0] === row && element[1] === column;
+      })
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   let receiveAttack = function (row, column) {
     if (thisBoard[row][column] == null) {
       changeBoard(row, column, "missed");
@@ -107,6 +123,7 @@ export default function gameboard() {
       let shipNo = thisBoard[row][column].toString();
       hitShip(shipNo);
       changeBoard(row, column, "hitShip");
+      saveHit(row, column);
       saveAttacked(row, column);
     }
   };
@@ -162,6 +179,7 @@ export default function gameboard() {
       hitShip(shipNo);
       changeBoard(row, column, "hitShip");
       saveAttacked(row, column);
+      saveHit(row, column);
     }
   };
 
@@ -233,8 +251,10 @@ export default function gameboard() {
     anyAttacks,
     missedInARow,
     saveAttacked,
+    isHit,
     isAttacked,
     listAttacked,
     generatePotentialTargets,
+    listHit,
   };
 }
