@@ -1,5 +1,7 @@
 body {
   font-family: Helvetica, sans-serif;
+  color: rgb(244, 249, 255);
+  background-color: rgb(20, 33, 70);
 }
 
 .logoCont {
@@ -52,6 +54,7 @@ body {
 #battleBoard,
 #userBoard,
 #aiBoard {
+  border: white 4px solid;
   display: grid;
   width: 350px;
   height: 350px;
@@ -75,7 +78,7 @@ body {
 .cyan:hover,
 .blue:hover,
 .grey:hover {
-  background-color: rgba(255, 0, 0, 0.2);
+  background-color: rgb(255, 238, 223);
 }
 
 .cyan {
@@ -100,10 +103,23 @@ body {
 
 .boardCont .hitShip {
   background-color: rgb(233, 31, 31);
+  animation: bulge 0.5s;
+}
+
+@keyframes bulge {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .missed {
-  background-color: rgb(120, 202, 161);
+  background-color: rgb(120, 183, 202);
 }
 
 .userMissed {
@@ -111,13 +127,13 @@ body {
 }
 
 .boardCont .boom {
-  background-color: rgb(255, 255, 177);
+  background-color: rgb(255, 255, 104);
 }
 
 .boardCont .flash {
   background-image: url("/explosion.gif");
   background-size: cover;
-  background-color: rgb(255, 255, 177);
+  background-color: rgb(255, 255, 104);
 }
 
 .announceCont {

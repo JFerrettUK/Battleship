@@ -1,6 +1,6 @@
 import path from "path";
 import { JSDOM } from "jsdom";
-import placeTempShipsDOM from "./placeTempShipsDOM";
+import placeShipsDOM from "./placeShipsDOM";
 import editPlayerBoardDOM from "./editPlayerBoardDOM";
 import editAIBoardDOM from "./editAIBoardDOM";
 
@@ -14,7 +14,7 @@ beforeAll(async () => {
 test("Place temp ships", () => {
   editPlayerBoardDOM("userBoard");
   editAIBoardDOM("aiBoard");
-  placeTempShipsDOM();
+  placeShipsDOM();
   expect(
     document.getElementById("2-1-userBoard").classList.contains("shipSquare")
   ).toBe(true);

@@ -4,7 +4,7 @@ import path from "path";
 import { fireEvent } from "@testing-library/dom";
 import { JSDOM } from "jsdom";
 import editAIBoardDOM from "./editAIBoardDOM";
-import placeTempShipsDOM from "./placeTempShipsDOM";
+import placeShipsDOM from "./placeShipsDOM";
 
 let dom;
 beforeAll(async () => {
@@ -16,7 +16,7 @@ beforeAll(async () => {
 test("clicking a square toggles its 'flash' class", () => {
   editAIBoardDOM("aiBoard");
   editPlayerBoardDOM("userBoard");
-  placeTempShipsDOM();
+  placeShipsDOM();
   userClickDOM();
   const square = document.getElementById("0-0-aiBoard");
   expect(square.classList.contains("flash")).toBe(false);
@@ -27,7 +27,7 @@ test("clicking a square toggles its 'flash' class", () => {
 test("clicking a ship square toggles its 'flash' class", () => {
   editAIBoardDOM("aiBoard");
   editPlayerBoardDOM("userBoard");
-  placeTempShipsDOM();
+  placeShipsDOM();
   userClickDOM();
   const square = document.getElementById("2-2-aiBoard");
   expect(square.classList.contains("hitShip")).toBe(false);
@@ -38,7 +38,7 @@ test("clicking a ship square toggles its 'flash' class", () => {
 test("clicking a ship square toggles its 'flash' class", () => {
   editAIBoardDOM("aiBoard");
   editPlayerBoardDOM("userBoard");
-  placeTempShipsDOM();
+  placeShipsDOM();
   userClickDOM();
   const square = document.getElementById("3-3-aiBoard");
   expect(square.classList.contains("missed")).toBe(false);

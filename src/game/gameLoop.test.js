@@ -84,16 +84,16 @@ describe("Hit ships: attack function works", () => {
   });
 });
 
-test("placeTempShips: Manually add ships to user/ai boards", () => {
+test("placeGameShips: Manually add ships to user/ai boards", () => {
   thisGame = gameLoop("James");
-  thisGame.placeTempShips();
+  thisGame.placeGameShips();
   expect(thisGame.ai.playerBoard.board[2][1]).toBe("ship2");
   expect(thisGame.ai.playerBoard.board[4][4]).toBe("ship3");
   expect(thisGame.ai.playerBoard.board[6][1]).toBe("ship4");
   expect(thisGame.ai.playerBoard.board[4][5]).toBe("ship5");
 
   expect(thisGame.user.playerBoard.board[2][1]).toBe("ship2");
-  expect(thisGame.user.playerBoard.board[4][4]).toBe("ship3");
+  expect(thisGame.user.playerBoard.board[4][3]).toBe("ship3");
   expect(thisGame.user.playerBoard.board[6][1]).toBe("ship4");
   expect(thisGame.user.playerBoard.board[4][5]).toBe("ship5");
 });

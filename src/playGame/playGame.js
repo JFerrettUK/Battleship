@@ -1,17 +1,32 @@
 import gameLoop from "../game/gameLoop";
-import placeTempShipsDOM from "../dom/placeTempShipsDOM";
+import placeShipsDOM from "../dom/placeShipsDOM";
 import editAIBoardDOM from "../dom/editAIBoardDOM";
 import editPlayerBoardDOM from "../dom/editPlayerBoardDOM";
 import userClickGameDOM from "./userClickGameDOM";
-import gameOver from "../game/gameOver";
 import announceWinnerDOM from "../dom/announceWinnerDOM";
 
 export default function playGame() {
   let thisGame = gameLoop("James");
-  thisGame.placeTempShips();
   editPlayerBoardDOM("userBoard");
   editAIBoardDOM("aiBoard");
-  placeTempShipsDOM();
+
+  let tempShipsToPlace = {
+    aiShips: [
+      [2, 2, 1, "vertical"],
+      [2, 4, 3, "horizontal"],
+      [2, 6, 1, "horizontal"],
+      [2, 4, 5, "vertical"],
+    ],
+    playerShips: [
+      [2, 2, 1, "vertical"],
+      [2, 4, 3, "horizontal"],
+      [2, 6, 1, "horizontal"],
+      [2, 4, 5, "vertical"],
+    ],
+  };
+
+  thisGame.placeGameShips();
+  placeShipsDOM(tempShipsToPlace);
 
   // Define a callback function that updates `thisGame` based on the user's attack
   const userSquareCallback = (

@@ -49,16 +49,38 @@ export default function gameLoop(playerName) {
   };
 
   // Function to place temporary ships for testing purposes
-  let placeTempShips = function () {
-    // Place temporary ships on both AI and user player boards
-    placeAIShip(2, 2, 1, "vertical");
-    placeAIShip(3, 4, 4, "horizontal");
-    placeAIShip(4, 6, 1, "horizontal");
-    placeAIShip(5, 4, 5, "vertical");
-    placeUserShip(2, 2, 1, "vertical");
-    placeUserShip(3, 4, 3, "horizontal");
-    placeUserShip(4, 6, 1, "horizontal");
-    placeUserShip(5, 4, 5, "vertical");
+  let placeGameShips = function (shipsToPlace) {
+    let aiShips, playerShips;
+
+    // replace with parameter
+    if (!shipsToPlace) {
+      shipsToPlace = {
+        aiShips: [
+          [2, 2, 1, "vertical"],
+          [3, 4, 4, "horizontal"],
+          [4, 6, 1, "horizontal"],
+          [5, 4, 5, "vertical"],
+        ],
+        playerShips: [
+          [2, 2, 1, "vertical"],
+          [3, 4, 3, "horizontal"],
+          [4, 6, 1, "horizontal"],
+          [5, 4, 5, "vertical"],
+        ],
+      };
+    }
+
+    aiShips = shipsToPlace.aiShips;
+    playerShips = shipsToPlace.playerShips;
+
+    function placeShips() {
+      for (let i = 0; i < aiShips.length; i++) {
+        placeAIShip(...aiShips[i]);
+        placeUserShip(...playerShips[i]);
+      }
+    }
+
+    placeShips();
   };
 
   // Return an object containing the relevant components of the game loop
@@ -71,6 +93,6 @@ export default function gameLoop(playerName) {
     attackAI, // Function to handle AI attack
     placeAIShip, // Function to place AI ship
     placeUserShip, // Function to place user ship
-    placeTempShips, // Function to place temporary ships for testing
+    placeGameShips, // Function to place temporary ships for testing
   };
 }
