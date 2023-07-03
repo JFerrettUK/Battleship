@@ -207,3 +207,14 @@ body {
 .playButton:disabled {
   cursor: auto;
 }
+
+.shipElements {
+  display: grid;
+  padding: 30px;
+  justify-content: center;
+}
+
+.shipPiece {
+  border: white solid 1px;
+  position: relative;
+}

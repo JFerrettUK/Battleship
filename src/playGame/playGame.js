@@ -13,20 +13,20 @@ export default function playGame() {
   let tempShipsToPlace = {
     aiShips: [
       [2, 2, 1, "vertical"],
-      [2, 4, 3, "horizontal"],
-      [2, 6, 1, "horizontal"],
-      [2, 4, 5, "vertical"],
+      [3, 4, 3, "horizontal"],
+      [4, 6, 1, "horizontal"],
+      [5, 4, 5, "vertical"],
     ],
     playerShips: [
       [2, 2, 1, "vertical"],
-      [2, 4, 3, "horizontal"],
-      [2, 6, 1, "horizontal"],
-      [2, 4, 5, "vertical"],
+      [3, 4, 3, "horizontal"],
+      [4, 6, 1, "horizontal"],
+      [5, 4, 5, "vertical"],
     ],
   };
 
-  thisGame.placeGameShips();
-  placeShipsDOM(tempShipsToPlace);
+  // thisGame.placeGameShips();
+  // placeShipsDOM(tempShipsToPlace);
 
   // Define a callback function that updates `thisGame` based on the user's attack
   const userSquareCallback = (
