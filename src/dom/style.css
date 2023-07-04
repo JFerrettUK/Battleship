@@ -54,7 +54,6 @@ body {
 #battleBoard,
 #userBoard,
 #aiBoard {
-  border: white 4px solid;
   display: grid;
   width: 350px;
   height: 350px;
@@ -69,7 +68,6 @@ body {
 .aiShipSquare {
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 34px;
   width: 34px;
   border: 1px dotted rgb(255, 255, 255);
