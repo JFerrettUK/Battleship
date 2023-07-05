@@ -216,3 +216,7 @@ body {
   border: white solid 1px;
   position: relative;
 }
+
+.vertical {
+  position: relative;
+}
