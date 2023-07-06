@@ -1,13 +1,14 @@
 export default function dragAndDrop() {
   const shipPieces = document.querySelectorAll(".shipPiece");
   const userSquares = document.querySelectorAll(".userSquare");
-  const occupiedSquares = []; // Array to store occupied squares data
+  const occupiedSquares = [];
 
   shipPieces.forEach((shipPiece) => {
     shipPiece.addEventListener("dragstart", handleDragStart);
     shipPiece.addEventListener("dragend", handleDragEnd);
     shipPiece.addEventListener("click", handleShipClick);
   });
+
   userSquares.forEach((userSquare) => {
     userSquare.addEventListener("dragover", dragOver);
     userSquare.addEventListener("drop", dragDrop);
@@ -19,14 +20,11 @@ export default function dragAndDrop() {
     const shipPiece = e.target;
     const currentOrientation = shipPiece.dataset.orientation;
 
-    // Toggle the orientation between "horizontal" and "vertical"
     const newOrientation =
       currentOrientation === "horizontal" ? "vertical" : "horizontal";
 
-    // Update the data-orientation attribute
     shipPiece.dataset.orientation = newOrientation;
 
-    // Rotate the ship image
     if (newOrientation === "vertical") {
       shipPiece.style.transform = "rotate(90deg)";
     } else {
@@ -47,43 +45,46 @@ export default function dragAndDrop() {
   function dragOver(e) {
     e.preventDefault();
   }
-
   function dragDrop(e) {
     e.preventDefault();
 
-    // Get the target user square element
     const targetUserSquare = e.target.closest(".userSquare");
 
     if (targetUserSquare) {
-      // Calculate the offset between the ship piece's corner position and the user square's corner position
       const offsetX = e.clientX - targetUserSquare.getBoundingClientRect().left;
       const offsetY = e.clientY - targetUserSquare.getBoundingClientRect().top;
 
-      // Calculate the relative position of the ship piece within the user square
-      const relativeX = offsetX / targetUserSquare.offsetWidth;
-      const relativeY = offsetY / targetUserSquare.offsetHeight;
-
-      // Calculate the row and column of the user square based on the relative position
       const row = Math.min(parseInt(targetUserSquare.dataset.row, 10), 9);
       const column = Math.min(parseInt(targetUserSquare.dataset.column, 10), 9);
-      const targetRow = Math.min(row + Math.floor(relativeY), 9);
-      const targetColumn = Math.min(column + Math.floor(relativeX), 9);
 
-      // Calculate the range of squares covered by the ship based on its size
-      const size = parseInt(beingDragged.getAttribute("alt"), 10);
+      const shipSize = parseInt(beingDragged.getAttribute("alt"), 10);
+      const shipOrientation = beingDragged.dataset.orientation;
 
-      // Flag to track placement validity
-      let isValidPlacement = true;
+      let targetRow, targetColumn;
+
+      if (shipOrientation === "vertical") {
+        targetRow = Math.min(
+          row + Math.floor(offsetY / targetUserSquare.offsetHeight),
+          9 - shipSize + 1
+        );
+        targetColumn = column;
+      } else {
+        targetRow = row;
+        targetColumn = Math.min(
+          column + Math.floor(offsetX / targetUserSquare.offsetWidth),
+          9 - shipSize + 1
+        );
+      }
 
       const occupiedSquaresData = [];
-      for (let i = 0; i < size; i++) {
+
+      for (let i = 0; i < shipSize; i++) {
         let occupiedRow, occupiedColumn;
-        if (relativeX < 0.5) {
-          // Placed vertically
+
+        if (shipOrientation === "vertical") {
           occupiedRow = targetRow + i;
           occupiedColumn = targetColumn;
         } else {
-          // Placed horizontally
           occupiedRow = targetRow;
           occupiedColumn = targetColumn + i;
         }
@@ -92,29 +93,43 @@ export default function dragAndDrop() {
           console.log(
             "Invalid placement! Occupied squares extend beyond the boundary."
           );
-          isValidPlacement = false;
-          break;
+          return;
         }
+
         occupiedSquaresData.push({ row: occupiedRow, column: occupiedColumn });
       }
 
-      if (isValidPlacement) {
-        const orientation = relativeX < 0.5 ? "vertical" : "horizontal";
+      const isValidPlacement = true; // You can add your own logic for validating the placement
 
-        // Display the occupied squares in the console
+      if (isValidPlacement) {
         console.log("Ship placed on User Squares:", occupiedSquaresData);
 
-        // Append the dragged image to the target user square
+        if (shipOrientation === "vertical") {
+          beingDragged.style.transform = "none";
+          beingDragged.style.position = "absolute";
+          beingDragged.style.left = "0";
+          beingDragged.style.top = "0";
+
+          const squareSize = targetUserSquare.offsetWidth;
+          const shipPieceSize = beingDragged.offsetWidth;
+
+          const adjustmentX = 0;
+          const adjustmentY = 0;
+
+          beingDragged.style.left =
+            targetUserSquare.offsetLeft + adjustmentX + "px";
+          beingDragged.style.top =
+            targetUserSquare.offsetTop + adjustmentY + "px";
+        }
+
         targetUserSquare.appendChild(beingDragged);
 
-        // Add ship data to the occupiedSquares array
         occupiedSquares.push({
-          size,
-          orientation,
+          size: shipSize,
+          orientation: shipOrientation,
           occupiedSquares: occupiedSquaresData,
         });
 
-        // Print the occupied squares and ship sizes
         console.log("Occupied Squares:", occupiedSquares);
       }
     }
