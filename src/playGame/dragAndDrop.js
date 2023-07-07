@@ -1,12 +1,11 @@
 export default function dragAndDrop() {
   const shipPieces = document.querySelectorAll(".shipPiece");
   const userSquares = document.querySelectorAll(".userSquare");
-  const occupiedSquares = [];
+  let occupiedSquares = [];
 
   shipPieces.forEach((shipPiece) => {
     shipPiece.addEventListener("dragstart", handleDragStart);
     shipPiece.addEventListener("dragend", handleDragEnd);
-    shipPiece.addEventListener("click", handleShipClick);
   });
 
   userSquares.forEach((userSquare) => {
@@ -15,25 +14,11 @@ export default function dragAndDrop() {
   });
 
   let beingDragged;
-
-  function handleShipClick(e) {
-    const shipPiece = e.target;
-    const currentOrientation = shipPiece.dataset.orientation;
-
-    const newOrientation =
-      currentOrientation === "horizontal" ? "vertical" : "horizontal";
-
-    shipPiece.dataset.orientation = newOrientation;
-
-    if (newOrientation === "vertical") {
-      shipPiece.style.transform = "rotate(90deg)";
-    } else {
-      shipPiece.style.transform = "none";
-    }
-  }
+  let shipPieceOrientation;
 
   function handleDragStart(e) {
     beingDragged = e.target;
+    shipPieceOrientation = beingDragged.dataset.orientation;
     e.dataTransfer.setData("text/plain", "");
   }
 
@@ -99,30 +84,21 @@ export default function dragAndDrop() {
         occupiedSquaresData.push({ row: occupiedRow, column: occupiedColumn });
       }
 
-      const isValidPlacement = true; // You can add your own logic for validating the placement
+      const isPlacementValid = validatePlacement(occupiedSquaresData);
 
-      if (isValidPlacement) {
+      if (isPlacementValid) {
         console.log("Ship placed on User Squares:", occupiedSquaresData);
 
         if (shipOrientation === "vertical") {
           beingDragged.style.transform = "none";
           beingDragged.style.position = "absolute";
-          beingDragged.style.left = "0";
-          beingDragged.style.top = "0";
-
-          const squareSize = targetUserSquare.offsetWidth;
-          const shipPieceSize = beingDragged.offsetWidth;
-
-          const adjustmentX = 0;
-          const adjustmentY = 0;
-
-          beingDragged.style.left =
-            targetUserSquare.offsetLeft + adjustmentX + "px";
-          beingDragged.style.top =
-            targetUserSquare.offsetTop + adjustmentY + "px";
+          beingDragged.style.left = `${
+            targetColumn * targetUserSquare.offsetWidth
+          }px`;
+          beingDragged.style.top = `${
+            targetRow * targetUserSquare.offsetHeight
+          }px`;
         }
-
-        targetUserSquare.appendChild(beingDragged);
 
         occupiedSquares.push({
           size: shipSize,
@@ -131,7 +107,38 @@ export default function dragAndDrop() {
         });
 
         console.log("Occupied Squares:", occupiedSquares);
+
+        const correspondingShip = document.getElementById(
+          beingDragged.id.replace(/V$/, "")
+        );
+
+        correspondingShip.remove();
+
+        if (!beingDragged.id.endsWith("V")) {
+          const oppositeShip = document.getElementById(`${beingDragged.id}V`);
+          oppositeShip.remove();
+        }
+
+        beingDragged.remove();
+      } else {
+        console.log("Invalid placement! Overlapping with existing ships.");
       }
     }
+  }
+
+  function validatePlacement(occupiedSquaresData) {
+    for (const occupiedSquare of occupiedSquares) {
+      for (const square of occupiedSquaresData) {
+        if (
+          occupiedSquare.occupiedSquares.some(
+            (occupied) =>
+              occupied.row === square.row && occupied.column === square.column
+          )
+        ) {
+          return false; // Overlapping placement
+        }
+      }
+    }
+    return true; // Valid placement
   }
 }

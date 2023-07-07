@@ -38,7 +38,8 @@ body {
 }
 
 #userTitle,
-#aiTitle {
+#aiTitle,
+#flipShips {
   font-weight: 600;
   display: flex;
   justify-content: center;
@@ -214,4 +215,12 @@ body {
 .shipPiece {
   border: white solid 1px;
   position: relative;
+}
+
+#verShips {
+  display: none;
+}
+
+#horShips {
+  display: grid;
 }
