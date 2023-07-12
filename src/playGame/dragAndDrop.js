@@ -1,7 +1,9 @@
-export default function dragAndDrop() {
+export default function dragAndDrop(onShipsPlaced) {
   const shipPieces = document.querySelectorAll(".shipPiece");
   const userSquares = document.querySelectorAll(".userSquare");
   let occupiedSquares = [];
+  let shipsPlaced = 0;
+  let isPlacementValid = false; // Declare isPlacementValid variable
 
   shipPieces.forEach((shipPiece) => {
     shipPiece.addEventListener("dragstart", handleDragStart);
@@ -22,14 +24,19 @@ export default function dragAndDrop() {
     e.dataTransfer.setData("text/plain", "");
   }
 
-  function handleDragEnd(e) {
-    console.log(e.target);
-    console.log("targetAbove");
+  function handleDragEnd() {
+    if (beingDragged && beingDragged.parentNode) {
+      // Check if the placement is valid before removing the ship
+      if (isPlacementValid) {
+        beingDragged.parentNode.removeChild(beingDragged);
+      }
+    }
   }
 
   function dragOver(e) {
     e.preventDefault();
   }
+
   function dragDrop(e) {
     e.preventDefault();
 
@@ -75,20 +82,15 @@ export default function dragAndDrop() {
         }
 
         if (occupiedRow > 9 || occupiedColumn > 9) {
-          console.log(
-            "Invalid placement! Occupied squares extend beyond the boundary."
-          );
           return;
         }
 
         occupiedSquaresData.push({ row: occupiedRow, column: occupiedColumn });
       }
 
-      const isPlacementValid = validatePlacement(occupiedSquaresData);
+      isPlacementValid = validatePlacement(occupiedSquaresData); // Update isPlacementValid
 
       if (isPlacementValid) {
-        console.log("Ship placed on User Squares:", occupiedSquaresData);
-
         if (shipOrientation === "vertical") {
           beingDragged.style.transform = "none";
           beingDragged.style.position = "absolute";
@@ -106,29 +108,40 @@ export default function dragAndDrop() {
           occupiedSquares: occupiedSquaresData,
         });
 
-        console.log("Occupied Squares:", occupiedSquares);
+        shipsPlaced++;
 
-        const correspondingShip = document.getElementById(
-          beingDragged.id.replace(/V$/, "")
-        );
+        if (beingDragged.parentElement) {
+          const correspondingShip = document.getElementById(
+            beingDragged.id.replace(/V$/, "")
+          );
+          if (correspondingShip && correspondingShip.parentElement) {
+            correspondingShip.parentElement.removeChild(correspondingShip);
+          }
 
-        correspondingShip.remove();
-
-        if (!beingDragged.id.endsWith("V")) {
-          const oppositeShip = document.getElementById(`${beingDragged.id}V`);
-          oppositeShip.remove();
+          if (!beingDragged.id.endsWith("V")) {
+            const oppositeShip = document.getElementById(`${beingDragged.id}V`);
+            if (oppositeShip && oppositeShip.parentElement) {
+              oppositeShip.parentElement.removeChild(oppositeShip);
+            }
+          }
         }
 
-        beingDragged.remove();
+        if (shipsPlaced > 3) {
+          if (typeof onShipsPlaced === "function") {
+            onShipsPlaced(occupiedSquares); // Pass occupiedSquares as an argument to the callback function
+          }
+        }
       } else {
-        console.log("Invalid placement! Overlapping with existing ships.");
+        console.log(
+          "Invalid placement! Overlapping with existing ships or occupied squares."
+        );
       }
     }
   }
 
   function validatePlacement(occupiedSquaresData) {
-    for (const occupiedSquare of occupiedSquares) {
-      for (const square of occupiedSquaresData) {
+    for (const square of occupiedSquaresData) {
+      for (const occupiedSquare of occupiedSquares) {
         if (
           occupiedSquare.occupiedSquares.some(
             (occupied) =>

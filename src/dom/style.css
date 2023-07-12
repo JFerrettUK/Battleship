@@ -41,6 +41,7 @@ body {
 #aiTitle,
 #flipShips {
   font-weight: 600;
+  user-select: none;
   display: flex;
   justify-content: center;
 }
@@ -208,6 +209,8 @@ body {
 }
 
 .shipElements {
+  user-select: none;
+
   display: grid;
   padding: 30px;
 }

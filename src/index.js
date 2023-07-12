@@ -1,7 +1,5 @@
 import playGame from "./playGame/playGame";
-import dragAndDrop from "./playGame/dragAndDrop";
-import flipShips from "./dom/flipShips";
+import startGame from "./playGame/startGame";
 
 playGame();
-dragAndDrop();
-flipShips();
+startGame();
