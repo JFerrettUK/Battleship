@@ -4,6 +4,7 @@ import editAIBoardDOM from "../dom/editAIBoardDOM";
 import editPlayerBoardDOM from "../dom/editPlayerBoardDOM";
 import userClickGameDOM from "./userClickGameDOM";
 import announceWinnerDOM from "../dom/announceWinnerDOM";
+import startGame from "./startGame";
 
 export default function playGame() {
   let thisGame = gameLoop("James");

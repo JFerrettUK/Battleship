@@ -1,4 +1,10 @@
 export default function dragAndDrop(onShipsPlaced) {
+  var titleElement = document.getElementById("aiTitle");
+  var boardElement = document.getElementById("aiBoard");
+
+  titleElement.style.display = "none";
+  boardElement.style.display = "none";
+
   const shipPieces = document.querySelectorAll(".shipPiece");
   const userSquares = document.querySelectorAll(".userSquare");
   let occupiedSquares = [];
@@ -26,7 +32,6 @@ export default function dragAndDrop(onShipsPlaced) {
 
   function handleDragEnd() {
     if (beingDragged && beingDragged.parentNode) {
-      // Check if the placement is valid before removing the ship
       if (isPlacementValid) {
         beingDragged.parentNode.removeChild(beingDragged);
       }

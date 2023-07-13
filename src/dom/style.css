@@ -21,11 +21,10 @@ body {
   grid-template-columns: 1fr 1fr;
   top: 52px;
   min-width: 800px;
-
   min-height: 394px;
 }
 
-.boardCont {
+.boardCont1 {
   display: grid;
   min-width: 394px;
   height: 394px;
@@ -35,6 +34,32 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.boardCont2 {
+  display: grid;
+  min-width: 394px;
+  height: 394px;
+  align-items: center;
+  justify-content: center;
+  top: 52px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.logoCont {
+  display: flex;
+  padding: 30px;
+  justify-content: center;
+  min-width: 800px;
+}
+
+#boardContainers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 800px;
 }
 
 #userTitle,
@@ -226,4 +251,12 @@ body {
 
 #horShips {
   display: grid;
+}
+
+.grid-display {
+  display: grid;
+}
+
+.hidden {
+  display: none !important;
 }
