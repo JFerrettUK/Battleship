@@ -26,6 +26,10 @@ export default function playGame() {
     ],
   };
 
+  startGame((occupiedSquares) => {
+    console.log("Occupied squares:", occupiedSquares);
+  });
+
   // thisGame.placeGameShips();
   // placeShipsDOM(tempShipsToPlace);
 
