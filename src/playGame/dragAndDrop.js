@@ -1,4 +1,6 @@
-export default function dragAndDrop(onShipsPlaced) {
+import convertShipArray from "./convertShipArray";
+
+export default function dragAndDrop(onOccupiedSquares) {
   var titleElement = document.getElementById("aiTitle");
   var boardElement = document.getElementById("aiBoard");
 
@@ -32,9 +34,7 @@ export default function dragAndDrop(onShipsPlaced) {
 
   function handleDragEnd() {
     if (beingDragged && beingDragged.parentNode) {
-      if (isPlacementValid) {
-        beingDragged.parentNode.removeChild(beingDragged);
-      }
+      beingDragged.parentNode.removeChild(beingDragged);
     }
   }
 
@@ -131,9 +131,10 @@ export default function dragAndDrop(onShipsPlaced) {
           }
         }
 
-        if (shipsPlaced > 3) {
-          if (typeof onShipsPlaced === "function") {
-            onShipsPlaced(occupiedSquares); // Pass occupiedSquares as an argument to the callback function
+        if (shipsPlaced === 4) {
+          if (typeof onOccupiedSquares === "function") {
+            const shipLocations = convertShipArray(occupiedSquares);
+            onOccupiedSquares(shipLocations, isPlacementValid); // Pass isPlacementValid as an argument
           }
         }
       } else {

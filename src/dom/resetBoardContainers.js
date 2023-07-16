@@ -15,6 +15,7 @@ export default function resetBoardContainers() {
     boardContainersElement.style.gridTemplateColumns = "1fr 1fr";
     boardContainersElement.style.top = "52px";
     boardContainersElement.style.minWidth = "800px";
+    boardContainersElement.style.gridTemplateColumns = "1fr 1fr";
 
     boardCont1Element.style.position = "";
     boardCont1Element.style.marginTop = "";

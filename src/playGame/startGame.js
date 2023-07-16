@@ -1,6 +1,7 @@
 import dragAndDrop from "./dragAndDrop";
 import flipShips from "../dom/flipShips";
 import resetBoardContainers from "../dom/resetBoardContainers";
+import convertShipArray from "./convertShipArray";
 
 export function hideElements() {
   const aiTitle = document.getElementById("aiTitle");
@@ -12,34 +13,31 @@ export function hideElements() {
 
 export function adjustStyles() {
   const boardContainers = document.getElementById("boardContainers");
-
+  boardContainers.style.gridTemplateColumns = "1fr 0.1fr";
   boardContainers.style.flexDirection = "row";
 }
 
-export default function startGame(onOccupiedSquares) {
+export default function startGame(convertShipArray, onShipsPlaced) {
   hideElements();
   adjustStyles();
   flipShips();
 
   let occupiedSquaresCount = 0;
   let hasTriggered = false;
+  let shipsPlaced = 0;
 
-  const onShipsPlaced = (occupiedSquares) => {
+  function handleShipsPlaced(occupiedSquares) {
     occupiedSquaresCount = occupiedSquares.length;
-    if (occupiedSquaresCount === 4 && !hasTriggered) {
+
+    if (occupiedSquaresCount > 3 && !hasTriggered) {
       hasTriggered = true;
-      onOccupiedSquares(occupiedSquares); // Pass occupiedSquares as an argument to the callback function
+      resetBoardContainers();
+
+      const shipLocations = convertShipArray(occupiedSquares || []);
+      onShipsPlaced(shipLocations);
     }
     return occupiedSquares;
-  };
+  }
 
-  dragAndDrop(onShipsPlaced);
-
-  // Check the number of occupied squares at regular intervals
-  setInterval(() => {
-    if (occupiedSquaresCount > 3 && typeof onOccupiedSquares === "function") {
-      resetBoardContainers();
-      onOccupiedSquares(occupiedSquares);
-    }
-  }, 1000); // Adjust the interval as needed
+  dragAndDrop(handleShipsPlaced);
 }
