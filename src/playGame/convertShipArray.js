@@ -2,6 +2,8 @@ export default function convertShipArray(arr) {
   const convertedArr = [];
 
   for (let i = 0; i < arr.length; i++) {
+    console.log("arr in CSA");
+    console.log(arr);
     const ship = arr[i];
     const size = ship.size;
     const orientation = ship.orientation;
@@ -11,7 +13,6 @@ export default function convertShipArray(arr) {
     let minCol = Infinity;
 
     for (let j = 0; j < occupiedSquares.length; j++) {
-      console.log("Value of occupiedSquares[j]:", occupiedSquares[j]);
       const { row, column } = occupiedSquares[j];
       minRow = Math.min(minRow, row);
       minCol = Math.min(minCol, column);
@@ -19,9 +20,6 @@ export default function convertShipArray(arr) {
 
     convertedArr.push([size, minRow, minCol, orientation]);
   }
-
-  console.log("convertedArr in func");
-  console.log(convertedArr);
 
   return convertedArr;
 }

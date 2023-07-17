@@ -13,8 +13,21 @@ export default function playGame() {
   editAIBoardDOM("aiBoard");
 
   function handleShipsPlaced(shipLocations) {
+    console.log("shipLocations in playGame");
     console.log(shipLocations);
-    placeShipsDOM(shipLocations); // Call placeShipsDOM with the shipLocations array
+    console.log("then PlaceShipsDOM");
+
+    const shipsToPlace = {
+      aiShips: shipLocations,
+      playerShips: shipLocations,
+    };
+    console.log("shipsToPlace");
+
+    console.log(shipsToPlace);
+
+    placeShipsDOM(shipsToPlace);
+
+    console.log("then placeGameShips");
     thisGame.placeGameShips(shipLocations);
   }
 
@@ -27,7 +40,7 @@ export default function playGame() {
     playerSquareRow,
     playerSquareCol
   ) => {
-    //ai attacked on user click in both DOM and Gameloop
+    // AI attacked on user click in both DOM and Game loop
     const attackAIResult = thisGame.attackAI(aiSquareRow, aiSquareCol);
     const attackPlayerResult = thisGame.attackPlayer(
       playerSquareRow,

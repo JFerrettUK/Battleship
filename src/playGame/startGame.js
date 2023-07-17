@@ -1,7 +1,6 @@
 import dragAndDrop from "./dragAndDrop";
 import flipShips from "../dom/flipShips";
 import resetBoardContainers from "../dom/resetBoardContainers";
-import convertShipArray from "./convertShipArray";
 
 export function hideElements() {
   const aiTitle = document.getElementById("aiTitle");
@@ -24,7 +23,6 @@ export default function startGame(convertShipArray, onShipsPlaced) {
 
   let occupiedSquaresCount = 0;
   let hasTriggered = false;
-  let shipsPlaced = 0;
 
   function handleShipsPlaced(occupiedSquares) {
     occupiedSquaresCount = occupiedSquares.length;
@@ -32,11 +30,11 @@ export default function startGame(convertShipArray, onShipsPlaced) {
     if (occupiedSquaresCount > 3 && !hasTriggered) {
       hasTriggered = true;
       resetBoardContainers();
-
+      console.log("board containers reset");
       const shipLocations = convertShipArray(occupiedSquares || []);
+      console.log("array converted");
       onShipsPlaced(shipLocations);
     }
-    return occupiedSquares;
   }
 
   dragAndDrop(handleShipsPlaced);
