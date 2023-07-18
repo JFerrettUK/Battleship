@@ -16,7 +16,7 @@ export function adjustStyles() {
   boardContainers.style.flexDirection = "row";
 }
 
-export default function startGame(convertShipArray, onShipsPlaced) {
+export default function startGame(handleShipsPlaced) {
   hideElements();
   adjustStyles();
   flipShips();
@@ -24,18 +24,18 @@ export default function startGame(convertShipArray, onShipsPlaced) {
   let occupiedSquaresCount = 0;
   let hasTriggered = false;
 
-  function handleShipsPlaced(occupiedSquares) {
+  function onOccupiedSquares(occupiedSquares) {
+    console.log("occupiedSquares in startGame");
+    console.log(occupiedSquares);
     occupiedSquaresCount = occupiedSquares.length;
 
     if (occupiedSquaresCount > 3 && !hasTriggered) {
       hasTriggered = true;
       resetBoardContainers();
       console.log("board containers reset");
-      const shipLocations = convertShipArray(occupiedSquares || []);
-      console.log("array converted");
-      onShipsPlaced(shipLocations);
+      handleShipsPlaced(occupiedSquares);
     }
   }
 
-  dragAndDrop(handleShipsPlaced);
+  dragAndDrop(onOccupiedSquares);
 }

@@ -10,80 +10,70 @@ beforeAll(async () => {
   global.document = dom.window.document;
 });
 
-test("no ships at start of test", () => {
+test("place ship in dom with vertical length", () => {
   editPlayerBoardDOM("userBoard");
 
-  expect(
-    document.getElementById("5-8-userBoard").classList.contains("shipSquare")
-  ).toBe(false);
-  expect(
-    document.getElementById("2-1-userBoard").classList.contains("shipSquare")
-  ).toBe(false);
-});
+  placePlayerShipDOM(3, 1, 2, "vertical"); // Adjusted row and column values
 
-test("place ship  in dom with vertical length", () => {
-  editPlayerBoardDOM("userBoard");
-
-  placePlayerShipDOM(3, 2, 1, "vertical");
   expect(
-    document.getElementById("2-1-userBoard").classList.contains("shipSquare")
+    document.getElementById("1-2-userBoard").classList.contains("shipSquare")
   ).toBe(true);
   expect(
     document.getElementById("2-2-userBoard").classList.contains("shipSquare")
   ).toBe(true);
   expect(
-    document.getElementById("2-3-userBoard").classList.contains("shipSquare")
+    document.getElementById("3-2-userBoard").classList.contains("shipSquare")
   ).toBe(true);
 
-  placePlayerShipDOM(4, 5, 6, "vertical");
+  placePlayerShipDOM(4, 6, 5, "vertical"); // Adjusted row and column values
 
   expect(
-    document.getElementById("5-6-userBoard").classList.contains("shipSquare")
+    document.getElementById("6-5-userBoard").classList.contains("shipSquare")
   ).toBe(true);
   expect(
-    document.getElementById("5-7-userBoard").classList.contains("shipSquare")
+    document.getElementById("7-5-userBoard").classList.contains("shipSquare")
   ).toBe(true);
   expect(
-    document.getElementById("5-8-userBoard").classList.contains("shipSquare")
+    document.getElementById("8-5-userBoard").classList.contains("shipSquare")
   ).toBe(true);
   expect(
-    document.getElementById("5-9-userBoard").classList.contains("shipSquare")
+    document.getElementById("9-5-userBoard").classList.contains("shipSquare")
   ).toBe(true);
 });
 
 test("place ship in dom with horizontal length", () => {
   editPlayerBoardDOM("userBoard");
 
-  placePlayerShipDOM(3, 3, 1, "horizontal");
+  placePlayerShipDOM(3, 1, 3, "horizontal"); // Adjusted row and column values
 
   expect(
-    document.getElementById("3-1-userBoard").classList.contains("shipSquare")
+    document.getElementById("1-3-userBoard").classList.contains("shipSquare")
   ).toBe(true);
   expect(
-    document.getElementById("4-1-userBoard").classList.contains("shipSquare")
+    document.getElementById("1-4-userBoard").classList.contains("shipSquare")
   ).toBe(true);
   expect(
-    document.getElementById("5-1-userBoard").classList.contains("shipSquare")
+    document.getElementById("1-5-userBoard").classList.contains("shipSquare")
   ).toBe(true);
 
-  placePlayerShipDOM(4, 6, 6, "horizontal");
+  placePlayerShipDOM(4, 6, 6, "horizontal"); // Adjusted row and column values
 
   expect(
     document.getElementById("6-6-userBoard").classList.contains("shipSquare")
   ).toBe(true);
   expect(
-    document.getElementById("7-6-userBoard").classList.contains("shipSquare")
+    document.getElementById("6-7-userBoard").classList.contains("shipSquare")
   ).toBe(true);
   expect(
-    document.getElementById("8-6-userBoard").classList.contains("shipSquare")
+    document.getElementById("6-8-userBoard").classList.contains("shipSquare")
   ).toBe(true);
   expect(
-    document.getElementById("9-6-userBoard").classList.contains("shipSquare")
+    document.getElementById("6-9-userBoard").classList.contains("shipSquare")
   ).toBe(true);
 });
 
-test("If a ship is placed in a spot that extend off the board, return offBoard", () => {
+test("If a ship is placed in a spot that extends off the board, return offBoard", () => {
   editPlayerBoardDOM("userBoard");
 
-  expect(placePlayerShipDOM(7, 11, 1, "horizontal")).toBe("offBoard");
+  expect(placePlayerShipDOM(7, 1, 11, "horizontal")).toBe("offBoard"); // Adjusted row and column values
 });

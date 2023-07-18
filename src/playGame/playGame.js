@@ -5,8 +5,6 @@ import editPlayerBoardDOM from "../dom/editPlayerBoardDOM";
 import userClickGameDOM from "./userClickGameDOM";
 import announceWinnerDOM from "../dom/announceWinnerDOM";
 import startGame from "./startGame";
-import convertShipArray from "./convertShipArray";
-
 export default function playGame() {
   let thisGame = gameLoop("James");
   editPlayerBoardDOM("userBoard");
@@ -15,23 +13,25 @@ export default function playGame() {
   function handleShipsPlaced(shipLocations) {
     console.log("shipLocations in playGame");
     console.log(shipLocations);
+
     console.log("then PlaceShipsDOM");
 
     const shipsToPlace = {
       aiShips: shipLocations,
       playerShips: shipLocations,
     };
-    console.log("shipsToPlace");
 
-    console.log(shipsToPlace);
+    console.log("shipsToPlace");
+    console.log(shipsToPlace.playerShips);
 
     placeShipsDOM(shipsToPlace);
 
     console.log("then placeGameShips");
-    thisGame.placeGameShips(shipLocations);
+    thisGame.placeGameShips(shipsToPlace); // Call placeGameShips as a method of thisGame
+    console.log(thisGame.user.playerBoard);
   }
 
-  startGame(convertShipArray, handleShipsPlaced);
+  startGame(handleShipsPlaced);
 
   // Define a callback function that updates `thisGame` based on the user's attack
   const userSquareCallback = (

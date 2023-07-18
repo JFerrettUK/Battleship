@@ -56,6 +56,7 @@ export default function dragAndDrop(onOccupiedSquares) {
 
       const shipSize = parseInt(beingDragged.getAttribute("alt"), 10);
       const shipOrientation = beingDragged.dataset.orientation;
+      console.log(shipOrientation);
 
       let targetRow, targetColumn;
 
@@ -133,7 +134,12 @@ export default function dragAndDrop(onOccupiedSquares) {
 
         if (shipsPlaced === 4) {
           if (typeof onOccupiedSquares === "function") {
+            console.log("occupiedSquares in D&D");
+            console.log(occupiedSquares);
             const shipLocations = convertShipArray(occupiedSquares);
+            console.log("shipLocations in D&D");
+            console.log(shipLocations);
+
             onOccupiedSquares(shipLocations, isPlacementValid); // Pass isPlacementValid as an argument
           }
         }
