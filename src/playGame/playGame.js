@@ -27,8 +27,19 @@ export default function playGame() {
     placeShipsDOM(shipsToPlace);
 
     console.log("then placeGameShips");
-    thisGame.placeGameShips(shipsToPlace); // Call placeGameShips as a method of thisGame
-    console.log(thisGame.user.playerBoard);
+
+    const modifiedShipsToPlace = {
+      aiShips: modifyShipArray(shipsToPlace.aiShips),
+      playerShips: modifyShipArray(shipsToPlace.playerShips),
+    };
+
+    console.log("then modifiedShipsToPlace");
+    console.log(modifiedShipsToPlace);
+
+    // Call placeGameShips as a method of thisGame
+
+    thisGame.placeGameShips(modifiedShipsToPlace);
+    console.log(thisGame.user.playerBoard.board);
   }
 
   startGame(handleShipsPlaced);
@@ -58,4 +69,19 @@ export default function playGame() {
   userClickGameDOM(userSquareCallback, thisGame);
 
   return thisGame;
+}
+
+function modifyShipArray(ships) {
+  const modifiedShips = ships.map((ship) => {
+    const [size, row, col, orientation] = ship;
+
+    const modifiedOrientation =
+      orientation === "vertical" ? "horizontal" : "vertical";
+    const modifiedRow = col;
+    const modifiedCol = row;
+
+    return [size, modifiedRow, modifiedCol, modifiedOrientation];
+  });
+
+  return modifiedShips;
 }
