@@ -50,6 +50,9 @@ export default function gameLoop(playerName) {
 
   // Function to place temporary ships for testing purposes
   let placeGameShips = function (shipsToPlace) {
+    console.log("gameLoop shipsToPlace");
+
+    console.log(shipsToPlace);
     let aiShips, playerShips;
 
     // replace with parameter

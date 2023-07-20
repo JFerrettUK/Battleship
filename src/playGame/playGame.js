@@ -21,9 +21,6 @@ export default function playGame() {
       playerShips: shipLocations,
     };
 
-    console.log("shipsToPlace");
-    console.log(shipsToPlace.playerShips);
-
     placeShipsDOM(shipsToPlace);
 
     console.log("then placeGameShips");
@@ -37,8 +34,10 @@ export default function playGame() {
     console.log(modifiedShipsToPlace);
 
     // Call placeGameShips as a method of thisGame
+    console.log("shipsToPlace");
+    console.log(shipsToPlace.playerShips);
 
-    thisGame.placeGameShips(modifiedShipsToPlace);
+    thisGame.placeGameShips(shipsToPlace);
     console.log(thisGame.user.playerBoard.board);
   }
 

@@ -2,8 +2,6 @@ export default function convertShipArray(arr) {
   const convertedArr = [];
 
   for (let i = 0; i < arr.length; i++) {
-    // console.log("arr in CSA");
-    // console.log(arr);
     const ship = arr[i];
     const size = ship.size;
     const orientation = ship.orientation;
