@@ -3,7 +3,7 @@ import placeAIShipDOM from "./placeAIShipDOM";
 export default function placeShipsDOM(shipsToPlace) {
   let aiShips, playerShips;
 
-  console.log("DOM ship locations");
+  console.log("placeshipsDOM shipsToPlace");
 
   console.log(shipsToPlace);
 

@@ -25,14 +25,11 @@ export default function startGame(handleShipsPlaced) {
   let hasTriggered = false;
 
   function onOccupiedSquares(occupiedSquares) {
-    console.log("occupiedSquares in startGame");
-    console.log(occupiedSquares);
     occupiedSquaresCount = occupiedSquares.length;
 
     if (occupiedSquaresCount > 3 && !hasTriggered) {
       hasTriggered = true;
       resetBoardContainers();
-      console.log("board containers reset");
       handleShipsPlaced(occupiedSquares);
     }
   }

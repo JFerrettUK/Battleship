@@ -24,42 +24,73 @@ export default function gameboard() {
     thisBoard[row][column] = newText;
   };
 
+  //this code means tests don't work
   let placeShip = function (length, row, column, align) {
     addShip(length);
     if (row > 9 || column > 9) {
       return "offBoard";
     }
 
-    if (align == "vertical") {
-      //check if these squares are already occupied or off board
-      for (let i = column; i < length + column; i++) {
-        if (i > 9) {
-          return "offBoard";
-        }
-        if (thisBoard[row][i] !== null) {
-          return "occupiedSquare";
-        }
-      }
-      //change the board if not
-      for (let i = column; i < length + column; i++) {
-        changeBoard(row, i, `ship${length}`);
-      }
-    } else {
-      //check if these squares are already occupied or off board
+    const normalizedAlign = align.toLowerCase();
+
+    if (normalizedAlign === "vertical") {
+      // check if these squares are already occupied or off board
       for (let i = row; i < length + row; i++) {
-        if (i > 9) {
-          return "offBoard";
-        }
-        if (thisBoard[i][column] !== null) {
+        if (i > 9 || thisBoard[i][column] !== null) {
           return "occupiedSquare";
         }
       }
-      //change the board if not
+      // change the board if not
       for (let i = row; i < length + row; i++) {
         changeBoard(i, column, `ship${length}`);
       }
+    } else {
+      // check if these squares are already occupied or off board
+      for (let i = column; i < length + column; i++) {
+        if (i > 9 || thisBoard[row][i] !== null) {
+          return "occupiedSquare";
+        }
+      }
+      // change the board if not
+      for (let i = column; i < length + column; i++) {
+        changeBoard(row, i, `ship${length}`);
+      }
     }
   };
+
+  // // This code works with tests
+  // let placeShip = function (length, row, column, align) {
+  //   addShip(length);
+  //   if (row > 9 || column > 9) {
+  //     return "offBoard";
+  //   }
+
+  //   const normalizedAlign = align.toLowerCase();
+
+  //   if (normalizedAlign === "vertical") {
+  //     // check if these squares are already occupied or off board
+  //     for (let i = row; i < length + row; i++) {
+  //       if (i > 9 || thisBoard[i][column] !== null) {
+  //         return "occupiedSquare";
+  //       }
+  //     }
+  //     // change the board if not
+  //     for (let i = row; i < length + row; i++) {
+  //       changeBoard(i, column, `ship${length}`);
+  //     }
+  //   } else {
+  //     // check if these squares are already occupied or off board
+  //     for (let i = column; i < length + column; i++) {
+  //       if (i > 9 || thisBoard[row][i] !== null) {
+  //         return "occupiedSquare";
+  //       }
+  //     }
+  //     // change the board if not
+  //     for (let i = column; i < length + column; i++) {
+  //       changeBoard(row, i, `ship${length}`);
+  //     }
+  //   }
+  // };
 
   let hitShip = function (shipNo) {
     ships[shipNo].hit();
@@ -150,12 +181,10 @@ export default function gameboard() {
     return [false, []];
   };
 
-  let missedInARow = function (row) {
-    for (let row = 0; row < 10; row++) {
-      for (let n = 0; n < 10; n++) {
-        if (thisBoard[i][n] === "missed") {
-          return [true, [i, n]];
-        }
+  let missedInARow = function (rowToCheck) {
+    for (let col = 0; col < 10; col++) {
+      if (thisBoard[rowToCheck][col] === "missed") {
+        return [true, [rowToCheck, col]];
       }
     }
     return false;
