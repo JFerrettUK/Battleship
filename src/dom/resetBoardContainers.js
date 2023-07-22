@@ -2,6 +2,8 @@ export default function resetBoardContainers() {
   const boardContainersElement = document.getElementById("boardContainers");
   const boardCont1Element = document.querySelector(".boardCont1");
   const flipShipsElement = document.getElementById("flipShips");
+  const horShipsElement = document.getElementById("horShips");
+  const verShipsElement = document.getElementById("verShips");
 
   const aiTitle = document.getElementById("aiTitle");
   const aiBoard = document.getElementById("aiBoard");
@@ -20,5 +22,7 @@ export default function resetBoardContainers() {
     boardCont1Element.style.position = "";
     boardCont1Element.style.marginTop = "";
     flipShipsElement.style.display = "none";
+    horShipsElement.style.display = "none";
+    verShipsElement.style.display = "none";
   }
 }

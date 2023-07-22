@@ -126,7 +126,12 @@ body {
   background-color: rgb(83, 83, 83);
 }
 
-.boardCont .hitShip {
+.boardCont1 .hitShip {
+  background-color: rgb(233, 31, 31);
+  animation: bulge 0.5s;
+}
+
+.boardCont2 .hitShip {
   background-color: rgb(233, 31, 31);
   animation: bulge 0.5s;
 }
@@ -151,11 +156,21 @@ body {
   background-color: rgb(202, 183, 120);
 }
 
-.boardCont .boom {
+.boardCont1 .boom {
   background-color: rgb(255, 255, 104);
 }
 
-.boardCont .flash {
+.boardCont2 .boom {
+  background-color: rgb(255, 255, 104);
+}
+
+.boardCont1 .flash {
+  background-image: url("/explosion.gif");
+  background-size: cover;
+  background-color: rgb(255, 255, 104);
+}
+
+.boardCont2 .flash {
   background-image: url("/explosion.gif");
   background-size: cover;
   background-color: rgb(255, 255, 104);

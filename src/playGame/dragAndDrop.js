@@ -13,9 +13,17 @@ export default function dragAndDrop(onOccupiedSquares) {
   let shipsPlaced = 0;
   let isPlacementValid = false; // Declare isPlacementValid variable
 
+  // Store the initial state of each ship's position and orientation
+  const initialShipState = {};
+
   shipPieces.forEach((shipPiece) => {
     shipPiece.addEventListener("dragstart", handleDragStart);
     shipPiece.addEventListener("dragend", handleDragEnd);
+    initialShipState[shipPiece.id] = {
+      top: shipPiece.style.top,
+      left: shipPiece.style.left,
+      orientation: shipPiece.dataset.orientation,
+    };
   });
 
   userSquares.forEach((userSquare) => {
@@ -34,7 +42,12 @@ export default function dragAndDrop(onOccupiedSquares) {
 
   function handleDragEnd() {
     if (beingDragged && beingDragged.parentNode) {
-      beingDragged.parentNode.removeChild(beingDragged);
+      beingDragged.style.transform = "none";
+      beingDragged.style.position = "absolute";
+      beingDragged.style.left = initialShipState[beingDragged.id].left;
+      beingDragged.style.top = initialShipState[beingDragged.id].top;
+      beingDragged.dataset.orientation =
+        initialShipState[beingDragged.id].orientation;
     }
   }
 
@@ -56,7 +69,6 @@ export default function dragAndDrop(onOccupiedSquares) {
 
       const shipSize = parseInt(beingDragged.getAttribute("alt"), 10);
       const shipOrientation = beingDragged.dataset.orientation;
-      console.log(shipOrientation);
 
       let targetRow, targetColumn;
 
@@ -132,13 +144,9 @@ export default function dragAndDrop(onOccupiedSquares) {
           }
         }
 
-        if (shipsPlaced === 4) {
+        if (shipsPlaced <= 4) {
           if (typeof onOccupiedSquares === "function") {
-            console.log("occupiedSquares in D&D");
-            console.log(occupiedSquares);
             const shipLocations = convertShipArray(occupiedSquares);
-            console.log("shipLocations in D&D");
-            console.log(shipLocations);
 
             onOccupiedSquares(shipLocations, isPlacementValid); // Pass isPlacementValid as an argument
           }

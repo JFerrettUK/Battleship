@@ -26,7 +26,8 @@ export default function playGame() {
     // Call placeGameShips as a method of thisGame
 
     thisGame.placeGameShips(shipsToPlace);
-    console.log(thisGame.user.playerBoard.board);
+    console.log("thisGame.ai.playerBoard.board");
+    console.log(thisGame.ai.playerBoard.board);
   }
 
   startGame(handleShipsPlaced);

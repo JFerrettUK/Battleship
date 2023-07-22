@@ -30,8 +30,9 @@ export default function startGame(handleShipsPlaced) {
     if (occupiedSquaresCount > 3 && !hasTriggered) {
       hasTriggered = true;
       resetBoardContainers();
-      handleShipsPlaced(occupiedSquares);
     }
+
+    handleShipsPlaced(occupiedSquares);
   }
 
   dragAndDrop(onOccupiedSquares);

@@ -3,10 +3,6 @@ import placeAIShipDOM from "./placeAIShipDOM";
 export default function placeShipsDOM(shipsToPlace) {
   let aiShips, playerShips;
 
-  console.log("placeshipsDOM shipsToPlace");
-
-  console.log(shipsToPlace);
-
   // replace with parameter
   if (!shipsToPlace) {
     shipsToPlace = {
@@ -27,6 +23,9 @@ export default function placeShipsDOM(shipsToPlace) {
 
   aiShips = shipsToPlace.aiShips;
   playerShips = shipsToPlace.playerShips;
+
+  console.log("shipsToPlace in placeShipsDOM");
+  console.log(aiShips);
 
   function placeShipsIntoDOM() {
     for (let i = 0; i < aiShips.length; i++) {
