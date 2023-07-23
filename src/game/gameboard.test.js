@@ -22,7 +22,6 @@ test("place ship with vertical length at specific coordinates", () => {
 
 test("place ship with horizontal length at specific coordinates", () => {
   let battleshipBoard = gameboard();
-  console.log(battleshipBoard);
   battleshipBoard.placeShip(3, 2, 1, "horizontal");
   expect(battleshipBoard.board[2][1]).toBe("ship3");
   expect(battleshipBoard.board[3][1]).toBe("ship3");

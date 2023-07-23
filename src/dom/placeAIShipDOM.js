@@ -1,6 +1,7 @@
 import changeShipClassDOM from "./changeShipClassDOM";
 
 export default function placeAIShipDOM(length, row, column, align) {
+  console.log(length, row, column, align);
   if (row > 9 || column > 9) {
     return "offBoard";
   }

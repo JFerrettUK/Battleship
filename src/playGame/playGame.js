@@ -11,6 +11,9 @@ export default function playGame() {
   editAIBoardDOM("aiBoard");
 
   function handleShipsPlaced(shipLocations) {
+    console.log("shipLocations");
+    console.log(shipLocations);
+
     const shipsToPlace = {
       aiShips: shipLocations,
       playerShips: shipLocations,
@@ -18,13 +21,7 @@ export default function playGame() {
 
     placeShipsDOM(shipsToPlace);
 
-    const modifiedShipsToPlace = {
-      aiShips: modifyShipArray(shipsToPlace.aiShips),
-      playerShips: modifyShipArray(shipsToPlace.playerShips),
-    };
-
     // Call placeGameShips as a method of thisGame
-
     thisGame.placeGameShips(shipsToPlace);
     console.log("thisGame.ai.playerBoard.board");
     console.log(thisGame.ai.playerBoard.board);
