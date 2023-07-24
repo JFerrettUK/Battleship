@@ -5,6 +5,8 @@ import editPlayerBoardDOM from "../dom/editPlayerBoardDOM";
 import userClickGameDOM from "./userClickGameDOM";
 import announceWinnerDOM from "../dom/announceWinnerDOM";
 import startGame from "./startGame";
+import makeAICoords from "./makeAICoords";
+
 export default function playGame() {
   let thisGame = gameLoop("James");
   editPlayerBoardDOM("userBoard");
@@ -14,17 +16,20 @@ export default function playGame() {
     console.log("shipLocations");
     console.log(shipLocations);
 
+    let aiCoords = makeAICoords();
+
     const shipsToPlace = {
-      aiShips: shipLocations,
+      aiShips: aiCoords,
       playerShips: shipLocations,
     };
 
-    placeShipsDOM(shipsToPlace);
+    if (shipLocations.length >= 4) {
+      placeShipsDOM(shipsToPlace);
 
-    // Call placeGameShips as a method of thisGame
-    thisGame.placeGameShips(shipsToPlace);
-    console.log("thisGame.ai.playerBoard.board");
-    console.log(thisGame.ai.playerBoard.board);
+      // Call placeGameShips as a method of thisGame
+      thisGame.placeGameShips(shipsToPlace);
+      console.log(thisGame.ai.playerBoard);
+    }
   }
 
   startGame(handleShipsPlaced);

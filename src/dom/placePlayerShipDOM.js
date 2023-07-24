@@ -1,9 +1,6 @@
 import changeShipClassDOM from "./changeShipClassDOM";
 
 export default function placePlayerShipDOM(length, row, column, align) {
-  console.log("placePlayerShip dom coords");
-  console.log(length, row, column, align);
-
   if (row > 9 || column > 9) {
     return "offBoard";
   }

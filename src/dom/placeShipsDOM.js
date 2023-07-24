@@ -5,9 +5,6 @@ export default function placeShipsDOM(shipsToPlace) {
   aiShips = shipsToPlace.aiShips;
   playerShips = shipsToPlace.playerShips;
 
-  console.log("shipsToPlace in placeShipsDOM");
-  console.log(aiShips);
-
   function placeShipsIntoDOM() {
     for (let i = 0; i < aiShips.length; i++) {
       placeAIShipDOM(...aiShips[i]);
