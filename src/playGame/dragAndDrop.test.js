@@ -65,7 +65,12 @@ test("drag and drop image onto target square", () => {
   shipPiece.dispatchEvent(dragStartEvent);
   targetSquare.dispatchEvent(dragOverEvent);
   targetSquare.dispatchEvent(dropEvent);
+
+  // The beingDragged element should now have a parent after the drop event
+  expect(shipPiece.parentElement).toBe(targetSquare);
+
   shipPiece.dispatchEvent(dragEndEvent);
 
   // Assert expected outcome
+  // Add your assertions here based on the expected behavior after the drag and drop events.
 });

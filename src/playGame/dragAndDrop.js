@@ -129,19 +129,24 @@ export default function dragAndDrop(onOccupiedSquares) {
         shipsPlaced++;
 
         if (beingDragged.parentElement) {
-          const correspondingShip = document.getElementById(
-            beingDragged.id.replace(/V$/, "")
-          );
-          if (correspondingShip && correspondingShip.parentElement) {
-            correspondingShip.parentElement.removeChild(correspondingShip);
-          }
-
-          if (!beingDragged.id.endsWith("V")) {
+          if (beingDragged.id.endsWith("V")) {
+            // Remove the corresponding horizontal ship
+            const correspondingShip = document.getElementById(
+              beingDragged.id.replace(/V$/, "")
+            );
+            if (correspondingShip && correspondingShip.parentElement) {
+              correspondingShip.parentElement.removeChild(correspondingShip);
+            }
+          } else {
+            // Remove the corresponding vertical ship
             const oppositeShip = document.getElementById(`${beingDragged.id}V`);
             if (oppositeShip && oppositeShip.parentElement) {
               oppositeShip.parentElement.removeChild(oppositeShip);
             }
           }
+
+          // Now, remove the placed ship (both horizontal and vertical versions)
+          beingDragged.parentElement.removeChild(beingDragged);
         }
 
         if (shipsPlaced <= 4) {
@@ -151,10 +156,6 @@ export default function dragAndDrop(onOccupiedSquares) {
             onOccupiedSquares(shipLocations, isPlacementValid); // Pass isPlacementValid as an argument
           }
         }
-      } else {
-        console.log(
-          "Invalid placement! Overlapping with existing ships or occupied squares."
-        );
       }
     }
   }

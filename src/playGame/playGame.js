@@ -23,13 +23,10 @@ export default function playGame() {
       playerShips: shipLocations,
     };
 
-    if (shipLocations.length >= 4) {
-      placeShipsDOM(shipsToPlace);
+    placeShipsDOM(shipsToPlace);
 
-      // Call placeGameShips as a method of thisGame
-      thisGame.placeGameShips(shipsToPlace);
-      console.log(thisGame.ai.playerBoard);
-    }
+    // Call placeGameShips as a method of thisGame
+    thisGame.placeGameShips(shipsToPlace);
   }
 
   startGame(handleShipsPlaced);

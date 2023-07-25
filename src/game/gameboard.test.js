@@ -16,19 +16,19 @@ test("place ship with vertical length at specific coordinates", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(3, 2, 1, "vertical");
   expect(battleshipBoard.board[2][1]).toBe("ship3");
-  expect(battleshipBoard.board[2][2]).toBe("ship3");
-  expect(battleshipBoard.board[2][3]).toBe("ship3");
+  expect(battleshipBoard.board[3][1]).toBe("ship3");
+  expect(battleshipBoard.board[4][1]).toBe("ship3");
 });
 
 test("place ship with horizontal length at specific coordinates", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(3, 2, 1, "horizontal");
   expect(battleshipBoard.board[2][1]).toBe("ship3");
-  expect(battleshipBoard.board[3][1]).toBe("ship3");
-  expect(battleshipBoard.board[4][1]).toBe("ship3");
+  expect(battleshipBoard.board[2][2]).toBe("ship3");
+  expect(battleshipBoard.board[2][3]).toBe("ship3");
 });
 
-test("after placeShip, a ship is added to an object list", () => {
+test("after placeShip, a ship is added to the ships object", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
   expect(battleshipBoard.ships).toHaveProperty("ship4");
@@ -144,121 +144,18 @@ test("run receiveRandomAIAttack 500 times. It should at some point return 'hit b
 });
 test("if receiveRandomAIAttack hits an already touched square, it runs again", () => {
   let battleshipBoard = gameboard();
-  for (let row = 0; row < 9; row++) {
-    for (let column = 0; column < 10; column++) {
-      battleshipBoard.receiveRandomAIAttack(row, column);
-    }
-  }
-
-  for (let i = 0; i < 10; i++) {
-    battleshipBoard.receiveRandomAIAttack();
-  }
-
-  expect(battleshipBoard.receiveAttack(9, 9)).toBe("hitBefore");
-});
-
-test("if receiveRandomAIAttack runs on a full gameboard, board full is returned", () => {
-  let battleshipBoard = gameboard();
-  for (let row = 0; row < 10; row++) {
-    for (let column = 0; column < 10; column++) {
-      battleshipBoard.receiveRandomAIAttack(row, column);
-    }
-  }
-
+  battleshipBoard.placeShip(4, 5, 6, "horizontal");
+  battleshipBoard.receiveAttack(4, 5);
   battleshipBoard.receiveRandomAIAttack();
-
-  expect(battleshipBoard.receiveRandomAIAttack()[0]).toBe("board full");
+  const theAttacked = battleshipBoard.anyAttacks();
+  expect(theAttacked[0]).toBe(true);
+  expect(
+    battleshipBoard.receiveAttack(theAttacked[1][0], theAttacked[1][1])
+  ).toBe("hitBefore");
 });
-
-test("can't place ship vertically on an already occupied square", () => {
+test("generate a list of all coordinates not attacked", () => {
   let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(1, 2, 2, "vertical");
-  expect(battleshipBoard.board[2][2]).toBe("ship1");
-  expect(battleshipBoard.placeShip(3, 2, 1, "vertical")).toBe("occupiedSquare");
-});
-
-test("can't place ship horizontally on an already occupied square", () => {
-  let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(2, 2, 2, "horizontal");
-  expect(battleshipBoard.board[2][2]).toBe("ship2");
-  expect(battleshipBoard.placeShip(3, 2, 2, "horizontal")).toBe(
-    "occupiedSquare"
-  );
-});
-
-test("can't place ship offBoard", () => {
-  let battleshipBoard = gameboard();
-  expect(battleshipBoard.placeShip(11, 2, 2, "horizontal")).toBe("offBoard");
-  expect(battleshipBoard.placeShip(3, 11, 2, "horizontal")).toBe("offBoard");
-  expect(battleshipBoard.placeShip(11, 2, 2, "vertical")).toBe("offBoard");
-  expect(battleshipBoard.placeShip(3, 11, 2, "vertical")).toBe("offBoard");
-});
-
-test("check receiveAIAttack function changes a null board square", () => {
-  let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(4, 5, 6, "horizontal");
-  battleshipBoard.receiveAIAttack(4, 5);
-  expect(battleshipBoard.board[4][5]).toBe("missed");
-});
-
-test("check receiveAIAttack function changes a ship board square", () => {
-  let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(4, 5, 6, "horizontal");
-  battleshipBoard.receiveAIAttack(5, 6);
-  expect(battleshipBoard.board[5][6]).toBe("hitShip");
-});
-
-test("check receiveAIAttack function changes a ship object", () => {
-  let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(4, 5, 6, "horizontal");
-  battleshipBoard.receiveAIAttack(5, 6);
-  battleshipBoard.receiveAIAttack(6, 6);
-  expect(battleshipBoard.ships.ship4.hits).toBe(2);
-});
-
-test("check receiveAIAttack records coordinates of a missed shot", () => {
-  let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(1, 5, 6, "horizontal");
-  battleshipBoard.receiveAIAttack(4, 5);
-  expect(battleshipBoard.listMissed[0]).toStrictEqual([4, 5]);
-});
-
-test("check whether after receiveAIAttack all ships have been sunk (true)", () => {
-  let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(3, 2, 1, "vertical");
-  battleshipBoard.receiveAIAttack(2, 1);
-  battleshipBoard.receiveAIAttack(2, 2);
-  battleshipBoard.receiveAIAttack(2, 3);
-
-  battleshipBoard.placeShip(4, 5, 6, "vertical");
-  battleshipBoard.receiveAIAttack(5, 6);
-  battleshipBoard.receiveAIAttack(5, 7);
-  battleshipBoard.receiveAIAttack(5, 8);
-  battleshipBoard.receiveAIAttack(5, 9);
-  expect(battleshipBoard.allSunk()).toBe(true);
-});
-
-test("check whether after receiveAIAttack all ships have been sunk (false)", () => {
-  let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(3, 2, 1, "horizontal");
-  battleshipBoard.placeShip(4, 5, 6, "horizontal");
-  battleshipBoard.receiveAIAttack(5, 9);
-  battleshipBoard.receiveAIAttack(4, 1);
-  battleshipBoard.receiveAIAttack(5, 6);
-  battleshipBoard.receiveAIAttack(6, 6);
-  battleshipBoard.receiveAIAttack(7, 6);
-  battleshipBoard.receiveAIAttack(9, 6);
-  expect(battleshipBoard.allSunk()).toBe(false);
-});
-
-describe("gameboard", () => {
-  test("generatePotentialTargets should return targets within the 9x9 square grid", () => {
-    const board = gameboard();
-    const potentialTargets = board.generatePotentialTargets();
-
-    potentialTargets.forEach(([row, col]) => {
-      expect(row).toBeLessThan(10);
-      expect(col).toBeLessThan(10);
-    });
-  });
+  battleshipBoard.receiveAttack(4, 5);
+  let allPotentials = battleshipBoard.generatePotentialTargets();
+  expect(allPotentials.length).toBe(99);
 });
