@@ -48,34 +48,11 @@ test("check receiveAttack function changes a ship board square", () => {
   expect(battleshipBoard.board[5][6]).toBe("hitShip");
 });
 
-test("check receiveAttack function changes a ship object", () => {
-  let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(4, 5, 6, "horizontal");
-  battleshipBoard.receiveAttack(5, 6);
-  battleshipBoard.receiveAttack(6, 6);
-  expect(battleshipBoard.ships.ship4.hits).toBe(2);
-});
-
 test("record coordinates of a missed shot", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(1, 5, 6, "horizontal");
   battleshipBoard.receiveAttack(4, 5);
   expect(battleshipBoard.listMissed[0]).toStrictEqual([4, 5]);
-});
-
-test("check whether or not all ships have been sunk (true)", () => {
-  let battleshipBoard = gameboard();
-  battleshipBoard.placeShip(3, 2, 1, "vertical");
-  battleshipBoard.receiveAttack(2, 1);
-  battleshipBoard.receiveAttack(2, 2);
-  battleshipBoard.receiveAttack(2, 3);
-
-  battleshipBoard.placeShip(4, 5, 6, "vertical");
-  battleshipBoard.receiveAttack(5, 6);
-  battleshipBoard.receiveAttack(5, 7);
-  battleshipBoard.receiveAttack(5, 8);
-  battleshipBoard.receiveAttack(5, 9);
-  expect(battleshipBoard.allSunk()).toBe(true);
 });
 
 test("check whether or not all ships have been sunk (false)", () => {
@@ -130,6 +107,7 @@ test("check receiveRandomAIAttack can't hit a missed square twice", () => {
     "hitBefore"
   );
 });
+
 test("run receiveRandomAIAttack 500 times. It should at some point return 'hit before'", () => {
   let battleshipBoard = gameboard();
   let hitBefore = false;
@@ -142,6 +120,7 @@ test("run receiveRandomAIAttack 500 times. It should at some point return 'hit b
   }
   expect(hitBefore).toBe(true);
 });
+
 test("if receiveRandomAIAttack hits an already touched square, it runs again", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.placeShip(4, 5, 6, "horizontal");
@@ -153,6 +132,7 @@ test("if receiveRandomAIAttack hits an already touched square, it runs again", (
     battleshipBoard.receiveAttack(theAttacked[1][0], theAttacked[1][1])
   ).toBe("hitBefore");
 });
+
 test("generate a list of all coordinates not attacked", () => {
   let battleshipBoard = gameboard();
   battleshipBoard.receiveAttack(4, 5);

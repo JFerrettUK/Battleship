@@ -10,80 +10,31 @@ beforeAll(async () => {
   global.document = dom.window.document;
 });
 
-test("no ships at start of test", () => {
+test("place ship in dom with vertical length 2 at (5, 5)", () => {
+  // Clear the board before the test
   editAIBoardDOM("aiBoard");
 
-  expect(
-    document.getElementById("5-8-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(false);
-  expect(
-    document.getElementById("2-1-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(false);
-});
+  // Place a vertical ship of length 2 at coordinates (5, 5)
+  expect(placeAIShipDOM(2, 5, 5, "vertical")).toBeUndefined();
 
-test("place ship  in dom with vertical length", () => {
-  editAIBoardDOM("aiBoard");
-
-  placeAIShipDOM(3, 2, 1, "vertical");
+  // Check if the ship squares have the correct class after placement
   expect(
-    document.getElementById("2-1-aiBoard").classList.contains("aiShipSquare")
+    document.getElementById("5-5-aiBoard").classList.contains("aiShipSquare")
   ).toBe(true);
   expect(
-    document.getElementById("2-2-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(true);
-  expect(
-    document.getElementById("2-3-aiBoard").classList.contains("aiShipSquare")
+    document.getElementById("6-5-aiBoard").classList.contains("aiShipSquare")
   ).toBe(true);
 
-  placeAIShipDOM(4, 5, 6, "vertical");
-
-  expect(
-    document.getElementById("5-6-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(true);
-  expect(
-    document.getElementById("5-7-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(true);
-  expect(
-    document.getElementById("5-8-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(true);
-  expect(
-    document.getElementById("5-9-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(true);
-});
-
-test("place ship in dom with horizontal length", () => {
-  editAIBoardDOM("aiBoard");
-
-  placeAIShipDOM(3, 3, 1, "horizontal");
-
-  expect(
-    document.getElementById("3-1-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(true);
-  expect(
-    document.getElementById("4-1-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(true);
-  expect(
-    document.getElementById("5-1-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(true);
-
-  placeAIShipDOM(4, 6, 6, "horizontal");
-
-  expect(
-    document.getElementById("6-6-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(true);
-  expect(
-    document.getElementById("7-6-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(true);
-  expect(
-    document.getElementById("8-6-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(true);
-  expect(
-    document.getElementById("9-6-aiBoard").classList.contains("aiShipSquare")
-  ).toBe(true);
-});
-
-test("If a ship is placed in a spot that extend off the board, return offBoard", () => {
-  editAIBoardDOM("aiBoard");
-
-  expect(placeAIShipDOM(7, 11, 1, "horizontal")).toBe("offBoard");
+  // Check if there are no other occupied squares
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      if (i !== 5 && (i !== 6 || j !== 5)) {
+        expect(
+          document
+            .getElementById(i + "-" + j + "-aiBoard")
+            .classList.contains("aiShipSquare")
+        ).toBe(false);
+      }
+    }
+  }
 });

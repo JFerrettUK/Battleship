@@ -65,6 +65,7 @@ body {
 #userTitle,
 #aiTitle,
 #flipShips {
+  width: 300px;
   font-weight: 600;
   user-select: none;
   display: flex;
