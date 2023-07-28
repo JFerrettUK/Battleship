@@ -22,17 +22,14 @@ export default function playGame() {
       aiShips: aiCoords,
       playerShips: shipLocations,
     };
-    console.log(aiCoords);
 
     runTime++;
-    console.log("runTime is" + runTime);
     placePlayerShipsDOM(shipsToPlace);
 
     if (runTime >= 4) {
       // Call placeGameShips as a method of thisGame
       placeAIShipsDOM(shipsToPlace);
       thisGame.placeGameShips(shipsToPlace);
-      console.log(thisGame.ai.playerBoard.board);
     }
   }
 
