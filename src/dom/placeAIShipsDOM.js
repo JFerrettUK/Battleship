@@ -1,14 +1,12 @@
-import placePlayerShipDOM from "./placePlayerShipDOM";
 import placeAIShipDOM from "./placeAIShipDOM";
-export default function placeShipsDOM(shipsToPlace) {
-  let aiShips, playerShips;
+
+export default function placeAIShipsDOM(shipsToPlace) {
+  let aiShips;
   aiShips = shipsToPlace.aiShips;
-  playerShips = shipsToPlace.playerShips;
 
   function placeShipsIntoDOM() {
     for (let i = 0; i < aiShips.length; i++) {
       placeAIShipDOM(...aiShips[i]);
-      placePlayerShipDOM(...playerShips[i]);
     }
   }
 
