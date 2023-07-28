@@ -75,7 +75,6 @@ export default function makeAICoords() {
 
   // Call the function to generate 4 random ships with different lengths and alignments
   const randomShips = generateRandomShips();
-  console.log(randomShips); // The object containing the ship data
 
   return randomShips;
 }

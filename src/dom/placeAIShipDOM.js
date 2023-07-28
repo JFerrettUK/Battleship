@@ -1,6 +1,16 @@
 import changeShipClassDOM from "./changeShipClassDOM";
 
+// Function to clear the board by removing the "shipSquare" class from all squares
+function clearBoardDOM() {
+  const allSquares = document.querySelectorAll(".aiShipSquare");
+  allSquares.forEach((square) => {
+    square.classList.remove("shipSquare");
+  });
+}
+
 export default function placeAIShipDOM(length, row, column, align) {
+  // Clear the board before placing AI ships
+  clearBoardDOM();
   if (row > 9 || column > 9) {
     return "offBoard";
   }

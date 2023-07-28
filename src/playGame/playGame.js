@@ -1,5 +1,6 @@
 import gameLoop from "../game/gameLoop";
-import placeShipsDOM from "../dom/placeShipsDOM";
+import placePlayerShipsDOM from "../dom/placePlayerShipsDOM";
+import placeAIShipsDOM from "../dom/placeAIShipsDOM";
 import editAIBoardDOM from "../dom/editAIBoardDOM";
 import editPlayerBoardDOM from "../dom/editPlayerBoardDOM";
 import userClickGameDOM from "./userClickGameDOM";
@@ -12,21 +13,27 @@ export default function playGame() {
   editPlayerBoardDOM("userBoard");
   editAIBoardDOM("aiBoard");
 
-  function handleShipsPlaced(shipLocations) {
-    console.log("shipLocations");
-    console.log(shipLocations);
+  let runTime = 0;
 
+  function handleShipsPlaced(shipLocations) {
     let aiCoords = makeAICoords();
 
     const shipsToPlace = {
       aiShips: aiCoords,
       playerShips: shipLocations,
     };
+    console.log(aiCoords);
 
-    placeShipsDOM(shipsToPlace);
+    runTime++;
+    console.log("runTime is" + runTime);
+    placePlayerShipsDOM(shipsToPlace);
 
-    // Call placeGameShips as a method of thisGame
-    thisGame.placeGameShips(shipsToPlace);
+    if (runTime >= 4) {
+      // Call placeGameShips as a method of thisGame
+      placeAIShipsDOM(shipsToPlace);
+      thisGame.placeGameShips(shipsToPlace);
+      console.log(thisGame.ai.playerBoard.board);
+    }
   }
 
   startGame(handleShipsPlaced);
