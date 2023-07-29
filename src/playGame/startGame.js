@@ -12,7 +12,7 @@ export function hideElements() {
 
 export function adjustStyles() {
   const boardContainers = document.getElementById("boardContainers");
-  boardContainers.style.gridTemplateColumns = "1fr 0.1fr";
+  boardContainers.style.gridTemplateColumns = "1fr 0.1px";
   boardContainers.style.flexDirection = "row";
 }
 

@@ -63,7 +63,14 @@ body {
 }
 
 #userTitle,
-#aiTitle,
+#aiTitle {
+  width: 350px;
+  font-weight: 600;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+}
+
 #flipShips {
   width: 300px;
   font-weight: 600;
@@ -253,6 +260,7 @@ body {
   user-select: none;
 
   display: grid;
+  justify-content: center;
   padding: 30px;
 }
 
